@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Valleyball Versus — 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta property="og:title" content="Valleyball Versus">
+<meta property="og:description" content="Valleyball Versus — 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://valleyballvs.com/hero_valley.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="mark-sm.png">
+<link rel="canonical" href="https://valleyballvs.com/">
+<title>Valleyball Versus — Compete In A Brand-New Sport</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&display=swap">
+<style>
+/* =========================================================================
+   VALLEYBALL VERSUS — valleyballvs.com
+
+   IDENTITY: Dark vs Light value conflict with hard athletic edges.
+   Home/Dark on obsidian, Away/Light inverted to chalk.
+   Full continuous spectral rainbow touches per VB-SPEC v2.4.
+   ========================================================================= */
+:root {
+  color-scheme: dark;
+  --d-ground:#0A0A0C; --d-deep:#050509; --d-raise:#13131B;
+  --d-ink:#F5F5F7;    --d-sub:#C3C3D0;  --d-mute:#8A8A99;
+  --d-edge:rgba(255,255,255,.10); --d-edge2:rgba(255,255,255,.20);
+
+  --l-ground:#F2F2F0; --l-raise:#FFFFFF; --l-deep:#E4E5E1;
+  --l-ink:#121218;    --l-sub:#3E404A;   --l-mute:#6C6F78;
+  --l-edge:rgba(18,18,24,.14); --l-edge2:rgba(18,18,24,.30);
+
+  --home:#383B42; --away:#FFFFFF;
+  --contest-linear: linear-gradient(90deg, #1B1D22 0%, #383B42 34%, #D0D5DD 66%, #FFFFFF 100%);
+
+  --spec-red:#FF2A42; --spec-orange:#FF6B00; --spec-yellow:#FFD000;
+  --spec-green:#10E56A; --spec-cyan:#00E5FF; --spec-blue:#1F65FF;
+  --spec-indigo:#6B11FF; --spec-magenta:#E000B8;
+
+  --spectral:linear-gradient(90deg,#FF2A42 0%,#FF6B00 14.3%,#FFD000 28.6%,#10E56A 42.9%,
+                             #00E5FF 57.2%,#1F65FF 71.5%,#6B11FF 85.8%,#E000B8 100%);
+
+  --display:'Syncopate',sans-serif;
+  --body:'Space Grotesk','Helvetica Neue',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+
+  --gutter:clamp(20px,5vw,72px);
+  --max:1140px;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--d-ground);font-family:var(--body);font-size:16px;line-height:1.6;
+     -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+
+/* Top rainbow accent bar */
+.top-spectral-bar{height:3px;width:100%;background:var(--spectral);position:sticky;top:0;z-index:100}
+
+/* Navigation Bar */
+.nav-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px var(--gutter);background:rgba(5,5,9,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--d-edge);position:sticky;top:3px;z-index:90;
+}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo-text{
+  font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--spectral);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.nav-vs-badge{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.25em;color:#fff;
+  background:rgba(255,255,255,.1);padding:3px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.2);
+}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-link{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;color:var(--d-sub);transition:color .18s ease;
+}
+.nav-link:hover{color:#fff}
+.nav-btn{
+  font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  text-decoration:none;padding:8px 16px;border-radius:4px;background:#fff;color:#000;
+  transition:transform .14s ease,background .18s ease;
+}
+.nav-btn:hover{transform:translateY(-1px);background:#e2e8f0}
+
+.band{
+  --ground:var(--d-ground); --raise:var(--d-raise); --deep:var(--d-deep);
+  --ink:var(--d-ink); --sub:var(--d-sub); --mute:var(--d-mute);
+  --edge:var(--d-edge); --edge2:var(--d-edge2);
+  background:var(--ground); color:var(--ink);
+  padding-block:clamp(54px,7.5vw,90px);
+}
+.band--light{
+  --ground:var(--l-ground); --raise:var(--l-raise); --deep:var(--l-deep);
+  --ink:var(--l-ink); --sub:var(--l-sub); --mute:var(--l-mute);
+  --edge:var(--l-edge); --edge2:var(--l-edge2);
+}
+.band + .band{border-top:2px solid rgba(255,255,255,.22)}
+.band--light + .band, .band + .band--light{border-top:2px solid rgba(18,18,24,.28)}
+
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+         color:var(--mute);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;display:inline-block}
+
+.eyebrow--cyan{color:var(--spec-cyan)}
+.eyebrow--cyan::before{background:var(--spec-cyan);box-shadow:0 0 8px var(--spec-cyan)}
+
+.eyebrow--yellow{color:var(--spec-yellow)}
+.eyebrow--yellow::before{background:var(--spec-yellow);box-shadow:0 0 8px var(--spec-yellow)}
+
+.eyebrow--green{color:var(--spec-green)}
+.eyebrow--green::before{background:var(--spec-green);box-shadow:0 0 8px var(--spec-green)}
+
+.band--light .eyebrow{color:var(--l-mute)}
+.band--light .eyebrow::before{background:var(--l-mute);box-shadow:none}
+
+h2{font-family:var(--display);font-weight:700;font-size:clamp(20px,3vw,32px);letter-spacing:.055em;
+   text-transform:uppercase;line-height:1.22;margin:0 0 18px;text-wrap:balance;color:var(--ink)}
+h3{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:.12em;
+   text-transform:uppercase;margin:0 0 10px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--sub);max-width:64ch}
+.lede{font-size:clamp(17px,2vw,20px);line-height:1.6;font-weight:300}
+
+.wordmark{font-family:var(--display);font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+          background:var(--spectral);-webkit-background-clip:text;background-clip:text;
+          -webkit-text-fill-color:transparent;color:transparent}
+
+/* ============================== HERO ============================== */
+.hero{position:relative;overflow:hidden;background:var(--d-deep);color:var(--d-ink)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.45}
+.hero-bg::after{content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 25%,rgba(3,3,8,.84) 0%,rgba(3,3,8,.38) 64%,transparent 100%),
+    linear-gradient(180deg,rgba(5,5,9,.55) 0%,rgba(5,5,9,.65) 50%,var(--d-ground) 100%)}
+.hero-inner{position:relative;z-index:2;padding-block:clamp(50px,7vw,85px) clamp(46px,6.5vw,78px);
+            display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* Clean hero mark - NO halo/border ring */
+.hero-mark-wrap{
+  position:relative;width:clamp(120px,15vw,160px);height:clamp(120px,15vw,160px);
+  margin-bottom:14px;border-radius:50%;overflow:hidden;
+}
+.hero-mark-wrap img{width:100%;height:100%;object-fit:cover}
+
+.hero-word{font-size:clamp(32px,6vw,58px);margin-top:8px}
+
+/* Large, Dominant VERSUS Text */
+.hero-versus{
+  font-family:var(--display);font-weight:700;color:#fff;text-transform:uppercase;
+  font-size:clamp(28px,6vw,60px);letter-spacing:.42em;text-indent:.42em;margin-top:6px;
+  line-height:1.05;text-shadow:0 0 28px rgba(255,255,255,.3);
+}
+
+.hero-thesis{font-family:var(--display);font-weight:700;text-transform:uppercase;
+             font-size:clamp(16px,2.8vw,27px);letter-spacing:.06em;line-height:1.4;
+             margin:clamp(24px,3.8vw,36px) 0 0;max-width:28ch;text-wrap:balance;color:#fff;
+             text-shadow:0 2px 24px rgba(0,0,0,.7)}
+.hero-sub{margin:18px auto 0;max-width:54ch;color:#DCDCE6;font-weight:300;
+          text-shadow:0 1px 12px rgba(0,0,0,.8)}
+
+/* Hero Action CTAs */
+.hero-actions{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:28px;
+}
+.btn{
+  font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  padding:14px 26px;border-radius:6px;border:1px solid transparent;cursor:pointer;white-space:nowrap;
+  text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+  transition:transform .12s ease,background .18s ease,border-color .18s ease;
+}
+.btn-primary{background:#F5F5F7;color:#08080C}
+.btn-primary:hover{transform:translateY(-1px);background:#fff}
+.btn-guide{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3)}
+.btn-guide:hover{transform:translateY(-1px);background:rgba(255,255,255,.16);border-color:#fff}
+
+.play-meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8FA0B0;margin-top:16px}
+
+/* ============================== THE ONE RULE (LIGHT) ============================== */
+.two{display:grid;gap:clamp(30px,4.5vw,54px);grid-template-columns:1fr;align-items:center}
+@media(min-width:960px){.two{grid-template-columns:1fr 1.15fr}}
+
+.score-swap-card{
+  background:var(--l-raise);border:1px solid var(--l-edge2);border-radius:14px;
+  overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.score-swap-header{
+  padding:12px 18px;background:var(--l-deep);border-bottom:1px solid var(--l-edge);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  display:flex;justify-content:space-between;color:var(--l-ink);
+}
+.score-swap-views{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--l-edge)}
+.score-view-pane{background:#06080E;padding:14px 14px 12px;display:flex;flex-direction:column;gap:8px}
+.score-view-pane img{border-radius:6px;border:1px solid rgba(255,255,255,.1);aspect-ratio:16/9;object-fit:cover}
+.pane-badge{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  padding:4px 8px;border-radius:4px;align-self:flex-start;
+}
+.pane-badge--goal{background:rgba(255,42,66,.2);color:#FF6B7A;border:1px solid rgba(255,42,66,.4)}
+.pane-badge--swap{background:rgba(0,229,255,.15);color:#00E5FF;border:1px solid rgba(0,229,255,.4)}
+.pane-desc{font-family:var(--mono);font-size:10.5px;color:#A5A8B2;line-height:1.4;margin:0}
+
+.score-swap-caption{
+  padding:14px 18px;background:var(--l-raise);font-family:var(--mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--l-sub);line-height:1.6;
+  border-top:1px solid var(--l-edge);
+}
+
+/* ============================== CUSTOMIZATION SECTION (NEW) ============================== */
+.custom-lobby-card{
+  background:var(--d-raise);border:1px solid var(--d-edge2);border-radius:14px;
+  overflow:hidden;margin-top:clamp(28px,3.8vw,42px);box-shadow:0 14px 40px rgba(0,0,0,.6);
+}
+.custom-lobby-img{
+  width:100%;aspect-ratio:16/7.8;object-fit:cover;display:block;
+}
+.custom-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;
+  padding:24px;border-top:1px solid var(--d-edge);background:rgba(0,0,0,.3);
+}
+.custom-item{display:flex;flex-direction:column;gap:8px}
+.custom-item-title{
+  font-family:var(--display);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;display:flex;align-items:center;gap:8px;
+}
+.custom-item-desc{font-size:13px;color:var(--d-sub);line-height:1.55;margin:0}
+
+/* Swatch Palette Row */
+.swatch-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.swatch{width:18px;height:18px;border-radius:4px;border:1px solid rgba(255,255,255,.25)}
+
+/* ============================== GAMEPLAY SHOTS ============================== */
+.shots{display:grid;gap:clamp(14px,1.8vw,18px);grid-template-columns:1fr;margin-top:clamp(26px,3.4vw,34px)}
+@media(min-width:720px){.shots{grid-template-columns:1fr 1fr}}
+.shot{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--edge);background:var(--deep)}
+.shot img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.shot figcaption{
+  position:absolute;left:0;right:0;bottom:0;margin:0;padding:22px 16px 12px;color:#E8EEF5;
+  background:linear-gradient(180deg,rgba(3,5,10,0) 0%,rgba(3,5,10,.88) 100%);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;line-height:1.4;
+}
+.shot--wide{grid-column:1/-1}
+.shot--wide img{aspect-ratio:2.1/1}
+.badge-live-gif{
+  position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.18em;text-transform:uppercase;background:rgba(0,0,0,.75);
+  color:#7FE3B0;border:1px solid rgba(127,227,176,.4);padding:3px 8px;border-radius:4px;
+  z-index:3;
+}
+
+/* ============================== 4 FEATURE BEATS ============================== */
+.beats-grid{
+  display:grid;
+  gap:clamp(20px,2.8vw,28px);
+  grid-template-columns:1fr;
+  margin-top:clamp(36px,4.8vw,52px);
+}
+@media(min-width:768px){
+  .beats-grid{grid-template-columns:1fr 1fr}
+}
+.beat-card{
+  background:var(--d-raise);
+  border:1px solid var(--d-edge2);
+  border-radius:14px;
+  padding:clamp(24px,3.2vw,34px);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.beat-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+}
+.beat-card--1::before{background:var(--spec-red)}
+.beat-card--2::before{background:var(--spec-yellow)}
+.beat-card--3::before{background:var(--spec-cyan)}
+.beat-card--4::before{background:var(--spec-magenta)}
+
+.beat-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.32);
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+}
+.beat-num{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.beat-num::before{
+  content:"";width:6px;height:6px;border-radius:50%;display:inline-block;
+}
+.beat-card--1 .beat-num{color:var(--spec-red)}
+.beat-card--1 .beat-num::before{background:var(--spec-red);box-shadow:0 0 8px var(--spec-red)}
+
+.beat-card--2 .beat-num{color:var(--spec-yellow)}
+.beat-card--2 .beat-num::before{background:var(--spec-yellow);box-shadow:0 0 8px var(--spec-yellow)}
+
+.beat-card--3 .beat-num{color:var(--spec-cyan)}
+.beat-card--3 .beat-num::before{background:var(--spec-cyan);box-shadow:0 0 8px var(--spec-cyan)}
+
+.beat-card--4 .beat-num{color:var(--spec-magenta)}
+.beat-card--4 .beat-num::before{background:var(--spec-magenta);box-shadow:0 0 8px var(--spec-magenta)}
+.beat-card h3{font-size:15px;line-height:1.35;margin-bottom:12px;color:#fff}
+.beat-card p{font-size:14px;line-height:1.65;margin:0;color:var(--d-sub);max-width:none}
+
+/* ============================== FOOTER ============================== */
+footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
+       border-top:2px solid rgba(255,255,255,.22)}
+.foot{display:flex;flex-wrap:wrap;gap:20px 32px;justify-content:space-between;align-items:center}
+.foot-links{display:flex;flex-wrap:wrap;gap:12px 24px}
+.foot a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+        color:var(--d-mute);text-decoration:none;transition:color .18s ease}
+.foot a:hover{color:#fff}
+.foot a:focus-visible{outline:2px solid #6E9BC4;outline-offset:3px;border-radius:2px}
+.foot-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#5A5A6B}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top-spectral-bar" aria-hidden="true"></div>
+
+<!-- Navigation Bar -->
+<header class="nav-bar">
+  <a class="nav-brand" href="index.html">
+    <span class="nav-logo-text">Valleyball</span>
+    <span class="nav-vs-badge">VERSUS</span>
+  </a>
+  <nav class="nav-links">
+    <a class="nav-link" href="#the-game">The Game</a>
+    <a class="nav-link" href="#customization">Customization</a>
+    <a class="nav-link" href="#gameplay">Gameplay</a>
+    <a class="nav-link" href="how-to-play.html" style="color:var(--spec-cyan);font-weight:700">How To Play</a>
+    <a class="nav-btn" href="https://cascadiajac.itch.io/valleyball-versus">Play Free</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="hero-bg"><img src="hero_valley.jpg" alt="" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+
+      <!-- Distinct Textless Versus Ball Mark - NO halo/border ring -->
+      <div class="hero-mark-wrap" title="Valleyball Versus Match Ball">
+        <img src="mark.png" width="160" height="160" alt="Valleyball Versus Ball">
+      </div>
+
+      <div class="wordmark hero-word">Valleyball</div>
+      <div class="hero-versus">VERSUS</div>
+
+      <h1 class="hero-thesis">Compete In A Brand-New Sport</h1>
+      <p class="hero-sub">
+        Built on millennia of athletic tradition and engineered for the digital age. Purpose-designed multiplayer sport with unscripted momentum, honest full-gravity physics, a ball that never leaves play, and play that never stops.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://cascadiajac.itch.io/valleyball-versus">Play Free on itch.io</a>
+        <a class="btn btn-guide" href="how-to-play.html">How to Play & Controls Guide</a>
+      </div>
+      <span class="play-meta">Instant browser play · Dual gamepads or split keyboard · Zero install</span>
+    </div>
+  </section>
+
+  <!-- ==================== THE ONE RULE — LIGHT ==================== -->
+  <section class="band band--light" id="the-game">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow" style="color:#C14E4F">The Game // Unbroken Play</p>
+        <h2>Score, Swap, Keep Playing</h2>
+        <p class="lede">
+          Every goal counts, but nobody stops the clock. The moment the ball drops through the ring, target goals swap in real time. The momentum never breaks, and your opponent gets an immediate chance to answer back.
+        </p>
+        <p>
+          No resets, no dead time, and no sitting on a lead. Five minutes of play is five minutes
+          of unbroken, breathless competition.
+        </p>
+      </div>
+
+      <!-- In-Engine Scoreboard Swap Telemetry Display -->
+      <div class="score-swap-card">
+        <div class="score-swap-header">
+          <span>Match Telemetry // In-Game Event</span>
+          <span style="color:#C14E4F">Zero Clock Stoppage</span>
+        </div>
+        <div class="score-swap-views">
+          <div class="score-view-pane">
+            <div class="pane-badge pane-badge--goal">01 // Goal In North</div>
+            <img src="sb_celebration.png" alt="In-game goal clearance with the ball sailing through the goal arch and scoreboard advancing to 1 - 0">
+            <p class="pane-desc">Ball passes through the ring. Point awarded instantly without whistle or reset.</p>
+          </div>
+          <div class="score-view-pane">
+            <div class="pane-badge pane-badge--swap">02 // Instant Swap</div>
+            <img src="sb_end_close.png" alt="In-game digital scoreboards inverting target indicator to Away Attacking Goal South without clock stoppage">
+            <p class="pane-desc">Target ends invert the same second. The hoop you scored in is now yours to defend.</p>
+          </div>
+        </div>
+        <div class="score-swap-caption">
+          Score in the ring and it immediately becomes yours to defend—without the ball ever leaving play.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TEAM & ATHLETE CUSTOMIZATION (NEW) ==================== -->
+  <section class="band" id="customization">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--cyan">Match Setup // Customization</p>
+      <h2>Your Colors. Your Physique. Your Arena.</h2>
+      <p class="lede" style="max-width:60ch">
+        Before entering the arena, configure both athletes from the Match Setup Lobby. High-contrast Home and Away kits provide instant visual distinction mid-rally, backed by full control over athlete builds and match ball physics.
+      </p>
+
+      <!-- Match Lobby Visual -->
+      <div class="custom-lobby-card">
+        <img class="custom-lobby-img" src="img/customization_lobby.jpg" alt="Valleyball Versus Match Lobby setup screen showing 10 team color swatches, 3 physiques, and ball options">
+        <div class="custom-grid">
+          <div class="custom-item">
+            <div class="custom-item-title">
+              <span style="color:var(--spec-cyan)">01 //</span> Home vs Away
+            </div>
+            <p class="custom-item-desc">Dark vs Light polarity ensures crystal-clear visual clarity during high-speed dives and split-second net encounters.</p>
+          </div>
+
+          <div class="custom-item">
+            <div class="custom-item-title">
+              <span style="color:var(--spec-yellow)">02 //</span> 10 Team Colorways
+            </div>
+            <p class="custom-item-desc">Equip regulation athletic accents:</p>
+            <div class="swatch-row">
+              <div class="swatch" style="background:#FF2A42" title="Crimson"></div>
+              <div class="swatch" style="background:#1F65FF" title="Azure"></div>
+              <div class="swatch" style="background:#FFD000" title="Gold"></div>
+              <div class="swatch" style="background:#10E56A" title="Emerald"></div>
+              <div class="swatch" style="background:#6B11FF" title="Violet"></div>
+              <div class="swatch" style="background:#FF6B00" title="Orange"></div>
+              <div class="swatch" style="background:#00E5FF" title="Cyan"></div>
+              <div class="swatch" style="background:#E000B8" title="Magenta"></div>
+              <div class="swatch" style="background:#FFFFFF" title="White"></div>
+              <div class="swatch" style="background:#22252A" title="Obsidian"></div>
+            </div>
+          </div>
+
+          <div class="custom-item">
+            <div class="custom-item-title">
+              <span style="color:var(--spec-green)">03 //</span> 3 Physiques
+            </div>
+            <p class="custom-item-desc">Select Classic (balanced athletic proportions), Masculine (frame and power), or Feminine (low center of gravity and agile slide recovery).</p>
+          </div>
+
+          <div class="custom-item">
+            <div class="custom-item-title">
+              <span style="color:var(--spec-magenta)">04 //</span> Ball Spec Selection
+            </div>
+            <p class="custom-item-desc">Compete with the regulation 1.0m Valley Ball, test tight footwork with the 0.4m Foot Ball, or launch skyward rallies with the 1.5m Big Ball.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHAT IT LOOKS LIKE — DARK ==================== -->
+  <section class="band" id="gameplay">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--green">Physics-first gameplay</p>
+      <h2>Real Physics. Honest Momentum. Nothing Scripted.</h2>
+      <p class="lede" style="max-width:58ch">
+        Traditional sports games rely on canned animations and magnetic ball-snapping. Valleyball strips all of that away. Every strike, slide tackle, and diving save is a real physics collision. When momentum takes over, skill is the only thing that saves you.
+      </p>
+
+      <div class="shots">
+        <!-- Wide Action Animated GIF Loop -->
+        <figure class="shot shot--wide">
+          <span class="badge-live-gif">Live Gameplay Loop</span>
+          <img src="img/gameplay_action.gif" alt="Animated gameplay loop showing athlete driving uphill, scoring cleanly through the goal arch, and immediate scoreboard inversion.">
+          <figcaption>Uphill drive, aerial strike through the goal arch, and instantaneous target swap in continuous play.</figcaption>
+        </figure>
+
+        <!-- Compact Animated Dive Impulse -->
+        <figure class="shot">
+          <span class="badge-live-gif">Real Physics Impulse</span>
+          <img src="img/gameplay_uphill.gif" alt="Goal-line slide tackle and aerial contest against the AI defender.">
+          <figcaption>Goal-line slide tackle and aerial contest against the AI defender</figcaption>
+        </figure>
+
+        <!-- High-Res Sprint Drive -->
+        <figure class="shot">
+          <img src="act_sprint.jpg" alt="Player 1 sprinting in the approach lane, driving the match ball uphill towards the target goal with AI in pursuit.">
+          <figcaption>Full sprint in the approach lane, driving the match ball towards the raised goal</figcaption>
+        </figure>
+      </div>
+
+      <!-- Redesigned 2x2 Desktop Feature Grid with Rainbow Spectral Accents -->
+      <div class="beats-grid">
+        <div class="beat-card beat-card--1">
+          <div class="beat-num">01 // Ball Tuning</div>
+          <h3>Easy to volley, brutal to master</h3>
+          <p>Every match plays out differently. From the massive 1.5m Big Ball that keeps airborne rallies flying across the arena, down to the 0.4m Heavy Striker demanding razor-sharp precision, varying ball sizes reshape the physics, tempo, and replayability of every contest.</p>
+        </div>
+
+        <div class="beat-card beat-card--2">
+          <div class="beat-num">02 // Arena Physics</div>
+          <h3>The arena fights back</h3>
+          <p>The sloped surface is your foundation, but gravity is a relentless defender of its own. Each attack forces you to launch the ball uphill, and misplayed rebounds slide right back into the danger zone.</p>
+        </div>
+
+        <div class="beat-card beat-card--3">
+          <div class="beat-num">03 // Athlete Identity</div>
+          <h3>Your colors, your athlete</h3>
+          <p>High-contrast Home and Away kits ensure instant visual clarity mid-dive. Dial in your style with three athlete physiques and 10 vivid accent colorways to create an unmistakably personal athletic presence.</p>
+        </div>
+
+        <div class="beat-card beat-card--4">
+          <div class="beat-num">04 // Hustle Telemetry</div>
+          <h3>Built to feel like a real sport</h3>
+          <p>This isn't a traditional sports game. Valleyball Versus is an athletic contest built on momentum, court positioning, and reflexes. In-game statistics track your impact on each match, and can be viewed on the in-game Hustle Board.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="wrap foot">
+      <div style="display:flex;align-items:center;gap:14px">
+        <img src="mark-sm.png" width="34" height="34" alt="" aria-hidden="true" style="width:34px;height:34px;border-radius:50%">
+        <div>
+          <div class="wordmark" style="font-size:14px">Valleyball</div>
+          <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.42em;color:var(--d-mute);margin-top:3px">VERSUS</div>
+        </div>
+      </div>
+      <nav class="foot-links">
+        <a href="https://cascadiajac.itch.io/valleyball-versus">Play on itch.io</a>
+        <a href="how-to-play.html">How to Play</a>
+        <a href="https://github.com/valleyballjac/Valleyball-Versus">GitHub</a>
+        <a href="https://valleyball.org">valleyball.org</a>
+      </nav>
+      <div class="foot-meta">Valleyball Versus // Public Arcade Build</div>
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>
