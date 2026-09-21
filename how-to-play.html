@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5J14GD29XW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5J14GD29XW');
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Official How to Play and Controls Guide for Valleyball Versus. Dual gamepad mapping, shared keyboard setup, and gravity-incline athletic strategies.">
@@ -446,7 +455,21 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
     </div>
     <div style="font-family:var(--mono);font-size:10px;color:#6B6D7A">Official Rules & Mechanics · VB-SPEC v2.4</div>
   </div>
-</footer>
-
+<script>
+// Track outbound clicks to play on itch.io in Google Analytics
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href*="itch.io"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'play_game_click', {
+          'event_category': 'conversion',
+          'event_label': 'itch.io Play Button (How to Play)',
+          'link_url': link.href
+        });
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>

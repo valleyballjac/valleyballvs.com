@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5J14GD29XW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5J14GD29XW');
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Valleyball Versus — 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
@@ -549,5 +558,21 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   </footer>
 
 </main>
+<script>
+// Track outbound clicks to play on itch.io in Google Analytics
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href*="itch.io"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'play_game_click', {
+          'event_category': 'conversion',
+          'event_label': 'itch.io Play Button',
+          'link_url': link.href
+        });
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
