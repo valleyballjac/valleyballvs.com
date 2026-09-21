@@ -381,6 +381,41 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 .signup-form.is-success .signup-feedback--success{display:block}
 .signup-form.is-error .signup-feedback--error{display:block}
 
+/* ============================== HERO SIGNUP ============================== */
+.hero-signup-wrap{
+  margin-top:clamp(22px,3.2vw,30px);
+  width:100%;
+  max-width:480px;
+}
+.hero-divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+  width:100%;
+}
+.hero-divider::before,
+.hero-divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:rgba(255,255,255,.14);
+}
+.hero-divider span{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--d-mute);
+  white-space:nowrap;
+}
+.hero-signup-form input[type=email]{
+  background:rgba(8,8,14,.75);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-color:rgba(255,255,255,.24);
+}
+
 /* ============================== FOOTER ============================== */
 footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
        border-top:2px solid rgba(255,255,255,.22)}
@@ -439,6 +474,25 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <a class="btn btn-guide" href="how-to-play.html">How to Play & Controls Guide</a>
       </div>
       <span class="play-meta">Instant browser play · Dual gamepads or split keyboard · Zero install</span>
+
+      <div class="hero-signup-wrap">
+        <div class="hero-divider">
+          <span>Or get closed alpha & tournament invites</span>
+        </div>
+        <form class="signup-form hero-signup-form" id="signup-hero" novalidate>
+          <div class="signup-input-wrap">
+            <input type="email" id="email-hero" name="email" placeholder="athlete@example.com" required autocomplete="email">
+            <button type="submit" class="btn-signup">Get Notified</button>
+          </div>
+          <div class="signup-feedback signup-feedback--success" role="status">
+            ✓ You're on the roster. Match drops will land in your inbox.
+          </div>
+          <div class="signup-feedback signup-feedback--error" role="alert">
+            Please enter a valid email address.
+          </div>
+          <span class="signup-subnote">Early playtest invites & major tournament announcements</span>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -667,58 +721,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ==================== DISPATCH EMAIL SIGNUP ====================
 (function initSignup() {
-  const form = document.getElementById('signup-dispatch');
-  if (!form) return;
+  const forms = document.querySelectorAll('.signup-form');
+  if (!forms.length) return;
 
   // Live Google Form submission
   const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd8v7vR26O6fx10nEDPOAURx902Pm8_dlVU1J67xmqyw56-AQ/formResponse';
   const ENTRY_ID = 'entry.438232964';
 
-  const input = form.querySelector('input[type="email"]');
-  const btn = form.querySelector('button[type="submit"]');
-  const originalText = btn.textContent;
+  forms.forEach(function(form) {
+    const input = form.querySelector('input[type="email"]');
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    const isHero = form.id === 'signup-hero';
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    form.classList.remove('is-error');
-    const email = (input.value || '').trim();
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      form.classList.remove('is-error');
+      const email = (input.value || '').trim();
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      form.classList.add('is-error');
-      input.focus();
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = 'Joining…';
-
-    try {
-      const formData = new URLSearchParams();
-      formData.append(ENTRY_ID, email);
-
-      await fetch(GOOGLE_FORM_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: formData.toString()
-      });
-
-      // Fire conversion event to Google Analytics
-      if (typeof gtag === 'function') {
-        gtag('event', 'newsletter_signup', {
-          'event_category': 'conversion',
-          'event_label': 'Valley Dispatch Signup'
-        });
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        form.classList.add('is-error');
+        input.focus();
+        return;
       }
 
-      form.classList.add('is-success');
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = originalText;
-      form.classList.add('is-error');
-    }
+      btn.disabled = true;
+      btn.textContent = 'Joining…';
+
+      try {
+        const formData = new URLSearchParams();
+        formData.append(ENTRY_ID, email);
+
+        await fetch(GOOGLE_FORM_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: formData.toString()
+        });
+
+        // Fire conversion event to Google Analytics
+        if (typeof gtag === 'function') {
+          gtag('event', 'newsletter_signup', {
+            'event_category': 'conversion',
+            'event_label': isHero ? 'Hero Signup' : 'Dispatch Section Signup',
+            'signup_source': isHero ? 'hero' : 'bottom_card'
+          });
+        }
+
+        form.classList.add('is-success');
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        form.classList.add('is-error');
+      }
+    });
   });
 })();
 </script>
