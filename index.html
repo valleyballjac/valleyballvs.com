@@ -670,8 +670,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('signup-dispatch');
   if (!form) return;
 
-  // Set ENDPOINT to your provider URL (e.g. Buttondown, Formspree, or Google Forms)
-  const ENDPOINT = null;
+  // Live Google Form submission
+  const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd8v7vR26O6fx10nEDPOAURx902Pm8_dlVU1J67xmqyw56-AQ/formResponse';
+  const ENTRY_ID = 'entry.438232964';
 
   const input = form.querySelector('input[type="email"]');
   const btn = form.querySelector('button[type="submit"]');
@@ -691,33 +692,33 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.disabled = true;
     btn.textContent = 'Joining…';
 
-    if (ENDPOINT) {
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ email: email })
-        });
-        if (!res.ok) throw new Error('Submission failed');
-      } catch (err) {
-        btn.disabled = false;
-        btn.textContent = originalText;
-        form.classList.add('is-error');
-        return;
-      }
-    } else {
-      await new Promise(function(resolve) { setTimeout(resolve, 450); });
-    }
+    try {
+      const formData = new URLSearchParams();
+      formData.append(ENTRY_ID, email);
 
-    // Fire conversion event to Google Analytics
-    if (typeof gtag === 'function') {
-      gtag('event', 'newsletter_signup', {
-        'event_category': 'conversion',
-        'event_label': 'Valley Dispatch Signup'
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
       });
-    }
 
-    form.classList.add('is-success');
+      // Fire conversion event to Google Analytics
+      if (typeof gtag === 'function') {
+        gtag('event', 'newsletter_signup', {
+          'event_category': 'conversion',
+          'event_label': 'Valley Dispatch Signup'
+        });
+      }
+
+      form.classList.add('is-success');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = originalText;
+      form.classList.add('is-error');
+    }
   });
 })();
 </script>
