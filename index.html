@@ -247,7 +247,133 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 
 /* Swatch Palette Row */
 .swatch-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-.swatch{width:18px;height:18px;border-radius:4px;border:1px solid rgba(255,255,255,.25)}
+/* ============================== ROSTER & ATHLETES ============================== */
+.roster-wall-card{
+  border:1px solid var(--d-edge2);border-radius:16px;overflow:hidden;background:var(--d-raise);
+  margin-top:clamp(28px,3.8vw,42px);box-shadow:0 14px 40px rgba(0,0,0,.6);position:relative;
+}
+.roster-wall-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--spectral);z-index:2}
+.roster-wall-img-wrap{width:100%;aspect-ratio:16/9;max-height:520px;position:relative;overflow:hidden;background:#050509}
+.roster-wall-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.roster-wall-meta{
+  padding:16px 24px;background:rgba(255,255,255,.02);border-top:1px solid var(--d-edge);
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;
+}
+
+/* Interactive Roster Selector */
+.roster-selector{margin-top:clamp(36px,4.5vw,50px)}
+.roster-pills-wrap{
+  display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;
+  margin-bottom:24px;
+}
+.roster-pill{
+  background:var(--d-raise);border:1px solid var(--d-edge);border-radius:8px;
+  padding:10px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;
+  transition:all .18s ease;white-space:nowrap;font-family:var(--mono);font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--d-sub);flex-shrink:0;
+}
+.roster-pill:hover{background:#1B1B26;border-color:rgba(255,255,255,.3);color:#fff;transform:translateY(-1px)}
+.roster-pill.active{background:#222230;border-color:var(--pill-color,#fff);color:#fff;box-shadow:0 0 14px rgba(255,255,255,.15)}
+.roster-pill-dot{width:10px;height:10px;border-radius:50%;background:var(--pill-color);box-shadow:0 0 6px var(--pill-color)}
+
+/* Athlete Detail Card */
+.athlete-detail{
+  background:var(--d-raise);border:1px solid var(--d-edge2);border-radius:16px;
+  overflow:hidden;display:grid;grid-template-columns:1fr;position:relative;
+  box-shadow:0 12px 36px rgba(0,0,0,.5);
+}
+@media(min-width:840px){.athlete-detail{grid-template-columns:42% 58%}}
+
+.athlete-detail-visual{
+  position:relative;background:radial-gradient(circle at 50% 60%,rgba(255,255,255,.06) 0%,rgba(5,5,9,.9) 80%);
+  display:flex;align-items:center;justify-content:center;padding:24px;min-height:440px;overflow:hidden;
+  border-bottom:1px solid var(--d-edge);
+}
+@media(min-width:840px){.athlete-detail-visual{border-bottom:none;border-right:1px solid var(--d-edge)}}
+.athlete-detail-visual img{
+  max-height:400px;width:auto;max-width:95%;object-fit:contain;
+  filter:drop-shadow(0 14px 28px rgba(0,0,0,.8));transition:transform .3s ease;
+}
+.athlete-detail-visual:hover img{transform:scale(1.03)}
+.athlete-color-glow{
+  position:absolute;inset:0;pointer-events:none;opacity:.25;
+  background:radial-gradient(circle at 50% 50%,var(--active-color,#fff) 0%,transparent 70%);
+  transition:background .3s ease;
+}
+
+.athlete-detail-info{
+  padding:clamp(24px,3.5vw,36px);display:flex;flex-direction:column;gap:16px;
+  justify-content:center;
+}
+.athlete-tagline{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--active-color,#fff);display:flex;align-items:center;gap:8px;
+}
+.athlete-title-main{
+  font-family:var(--display);font-size:clamp(22px,3vw,32px);font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:#fff;margin:0;line-height:1.2;
+}
+.athlete-role-badge{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  background:rgba(255,255,255,.05);padding:4px 10px;border-radius:4px;border-left:3px solid var(--active-color,#fff);
+  color:var(--d-sub);display:inline-block;width:fit-content;
+}
+.athlete-metrics-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;
+  padding-block:12px;border-top:1px solid var(--d-edge);border-bottom:1px solid var(--d-edge);
+}
+.metric-box{display:flex;flex-direction:column;gap:3px}
+.metric-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--d-mute)}
+.metric-val{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff}
+
+.athlete-tech-block{
+  background:rgba(255,255,255,.03);border:1px solid var(--d-edge);border-radius:8px;
+  padding:14px 16px;
+}
+.tech-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--active-color,#fff);display:block;margin-bottom:4px}
+.tech-desc{font-size:13px;color:var(--d-sub);line-height:1.55;margin:0}
+
+.athlete-quote-box{
+  font-style:italic;font-size:13px;color:#E0E0EA;line-height:1.5;
+  border-left:2px solid var(--active-color,#fff);padding-left:14px;margin:0;
+}
+.athlete-cta-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:6px}
+.btn-athlete-lore{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;padding:10px 18px;border-radius:6px;border:1px solid var(--active-color,#fff);
+  color:#fff;background:rgba(255,255,255,.04);transition:all .18s ease;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-athlete-lore:hover{background:var(--active-color,#fff);color:#000;box-shadow:0 0 16px var(--active-color,#fff)}
+
+/* ============================== LOCKER PREVIEW ============================== */
+.locker-section{margin-top:clamp(44px,6vw,72px);border-top:1px solid var(--d-edge);padding-top:clamp(40px,5vw,60px)}
+.headgear-showcase{
+  border:1px solid var(--d-edge2);border-radius:16px;overflow:hidden;background:var(--d-raise);
+  margin-top:clamp(24px,3.2vw,36px);
+}
+.headgear-banner-img{width:100%;height:auto;display:block;border-bottom:1px solid var(--d-edge)}
+.headgear-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:20px;
+}
+.headgear-card{
+  background:rgba(255,255,255,.02);border:1px solid var(--d-edge);border-radius:10px;
+  padding:14px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;
+  transition:transform .18s ease,border-color .18s ease;
+}
+.headgear-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
+.headgear-card-img{width:100%;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.headgear-name{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.headgear-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--d-mute)}
+
+.locker-commitments{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:28px;
+}
+.commitment-card{
+  background:rgba(255,255,255,.02);border:1px solid var(--d-edge);border-radius:12px;
+  padding:20px;display:flex;flex-direction:column;gap:8px;
+}
+.commitment-title{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.commitment-desc{font-size:13px;color:var(--d-sub);line-height:1.55;margin:0}
 
 /* ============================== GAMEPLAY SHOTS ============================== */
 .shots{display:grid;gap:clamp(14px,1.8vw,18px);grid-template-columns:1fr;margin-top:clamp(26px,3.4vw,34px)}
@@ -441,9 +567,10 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   </a>
   <nav class="nav-links">
     <a class="nav-link" href="#the-game">The Game</a>
+    <a class="nav-link" href="#roster">Roster & Locker</a>
+    <a class="nav-link" href="#dispatch">Dispatch</a>
     <a class="nav-link" href="#customization">Customization</a>
     <a class="nav-link" href="#gameplay">Gameplay</a>
-    <a class="nav-link" href="#dispatch">Dispatch</a>
     <a class="nav-link" href="how-to-play.html" style="color:var(--spec-cyan);font-weight:700">How To Play</a>
     <a class="nav-btn" href="https://cascadiajac.itch.io/valleyball-versus">Play Free</a>
   </nav>
@@ -536,6 +663,236 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
     </div>
   </section>
 
+  <!-- ==================== PLAYABLE ROSTER & VALLEYBALL LOCKER ==================== -->
+  <section class="band" id="roster">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--yellow">Playable Athletes // The 10 Rainbow Colorways</p>
+      <h2>10 Athletes. 10 Accents. Identical Physics.</h2>
+      <p class="lede">
+        In Valleyball Versus, raw player skill is the only divider. Every athlete is simulated with 100% identical mass (80 kg), restitution (0.60), collision hitboxes, and slide recovery. 100% deterministic Rapier physics—your aerial spikes, angle reads, and slope momentum decide the rally.
+      </p>
+
+      <!-- Rainbow Lineup Banner -->
+      <div class="roster-wall-card">
+        <div class="roster-wall-img-wrap">
+          <img src="img/roster/group_rainbow_home.png" alt="The 10 Athletes of the Valleyball Rainbow assembled in spectral order on the arena court" loading="lazy">
+        </div>
+        <div class="roster-wall-meta">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10E56A;box-shadow:0 0 8px #10E56A"></span>
+            <span style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff">10 Athlete Identities · 10 Accent Colorways</span>
+          </div>
+          <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--d-mute);text-transform:uppercase">100% Deterministic Rapier Physics · Uniform Mass</span>
+        </div>
+      </div>
+
+      <!-- Interactive Athlete Selector -->
+      <div class="roster-selector" id="athlete-selector">
+        <div class="roster-pills-wrap" role="tablist" aria-label="Select Athlete">
+          <button class="roster-pill active" role="tab" aria-selected="true" data-athlete="white" style="--pill-color:#F8FAFC">
+            <span class="roster-pill-dot"></span>
+            <span>01 White // John</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="black" style="--pill-color:#94A3B8">
+            <span class="roster-pill-dot"></span>
+            <span>02 Black // Umpire</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="blue" style="--pill-color:#1D4ED8">
+            <span class="roster-pill-dot"></span>
+            <span>03 Blue // Bhavin</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="red" style="--pill-color:#D90429">
+            <span class="roster-pill-dot"></span>
+            <span>04 Red // Malik</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="green" style="--pill-color:#15803D">
+            <span class="roster-pill-dot"></span>
+            <span>05 Green // Tupac</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="purple" style="--pill-color:#8B5CF6">
+            <span class="roster-pill-dot"></span>
+            <span>06 Purple // Parisa</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="teal" style="--pill-color:#06B6D4">
+            <span class="roster-pill-dot"></span>
+            <span>07 Teal // Kahu</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="yellow" style="--pill-color:#FFD60A">
+            <span class="roster-pill-dot"></span>
+            <span>08 Yellow // Catarina</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="orange" style="--pill-color:#EA580C">
+            <span class="roster-pill-dot"></span>
+            <span>09 Orange // Vinny</span>
+          </button>
+          <button class="roster-pill" role="tab" aria-selected="false" data-athlete="pink" style="--pill-color:#EC4899">
+            <span class="roster-pill-dot"></span>
+            <span>10 Pink // Kimi</span>
+          </button>
+        </div>
+
+        <!-- Detail Card Display -->
+        <div class="athlete-detail" id="athlete-card" style="--active-color:#F8FAFC">
+          <div class="athlete-detail-visual">
+            <div class="athlete-color-glow" id="athlete-glow"></div>
+            <img id="athlete-img" src="img/roster/white_action.png" alt="John Valleyball - Action Pose in Game Engine" loading="lazy">
+          </div>
+          <div class="athlete-detail-info">
+            <div class="athlete-tagline" id="athlete-tagline">
+              <span>01 // White Accent Kit</span>
+            </div>
+            <h3 class="athlete-title-main" id="athlete-name">John Valleyball</h3>
+            <div class="athlete-role-badge" id="athlete-role">The Manager // Founding Captain</div>
+
+            <div class="athlete-metrics-row">
+              <div class="metric-box">
+                <span class="metric-label">Physics Simulation</span>
+                <span class="metric-val">80.0 kg · 0.60 Restitution</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Hitbox & Collider</span>
+                <span class="metric-val">100% Uniform Regulation</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Heritage Lineage</span>
+                <span class="metric-val" id="athlete-lineage">Cascadia Tradition</span>
+              </div>
+            </div>
+
+            <div class="athlete-tech-block">
+              <span class="tech-label" id="athlete-tech-title">Signature Technique // The Baseline Reset</span>
+              <p class="tech-desc" id="athlete-tech-desc">High-trajectory scoop lunge that absorbs aggressive downhill momentum and restores defensive shape.</p>
+            </div>
+
+            <blockquote class="athlete-quote-box" id="athlete-quote">
+              "Run the incline, trust the bounce."
+            </blockquote>
+
+            <div class="athlete-cta-actions">
+              <a class="btn-athlete-lore" id="athlete-lore-link" href="https://valleyball.org/athletes.html#athlete-white" target="_blank" rel="noopener">
+                View 3D Collector Card & Lore on valleyball.org ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== THE VALLEYBALL LOCKER (TEASER) ==================== -->
+      <div class="locker-section">
+        <p class="eyebrow eyebrow--cyan">Upcoming Feature // The Valleyball Locker</p>
+        <h2>Modular Headwear. Zero Collision Impact.</h2>
+        <p class="lede" style="max-width:62ch">
+          Coming in the next major game update: <strong>The Valleyball Locker</strong>. Personalize your athlete with modular tournament-legal headwear inspired by each athlete's regional heritage. Built as pure visual scene graph attachments with strictly zero Rapier colliders—ensuring 100% competitive parity across every tournament tier.
+        </p>
+
+        <!-- Modular Headwear Highlightable Card Stack -->
+        <div class="headgear-showcase">
+          <div class="headgear-grid">
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/white_headgear.png" alt="Captain's Peak Visor" loading="lazy">
+              <div class="headgear-name">Captain's Peak Visor</div>
+              <div class="headgear-tag">White // John</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/black_headgear.png" alt="Umpire Sensor Cowl" loading="lazy">
+              <div class="headgear-name">Sensor Cowl</div>
+              <div class="headgear-tag">Black // Umpire Bot</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/blue_headgear.png" alt="Wicket Keep Grill" loading="lazy">
+              <div class="headgear-name">Wicket Keep Grill</div>
+              <div class="headgear-tag">Blue // Bhavin</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/red_headgear.png" alt="Arena Combat Ram Horns" loading="lazy">
+              <div class="headgear-name">Combat Horns</div>
+              <div class="headgear-tag">Red // Malik</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/green_headgear.png" alt="Terracing Chullo Cap" loading="lazy">
+              <div class="headgear-name">Terracing Chullo</div>
+              <div class="headgear-tag">Green // Tupac</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/purple_headgear.png" alt="Artiste Wool Beret" loading="lazy">
+              <div class="headgear-name">Artiste Beret</div>
+              <div class="headgear-tag">Purple // Parisa</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/teal_headgear.png" alt="Wayfinder Crest & Toki" loading="lazy">
+              <div class="headgear-name">Wayfinder Crest</div>
+              <div class="headgear-tag">Teal // Kahu</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/yellow_headgear.png" alt="Calavera Floral Crown" loading="lazy">
+              <div class="headgear-name">Calavera Crown</div>
+              <div class="headgear-tag">Yellow // Catarina</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/orange_headgear.png" alt="Roman Courier Cap" loading="lazy">
+              <div class="headgear-name">Courier Cap</div>
+              <div class="headgear-tag">Orange // Vinny</div>
+            </div>
+            <div class="headgear-card">
+              <img class="headgear-card-img" src="img/roster/pink_headgear.png" alt="Ouendan Superfan Hachimaki" loading="lazy">
+              <div class="headgear-name">Ouendan Hachimaki</div>
+              <div class="headgear-tag">Pink // Kimi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Competitive Integrity Commitments -->
+        <div class="locker-commitments">
+          <div class="commitment-card" style="border-left:3px solid var(--spec-cyan)">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--spec-cyan);letter-spacing:.2em;text-transform:uppercase">01 // Architectural Isolation</span>
+            <div class="commitment-title">Pure Visual Attachment</div>
+            <p class="commitment-desc">Cosmetics exist strictly as decorative <code>THREE.Group</code> children parented to the athlete head armature. Zero Rapier physics bodies or colliders are ever created.</p>
+          </div>
+          <div class="commitment-card" style="border-left:3px solid var(--spec-yellow)">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--spec-yellow);letter-spacing:.2em;text-transform:uppercase">02 // Deterministic Parity</span>
+            <div class="commitment-title">100% Identical Collisions</div>
+            <p class="commitment-desc">Whether an athlete equips massive curved horns or bare hair, the match ball contacts the exact same geometric collider. Zero physics advantages.</p>
+          </div>
+          <div class="commitment-card" style="border-left:3px solid var(--spec-magenta)">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--spec-magenta);letter-spacing:.2em;text-transform:uppercase">03 // Distinct Personalities</span>
+            <div class="commitment-title">Living Traditions & Flair</div>
+            <p class="commitment-desc">Each piece of headwear reflects an athlete's personal background and clubhouse spirit—from Mesoamerican cempasúchil floral crowns to Andean chullos, West African arena horns, and Ouendan rally headbands. Express character without altering gameplay.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== THE DISPATCH // PLAYTEST & RELEASE SIGNUP ==================== -->
+  <section class="band band--signup" id="dispatch">
+    <div class="wrap">
+      <div class="signup-card">
+        <div class="signup-content">
+          <p class="eyebrow eyebrow--cyan" style="justify-content:center">The Valleyball Dispatch // Beta & Community</p>
+          <h2>Be Ready When The Incline Calls</h2>
+          <p>
+            Get direct invites to closed alpha playtests for <em>Valleyball Arenas (3v3 / 4v4)</em>, public tournament broadcasts, and major balance patches. Zero spam, unsubscribe anytime.
+          </p>
+        </div>
+        <form class="signup-form" id="signup-dispatch" novalidate>
+          <div class="signup-input-wrap">
+            <input type="email" id="signup-email" name="email" placeholder="athlete@example.com" required autocomplete="email">
+            <button type="submit" class="btn-signup">Join Dispatch</button>
+          </div>
+          <div class="signup-feedback signup-feedback--success" role="status">
+            ✓ You're on the roster. Next major playtest drop lands in your inbox.
+          </div>
+          <div class="signup-feedback signup-feedback--error" role="alert">
+            Please enter a valid email address.
+          </div>
+          <span class="signup-subnote">No marketing spam · Only major playtest and tournament announcements</span>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== TEAM & ATHLETE CUSTOMIZATION (NEW) ==================== -->
   <section class="band" id="customization">
     <div class="wrap">
@@ -617,10 +974,10 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           <figcaption>Goal-line slide tackle and aerial contest against the AI defender</figcaption>
         </figure>
 
-        <!-- High-Res Sprint Drive -->
+        <!-- High-Res Aerial Spike Strike -->
         <figure class="shot">
-          <img src="act_sprint.jpg" alt="Player 1 sprinting in the approach lane, driving the match ball uphill towards the target goal with AI in pursuit.">
-          <figcaption>Full sprint in the approach lane, driving the match ball towards the raised goal</figcaption>
+          <img src="img/roster/extra_spike_lowangle.png" alt="Athlete executing high-elevation aerial spike above the sloped court ring" loading="lazy">
+          <figcaption>High-elevation aerial spike at the target ring under continuous momentum</figcaption>
         </figure>
       </div>
 
@@ -654,34 +1011,6 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
     </div>
   </section>
 
-  <!-- ==================== THE DISPATCH // PLAYTEST & RELEASE SIGNUP ==================== -->
-  <section class="band band--signup" id="dispatch">
-    <div class="wrap">
-      <div class="signup-card">
-        <div class="signup-content">
-          <p class="eyebrow eyebrow--cyan" style="justify-content:center">The Valleyball Dispatch // Beta & Community</p>
-          <h2>Be Ready When The Incline Calls</h2>
-          <p>
-            Get direct invites to closed alpha playtests for <em>Valleyball Arenas (3v3 / 4v4)</em>, public tournament broadcasts, and major balance patches. Zero spam, unsubscribe anytime.
-          </p>
-        </div>
-        <form class="signup-form" id="signup-dispatch" novalidate>
-          <div class="signup-input-wrap">
-            <input type="email" id="signup-email" name="email" placeholder="athlete@example.com" required autocomplete="email">
-            <button type="submit" class="btn-signup">Join Dispatch</button>
-          </div>
-          <div class="signup-feedback signup-feedback--success" role="status">
-            ✓ You're on the roster. Next major playtest drop lands in your inbox.
-          </div>
-          <div class="signup-feedback signup-feedback--error" role="alert">
-            Please enter a valid email address.
-          </div>
-          <span class="signup-subnote">No marketing spam · Only major playtest and tournament announcements</span>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <!-- ==================== FOOTER ==================== -->
   <footer>
     <div class="wrap foot">
@@ -695,6 +1024,11 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
       <nav class="foot-links">
         <a href="https://cascadiajac.itch.io/valleyball-versus">Play on itch.io</a>
         <a href="how-to-play.html">How to Play</a>
+        <a href="#roster">Roster & Locker</a>
+        <a href="https://valleyball.org/athletes.html" target="_blank" rel="noopener">The 10 Athletes (Lore) ↗</a>
+        <a href="https://www.youtube.com/@valleyball" target="_blank" rel="noopener">YouTube ↗</a>
+        <a href="https://www.twitch.tv/valleyball" target="_blank" rel="noopener">Twitch ↗</a>
+        <a href="https://www.tiktok.com/@valleyball" target="_blank" rel="noopener">TikTok ↗</a>
         <a href="https://github.com/valleyballjac/Valleyball-Versus">GitHub</a>
         <a href="https://valleyball.org">valleyball.org</a>
       </nav>
@@ -775,6 +1109,179 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.disabled = false;
         btn.textContent = originalText;
         form.classList.add('is-error');
+      }
+    });
+  });
+})();
+
+// ==================== ROSTER ATHLETE SELECTOR ====================
+(function initRosterSelector() {
+  const athletes = {
+    white: {
+      color: '#F8FAFC',
+      tag: '01 // White Accent Kit',
+      name: 'John Valleyball',
+      role: 'The Manager // Founding Captain',
+      lineage: 'Cascadia Tradition',
+      img: 'img/roster/white_action.png',
+      techTitle: 'Signature Technique // The Baseline Reset',
+      techDesc: 'High-trajectory scoop lunge that absorbs aggressive downhill momentum and restores defensive shape.',
+      quote: '"Run the incline, trust the bounce."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-white'
+    },
+    black: {
+      color: '#94A3B8',
+      tag: '02 // Black Accent Kit',
+      name: 'Umpire Bot',
+      role: 'The Officiant // Autonomous Match Arbiter',
+      lineage: 'Silicon Core Lattice',
+      img: 'img/roster/black_action.png',
+      techTitle: 'Signature Technique // Zero-Tolerance Deflection',
+      techDesc: 'Microsecond collision calculation executed via flat-angle header off steep perimeter banks.',
+      quote: '"Zero whistles. Play through contact."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-black'
+    },
+    blue: {
+      color: '#1D4ED8',
+      tag: '03 // Blue Accent Kit',
+      name: 'Bhavin "The Anchor" Bhasin',
+      role: 'The Keeper // Simulation Architect',
+      lineage: 'South Asian Wicket Sim',
+      img: 'img/roster/blue_action.png',
+      techTitle: 'Signature Technique // The Wicket Parry',
+      techDesc: 'Rapid horizontal wrist redirect that preserves low-ground baseline defense under heavy fire.',
+      quote: '"You don\'t fight the slope—you anchor it."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-blue'
+    },
+    red: {
+      color: '#D90429',
+      tag: '04 // Red Accent Kit',
+      name: 'Malik "Striker" Modou',
+      role: 'The Striker // Offensive Spearhead',
+      lineage: 'West African Arena Combat',
+      img: 'img/roster/red_action.png',
+      techTitle: 'Signature Technique // Apex Hammer Spike',
+      techDesc: 'Explosive vertical bound off elevated goal decks delivering downward kinetic spikes.',
+      quote: '"Hit the crest with everything you have."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-red'
+    },
+    green: {
+      color: '#15803D',
+      tag: '05 // Green Accent Kit',
+      name: 'Tupac "The Terrace" Quispe',
+      role: 'Groundskeeper // Incline Physicist',
+      lineage: 'Andean High-Altitude Terracing',
+      img: 'img/roster/green_action.png',
+      techTitle: 'Signature Technique // Highland Terrace Sweep',
+      techDesc: 'Low-center slide tackle sweeping loose basin balls back into upward running lanes.',
+      quote: '"Respect the earth beneath your cleats."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-green'
+    },
+    purple: {
+      color: '#8B5CF6',
+      tag: '06 // Purple Accent Kit',
+      name: 'Parisa "The Palette" Shirin',
+      role: 'The Costumer // Artistic Director',
+      lineage: 'Persian Aesthetic Craft',
+      img: 'img/roster/purple_action.png',
+      techTitle: 'Signature Technique // Prismatic Volley Cut',
+      techDesc: 'Deceptive spin stroke carving tight parabolic arcs that dip sharply over the goal rim.',
+      quote: '"A clean strike is geometry in motion."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-purple'
+    },
+    teal: {
+      color: '#06B6D4',
+      tag: '07 // Teal Accent Kit',
+      name: 'Kahu "The Toki" Manaaki',
+      role: 'The Rigger // Release Warden',
+      lineage: 'Polynesian Wayfinding',
+      img: 'img/roster/teal_action.png',
+      techTitle: 'Signature Technique // Wayfinder Line Drive',
+      techDesc: 'Laser-straight baseline strike piercing directly between closing defenders into high goal space.',
+      quote: '"Read the wind before you launch the craft."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-teal'
+    },
+    yellow: {
+      color: '#FFD60A',
+      tag: '08 // Yellow Accent Kit',
+      name: 'Doña Catarina Sol',
+      role: 'The Announcer // Voice of the Valley',
+      lineage: 'Mesoamerican Tradition & Día de los Muertos',
+      img: 'img/roster/yellow_action.png',
+      techTitle: 'Signature Technique // Cempasúchil Sky Serve',
+      techDesc: 'Steep high-loft drop serve plummeting straight down into the basin with dead rebound.',
+      quote: '"Honor those who climbed the mountain before you."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-yellow'
+    },
+    orange: {
+      color: '#EA580C',
+      tag: '09 // Orange Accent Kit',
+      name: 'Vincente "Vinny" Valerius',
+      role: 'The Scout // Tactical Analyst',
+      lineage: 'Classical Mediterranean Antiquity',
+      img: 'img/roster/orange_action.png',
+      techTitle: 'Signature Technique // Appian Way Slide Tackle',
+      techDesc: 'Committed full-length sliding intercept converting errant shots into instant counter-drives.',
+      quote: '"Find the gap in the line and drive through it."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-orange'
+    },
+    pink: {
+      color: '#EC4899',
+      tag: '10 // Pink Accent Kit',
+      name: 'Kimi "Hana" Kizuna',
+      role: 'The Fan\'s Voice // Community Custodian',
+      lineage: 'East Asian Ouendan Spirit',
+      img: 'img/roster/pink_action.png',
+      techTitle: 'Signature Technique // Ouendan Echo Lunge',
+      techDesc: 'High-extension diving tip that keeps impossible baseline balls alive during continuous rallies.',
+      quote: '"One more rally. Give everything to the ball."',
+      loreUrl: 'https://valleyball.org/athletes.html#athlete-pink'
+    }
+  };
+
+  const pills = document.querySelectorAll('.roster-pill');
+  const card = document.getElementById('athlete-card');
+  const img = document.getElementById('athlete-img');
+  const tagline = document.getElementById('athlete-tagline');
+  const name = document.getElementById('athlete-name');
+  const role = document.getElementById('athlete-role');
+  const lineage = document.getElementById('athlete-lineage');
+  const techTitle = document.getElementById('athlete-tech-title');
+  const techDesc = document.getElementById('athlete-tech-desc');
+  const quote = document.getElementById('athlete-quote');
+  const loreLink = document.getElementById('athlete-lore-link');
+
+  if (!pills.length || !card) return;
+
+  function selectAthlete(key) {
+    const data = athletes[key];
+    if (!data) return;
+
+    pills.forEach(p => {
+      const isActive = p.dataset.athlete === key;
+      p.classList.toggle('active', isActive);
+      p.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    card.style.setProperty('--active-color', data.color);
+    img.src = data.img;
+    img.alt = `${data.name} - Action Pose in Game Engine`;
+    tagline.textContent = data.tag;
+    name.textContent = data.name;
+    role.textContent = data.role;
+    lineage.textContent = data.lineage;
+    techTitle.textContent = data.techTitle;
+    techDesc.textContent = data.techDesc;
+    quote.textContent = data.quote;
+    loreLink.href = data.loreUrl;
+  }
+
+  pills.forEach(p => {
+    p.addEventListener('click', () => selectAthlete(p.dataset.athlete));
+    p.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectAthlete(p.dataset.athlete);
       }
     });
   });
