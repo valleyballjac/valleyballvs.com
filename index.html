@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&display=swap">
 <style>
 /* =========================================================================
-   VALLEYBALL VERSUS — valleyballvs.com
+   VALLEYBALL VERSUS : valleyballvs.com
 
    IDENTITY: Dark vs Light value conflict with hard athletic edges.
    Home/Dark on obsidian, Away/Light inverted to chalk.
@@ -216,7 +216,7 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
   padding:4px 8px;border-radius:4px;align-self:flex-start;
 }
-.pane-badge--goal{background:rgba(255,42,66,.2);color:#FF6B7A;border:1px solid rgba(255,42,66,.4)}
+.pane-badge--hoop{background:rgba(255,42,66,.2);color:#FF6B7A;border:1px solid rgba(255,42,66,.4)}
 .pane-badge--swap{background:rgba(0,229,255,.15);color:#00E5FF;border:1px solid rgba(0,229,255,.4)}
 .pane-desc{font-family:var(--mono);font-size:10.5px;color:#A5A8B2;line-height:1.4;margin:0}
 
@@ -628,14 +628,14 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
     </div>
   </section>
 
-  <!-- ==================== THE ONE RULE — LIGHT ==================== -->
+  <!-- ==================== THE ONE RULE : LIGHT ==================== -->
   <section class="band band--light" id="the-game">
     <div class="wrap two">
       <div>
         <p class="eyebrow" style="color:#C14E4F">The Game // Unbroken Play</p>
         <h2>Score, Swap, Keep Playing</h2>
         <p class="lede">
-          Every goal counts, but nobody stops the clock. The moment the ball drops through the ring, target goals swap in real time. The momentum never breaks, and your opponent gets an immediate chance to answer back.
+          Every score counts, but nobody stops the clock. The moment the ball drops through the ring, target hoops invert in real time. The momentum never breaks, and your opponent gets an immediate chance to answer back.
         </p>
         <p>
           No resets, no dead time, and no sitting on a lead. Five minutes of play is five minutes
@@ -651,13 +651,13 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         </div>
         <div class="score-swap-views">
           <div class="score-view-pane">
-            <div class="pane-badge pane-badge--goal">01 // Goal In North</div>
-            <img src="sb_celebration.png" alt="In-game goal clearance with the ball sailing through the goal arch and scoreboard advancing to 1 - 0">
+            <div class="pane-badge pane-badge--hoop">01 // Score In North</div>
+            <img src="sb_celebration.png" alt="In-game score clearance with the ball sailing through the hoop arch and scoreboard advancing to 1 - 0">
             <p class="pane-desc">Ball passes through the ring. Point awarded instantly without whistle or reset.</p>
           </div>
           <div class="score-view-pane">
             <div class="pane-badge pane-badge--swap">02 // Instant Swap</div>
-            <img src="sb_end_close.png" alt="In-game digital scoreboards inverting target indicator to Away Attacking Goal South without clock stoppage">
+            <img src="sb_end_close.png" alt="In-game digital scoreboards inverting target indicator to Away Attacking Hoop South without clock stoppage">
             <p class="pane-desc">Target ends invert the same second. The hoop you scored in is now yours to defend.</p>
           </div>
         </div>
@@ -955,7 +955,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
     </div>
   </section>
 
-  <!-- ==================== WHAT IT LOOKS LIKE — DARK ==================== -->
+  <!-- ==================== WHAT IT LOOKS LIKE : DARK ==================== -->
   <section class="band" id="gameplay">
     <div class="wrap">
       <p class="eyebrow eyebrow--green">Physics-first gameplay</p>
@@ -968,15 +968,15 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <!-- Wide Action Animated GIF Loop -->
         <figure class="shot shot--wide">
           <span class="badge-live-gif">Live Gameplay Loop</span>
-          <img src="img/gameplay_action.gif" alt="Animated gameplay loop showing athlete driving uphill, scoring cleanly through the goal arch, and immediate scoreboard inversion.">
-          <figcaption>Uphill drive, aerial strike through the goal arch, and instantaneous target swap in continuous play.</figcaption>
+          <img src="img/gameplay_action.gif" alt="Animated gameplay loop showing athlete driving uphill, scoring cleanly through the hoop arch, and immediate scoreboard inversion.">
+          <figcaption>Uphill drive, aerial strike through the hoop arch, and instantaneous target swap in continuous play.</figcaption>
         </figure>
 
         <!-- Compact Animated Dive Impulse -->
         <figure class="shot">
           <span class="badge-live-gif">Real Physics Impulse</span>
-          <img src="img/gameplay_uphill.gif" alt="Goal-line slide tackle and aerial contest against the AI defender.">
-          <figcaption>Goal-line slide tackle and aerial contest against the AI defender</figcaption>
+          <img src="img/gameplay_uphill.gif" alt="Hoop-line slide tackle and aerial contest against the AI defender.">
+          <figcaption>Hoop-line slide tackle and aerial contest against the AI defender</figcaption>
         </figure>
 
         <!-- High-Res Aerial Spike Strike -->
@@ -1131,7 +1131,7 @@ document.addEventListener('DOMContentLoaded', function() {
       img: 'img/roster/white_action.png',
       techTitle: 'Signature Technique // The Baseline Reset',
       techDesc: 'High-trajectory scoop lunge that absorbs aggressive downhill momentum and restores defensive shape.',
-      quote: '"Run the incline, trust the bounce."',
+      quote: '"Ball in play. Run the incline, trust the bounce."',
       loreUrl: 'https://valleyball.org/athletes.html#athlete-white'
     },
     black: {
@@ -1143,7 +1143,7 @@ document.addEventListener('DOMContentLoaded', function() {
       img: 'img/roster/black_action.png',
       techTitle: 'Signature Technique // Zero-Tolerance Deflection',
       techDesc: 'Microsecond collision calculation executed via flat-angle header off steep perimeter banks.',
-      quote: '"Zero whistles. Play through contact."',
+      quote: '"Call stands. Zero whistles, play through contact."',
       loreUrl: 'https://valleyball.org/athletes.html#athlete-black'
     },
     blue: {
@@ -1166,8 +1166,8 @@ document.addEventListener('DOMContentLoaded', function() {
       lineage: 'West African Arena Combat',
       img: 'img/roster/red_action.png',
       techTitle: 'Signature Technique // Apex Hammer Spike',
-      techDesc: 'Explosive vertical bound off elevated goal decks delivering downward kinetic spikes.',
-      quote: '"Hit the crest with everything you have."',
+      techDesc: 'Explosive vertical bound off elevated hoop decks delivering downward kinetic spikes.',
+      quote: '"Swing big. Hit the crest with everything you have."',
       loreUrl: 'https://valleyball.org/athletes.html#athlete-red'
     },
     green: {
@@ -1179,7 +1179,7 @@ document.addEventListener('DOMContentLoaded', function() {
       img: 'img/roster/green_action.png',
       techTitle: 'Signature Technique // Highland Terrace Sweep',
       techDesc: 'Low-center slide tackle sweeping loose basin balls back into upward running lanes.',
-      quote: '"Respect the earth beneath your cleats."',
+      quote: '"Slope is true. Respect the earth beneath your cleats."',
       loreUrl: 'https://valleyball.org/athletes.html#athlete-green'
     },
     purple: {
@@ -1190,8 +1190,8 @@ document.addEventListener('DOMContentLoaded', function() {
       lineage: 'Persian Aesthetic Craft',
       img: 'img/roster/purple_action.png',
       techTitle: 'Signature Technique // Prismatic Volley Cut',
-      techDesc: 'Deceptive spin stroke carving tight parabolic arcs that dip sharply over the goal rim.',
-      quote: '"A clean strike is geometry in motion."',
+      techDesc: 'Deceptive spin stroke carving tight parabolic arcs that dip sharply over the hoop rim.',
+      quote: '"Stay radiant. A clean strike is geometry in motion."',
       loreUrl: 'https://valleyball.org/athletes.html#athlete-purple'
     },
     teal: {
@@ -1202,8 +1202,8 @@ document.addEventListener('DOMContentLoaded', function() {
       lineage: 'Polynesian Wayfinding',
       img: 'img/roster/teal_action.png',
       techTitle: 'Signature Technique // Wayfinder Line Drive',
-      techDesc: 'Laser-straight baseline strike piercing directly between closing defenders into high goal space.',
-      quote: '"Read the wind before you launch the craft."',
+      techDesc: 'Laser-straight baseline strike piercing directly between closing defenders into high hoop space.',
+      quote: '"Kia rite. Read the wind before you launch the craft."',
       loreUrl: 'https://valleyball.org/athletes.html#athlete-teal'
     },
     yellow: {
