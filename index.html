@@ -12,15 +12,15 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Valleyball Versus: 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta name="description" content="Valleyball Versus: 1v1 local splitscreen on a full-gravity slope. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
 <meta property="og:title" content="Valleyball Versus: Compete In A Brand-New Sport">
-<meta property="og:description" content="Valleyball Versus: 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta property="og:description" content="Valleyball Versus: 1v1 local splitscreen on a full-gravity slope. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://valleyballvs.com">
 <meta property="og:image" content="https://valleyballvs.com/hero_valley.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Valleyball Versus: Compete In A Brand-New Sport">
-<meta name="twitter:description" content="Valleyball Versus: 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta name="twitter:description" content="Valleyball Versus: 1v1 local splitscreen on a full-gravity slope. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
 <meta name="twitter:image" content="https://valleyballvs.com/hero_valley.jpg">
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -598,7 +598,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
       <h1 class="hero-thesis">Compete In A Brand-New Sport</h1>
       <p class="hero-sub">
-        Built on millennia of athletic tradition and engineered for the digital age. Purpose-designed multiplayer sport with unscripted momentum, honest full-gravity physics, a ball that never leaves play, and play that never stops.
+        Grab a friend, share a keyboard or two gamepads, and climb. Every strike is real physics, every rally is uphill, and the ball never leaves play.
       </p>
 
       <div class="hero-actions">
@@ -635,7 +635,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <p class="eyebrow" style="color:#C14E4F">The Game // Unbroken Play</p>
         <h2>Score, Swap, Keep Playing</h2>
         <p class="lede">
-          Every score counts, but nobody stops the clock. The moment the ball drops through the ring, target hoops invert in real time. The momentum never breaks, and your opponent gets an immediate chance to answer back.
+          Every score counts, but nobody stops the clock. The moment the ball drops through the hoop, target ends invert in real time. The momentum never breaks, and your opponent gets an immediate chance to answer back.
         </p>
         <p>
           No resets, no dead time, and no sitting on a lead. Five minutes of play is five minutes
@@ -653,7 +653,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           <div class="score-view-pane">
             <div class="pane-badge pane-badge--hoop">01 // Score In North</div>
             <img src="sb_celebration.png" alt="In-game score clearance with the ball sailing through the hoop arch and scoreboard advancing to 1 - 0">
-            <p class="pane-desc">Ball passes through the ring. Point awarded instantly without whistle or reset.</p>
+            <p class="pane-desc">Ball passes through the hoop. Point awarded instantly without whistle or reset.</p>
           </div>
           <div class="score-view-pane">
             <div class="pane-badge pane-badge--swap">02 // Instant Swap</div>
@@ -662,7 +662,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           </div>
         </div>
         <div class="score-swap-caption">
-          Score in the ring and it immediately becomes yours to defend, and the ball never leaves play.
+          Score in the hoop and it immediately becomes yours to defend, and the ball never leaves play.
         </div>
       </div>
     </div>
@@ -981,8 +981,8 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
         <!-- High-Res Aerial Spike Strike -->
         <figure class="shot">
-          <img src="img/roster/extra_spike_lowangle.png" alt="Athlete executing high-elevation aerial spike above the sloped court ring" loading="lazy">
-          <figcaption>High-elevation aerial spike at the target ring under continuous momentum</figcaption>
+          <img src="img/roster/extra_spike_lowangle.png" alt="Athlete executing high-elevation aerial spike above the sloped court hoop" loading="lazy">
+          <figcaption>High-elevation aerial spike at the target hoop under continuous momentum</figcaption>
         </figure>
       </div>
 
@@ -1102,6 +1102,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Fire conversion event to Google Analytics
         if (typeof gtag === 'function') {
+          gtag('event', 'waitlist_signup', {
+            'event_category': 'conversion',
+            'event_label': isHero ? 'Hero Signup' : 'Dispatch Section Signup',
+            'signup_source': isHero ? 'hero' : 'bottom_card'
+          });
           gtag('event', 'newsletter_signup', {
             'event_category': 'conversion',
             'event_label': isHero ? 'Hero Signup' : 'Dispatch Section Signup',
@@ -1262,6 +1267,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const data = athletes[key];
     if (!data) return;
 
+    if (typeof gtag === 'function') {
+      gtag('event', 'roster_athlete_select', {
+        athlete_color: key,
+        athlete_name: data.name
+      });
+    }
+
     pills.forEach(p => {
       const isActive = p.dataset.athlete === key;
       p.classList.toggle('active', isActive);
@@ -1289,6 +1301,17 @@ document.addEventListener('DOMContentLoaded', function() {
         selectAthlete(p.dataset.athlete);
       }
     });
+  });
+
+  // Outbound & Cross-Domain Link Telemetry
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link || !link.href || typeof gtag !== 'function') return;
+    if (link.href.includes('itch.io')) {
+      gtag('event', 'play_on_itch', { link_url: link.href, link_text: link.innerText.trim() });
+    } else if (link.href.includes('valleyball.org')) {
+      gtag('event', 'cross_domain_click', { destination: 'valleyball.org', link_text: link.innerText.trim() });
+    }
   });
 })();
 </script>
