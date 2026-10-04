@@ -273,6 +273,7 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   letter-spacing:.08em;text-transform:uppercase;color:var(--d-sub);flex-shrink:0;
 }
 .roster-pill:hover{background:#1B1B26;border-color:rgba(255,255,255,.3);color:#fff;transform:translateY(-1px)}
+.roster-pill:focus-visible{outline:2px solid var(--pill-color,#fff);outline-offset:2px}
 .roster-pill.active{background:#222230;border-color:var(--pill-color,#fff);color:#fff;box-shadow:0 0 14px rgba(255,255,255,.15)}
 .roster-pill-dot{width:10px;height:10px;border-radius:50%;background:var(--pill-color);box-shadow:0 0 6px var(--pill-color)}
 
@@ -290,6 +291,10 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   border-bottom:1px solid var(--d-edge);
 }
 @media(min-width:840px){.athlete-detail-visual{border-bottom:none;border-right:1px solid var(--d-edge)}}
+@media(max-width:640px){
+  .athlete-detail-visual{min-height:300px;padding:16px}
+  .athlete-detail-visual img{max-height:280px}
+}
 .athlete-detail-visual img{
   max-height:400px;width:auto;max-width:95%;object-fit:contain;
   filter:drop-shadow(0 14px 28px rgba(0,0,0,.8));transition:transform .3s ease;
@@ -732,7 +737,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         </div>
 
         <!-- Detail Card Display -->
-        <div class="athlete-detail" id="athlete-card" style="--active-color:#F8FAFC">
+        <div class="athlete-detail" id="athlete-card" role="tabpanel" aria-label="Athlete Details" style="--active-color:#F8FAFC">
           <div class="athlete-detail-visual">
             <div class="athlete-color-glow" id="athlete-glow"></div>
             <img id="athlete-img" src="img/roster/white_action.png" alt="John Valleyball - Action Pose in Game Engine" loading="lazy">
@@ -904,7 +909,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
       <!-- Match Lobby Visual -->
       <div class="custom-lobby-card">
-        <img class="custom-lobby-img" src="img/customization_lobby.jpg" alt="Valleyball Versus Match Lobby setup screen showing 10 team color swatches, 3 physiques, and ball options">
+        <img class="custom-lobby-img" src="img/ui_lobby.jpg" alt="Valleyball Versus Match Lobby setup screen showing 10 team color swatches, 3 physiques, and ball options">
         <div class="custom-grid">
           <div class="custom-item">
             <div class="custom-item-title">
