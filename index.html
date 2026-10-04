@@ -586,7 +586,9 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   <!-- ============================ HERO ============================ -->
   <section class="hero">
     <div class="hero-bg">
-      <video autoplay muted loop playsinline poster="hero_valley.jpg" aria-hidden="true" preload="auto">
+      <video id="hero-video" autoplay muted loop playsinline poster="hero_valley.jpg" aria-hidden="true" preload="auto">
+        <source src="hero_reel_mobile.webm" type="video/webm" media="(max-width: 640px)">
+        <source src="hero_reel_mobile.mp4" type="video/mp4" media="(max-width: 640px)">
         <source src="hero_reel.webm" type="video/webm">
         <source src="hero_reel.mp4" type="video/mp4">
         <img src="hero_valley.jpg" alt="" aria-hidden="true">
@@ -1049,6 +1051,18 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
 </main>
 <script>
+// Adaptive hero video for slow network / data-saver mode
+(function() {
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (conn && (conn.saveData || conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g')) {
+    const v = document.getElementById('hero-video');
+    if (v) {
+      v.pause();
+      v.removeAttribute('autoplay');
+    }
+  }
+})();
+
 // Track outbound clicks to play on itch.io in Google Analytics
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href*="itch.io"]').forEach(function(link) {
