@@ -148,7 +148,7 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 /* ============================== HERO ============================== */
 .hero{position:relative;overflow:hidden;background:var(--d-deep);color:var(--d-ink)}
 .hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.45}
+.hero-bg img,.hero-bg video{width:100%;height:100%;object-fit:cover;opacity:.45}
 .hero-bg::after{content:"";position:absolute;inset:0;
   background:
     radial-gradient(ellipse 80% 60% at 50% 25%,rgba(3,3,8,.84) 0%,rgba(3,3,8,.38) 64%,transparent 100%),
@@ -585,7 +585,13 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
   <!-- ============================ HERO ============================ -->
   <section class="hero">
-    <div class="hero-bg"><img src="hero_valley.jpg" alt="" aria-hidden="true"></div>
+    <div class="hero-bg">
+      <video autoplay muted loop playsinline poster="hero_valley.jpg" aria-hidden="true" preload="auto">
+        <source src="hero_reel.webm" type="video/webm">
+        <source src="hero_reel.mp4" type="video/mp4">
+        <img src="hero_valley.jpg" alt="" aria-hidden="true">
+      </video>
+    </div>
     <div class="wrap hero-inner">
 
       <!-- Distinct Textless Versus Ball Mark - NO halo/border ring -->
