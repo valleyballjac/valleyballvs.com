@@ -12,30 +12,30 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Official How to Play and Controls Guide for Valleyball Versus. Dual gamepad mapping, shared keyboard setup, and gravity-incline athletic strategies.">
-<meta property="og:title" content="How to Play — Valleyball Versus">
-<meta property="og:description" content="Official How to Play and Controls Guide for Valleyball Versus. Dual gamepad mapping, shared keyboard setup, and gravity-incline athletic strategies.">
+<meta name="description" content="Official How to Play and Canonical Controls Guide for Valleyball Versus v0.4.0. Up to 4 gamepads, shared keyboard setup, 2v2 quad split-screen team play, and unscripted physics mechanics.">
+<meta property="og:title" content="How to Play — Valleyball Versus (v0.4.0 Guide)">
+<meta property="og:description" content="Official How to Play and Canonical Controls Guide for Valleyball Versus v0.4.0. Up to 4 gamepads, shared keyboard setup, 2v2 quad split-screen team play, and unscripted physics mechanics.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://valleyballvs.com/how-to-play.html">
 <meta property="og:image" content="https://valleyballvs.com/hero_valley.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="How to Play — Valleyball Versus Guide">
-<meta name="twitter:description" content="Official How to Play and Controls Guide for Valleyball Versus. Dual gamepad mapping, shared keyboard setup, and gravity-incline athletic strategies.">
+<meta name="twitter:title" content="How to Play — Valleyball Versus (v0.4.0 Guide)">
+<meta name="twitter:description" content="Official How to Play and Canonical Controls Guide for Valleyball Versus v0.4.0. Up to 4 gamepads, shared keyboard setup, 2v2 quad split-screen team play, and unscripted physics mechanics.">
 <meta name="twitter:image" content="https://valleyballvs.com/hero_valley.jpg">
 <link rel="icon" href="mark-sm.png">
 <link rel="canonical" href="https://valleyballvs.com/how-to-play.html">
-<title>How to Play — Valleyball Versus Guide</title>
+<title>How to Play — Valleyball Versus (v0.4.0 Official Guide)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap">
 <style>
 /* =========================================================================
    HOW TO PLAY — valleyballvs.com/how-to-play.html
-   Authoritative athletic and input guide for Valleyball Versus.
+   Authoritative athletic and input guide for Valleyball Versus v0.4.0.
    ========================================================================= */
 :root {
   color-scheme: dark;
-  --d-ground:#0A0A0C; --d-deep:#050509; --d-raise:#13131B;
+  --d-ground:#0A0A0C; --d-deep:#050509; --d-raise:#13131B; --d-card:#181824;
   --d-ink:#F5F5F7;    --d-sub:#C3C3D0;  --d-mute:#8A8A99;
   --d-edge:rgba(255,255,255,.10); --d-edge2:rgba(255,255,255,.20);
 
@@ -51,7 +51,7 @@
   --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
 
   --gutter:clamp(20px,5vw,72px);
-  --max:1080px;
+  --max:1140px;
 }
 
 *{box-sizing:border-box}
@@ -67,7 +67,7 @@ a{color:inherit}
 /* Header / Nav */
 .nav-bar{
   display:flex;justify-content:space-between;align-items:center;
-  padding:18px var(--gutter);background:rgba(5,5,9,.94);backdrop-filter:blur(10px);
+  padding:16px var(--gutter);background:rgba(5,5,9,.94);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--d-edge);position:sticky;top:3px;z-index:90;
 }
 .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
@@ -80,9 +80,14 @@ a{color:inherit}
   font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.25em;color:#fff;
   background:rgba(255,255,255,.1);padding:3px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.2);
 }
-.nav-links{display:flex;gap:20px;align-items:center}
+.nav-version-badge{
+  font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.12em;
+  background:rgba(16,229,106,.15);color:var(--spec-green);padding:3px 7px;border-radius:4px;
+  border:1px solid rgba(16,229,106,.35);
+}
+.nav-links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .nav-link{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   text-decoration:none;color:var(--d-sub);transition:color .18s ease;
 }
 .nav-link:hover{color:#fff}
@@ -95,32 +100,50 @@ a{color:inherit}
 
 /* Hero Guide Header */
 .guide-header{
-  padding-block:clamp(48px,6vw,72px) clamp(32px,4.5vw,48px);
+  padding-block:clamp(48px,6vw,72px) clamp(32px,4vw,44px);
   border-bottom:1px solid var(--d-edge);
-  background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(31,101,255,.12) 0%,var(--d-ground) 85%);
+  background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(0,229,255,.12) 0%,rgba(31,101,255,.05) 50%,var(--d-ground) 85%);
 }
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;
          color:var(--spec-cyan);margin:0 0 14px;display:flex;align-items:center;gap:10px}
 .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--spec-cyan);
                  box-shadow:0 0 8px var(--spec-cyan);display:inline-block}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,4.2vw,44px);letter-spacing:.05em;
+h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,4vw,42px);letter-spacing:.05em;
    text-transform:uppercase;line-height:1.2;margin:0 0 16px;color:#fff}
-.guide-lede{font-size:clamp(17px,2vw,20px);line-height:1.6;font-weight:300;color:#DCDCE6;max-width:62ch;margin:0}
+.guide-lede{font-size:clamp(16px,1.9vw,19.5px);line-height:1.65;font-weight:300;color:#DCDCE6;max-width:68ch;margin:0 0 20px}
+.guide-pills{display:flex;gap:10px;flex-wrap:wrap}
+.guide-pill{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--d-edge2);color:var(--d-sub);
+}
+
+/* Quick Jump Sticky Bar */
+.jump-bar{
+  background:rgba(11,17,26,.95);border-bottom:1px solid var(--d-edge);padding:10px 0;
+  position:sticky;top:56px;z-index:80;backdrop-filter:blur(8px);
+}
+.jump-links{display:flex;gap:6px 14px;align-items:center;flex-wrap:wrap;padding-bottom:2px}
+.jump-link{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;color:var(--d-sub);padding:4px 8px;border-radius:4px;transition:all .15s ease;
+}
+.jump-link:hover{color:#fff;background:rgba(255,255,255,.08)}
 
 /* Section bands */
-.guide-section{padding-block:clamp(48px,6.5vw,72px);border-bottom:1px solid var(--d-edge)}
-h2{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.6vw,26px);letter-spacing:.06em;
-   text-transform:uppercase;line-height:1.3;margin:0 0 14px;color:#fff}
-p{margin:0 0 16px;color:var(--d-sub);max-width:64ch}
+.guide-section{padding-block:clamp(44px,6vw,68px);border-bottom:1px solid var(--d-edge)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,25px);letter-spacing:.06em;
+   text-transform:uppercase;line-height:1.3;margin:0 0 12px;color:#fff}
+p{margin:0 0 16px;color:var(--d-sub);max-width:68ch}
 
 /* Keycap & Controller UI Tags */
 .keycap{
   display:inline-flex;align-items:center;justify-content:center;
-  min-width:28px;height:28px;padding:0 8px;border-radius:6px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);
-  font-family:var(--mono);font-size:11.5px;font-weight:700;color:#fff;
-  box-shadow:0 2px 0 rgba(0,0,0,.6);vertical-align:middle;margin:0 2px;
+  min-width:26px;height:26px;padding:0 7px;border-radius:5px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);
+  font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;
+  box-shadow:0 2px 0 rgba(0,0,0,.6);vertical-align:middle;margin:0 2px;white-space:nowrap;
 }
+.keycap--mouse{background:rgba(0,229,255,.16);border-color:rgba(0,229,255,.5);color:var(--spec-cyan)}
 .keycap--red{background:rgba(255,42,66,.18);border-color:rgba(255,42,66,.55);color:var(--spec-red)}
 .keycap--orange{background:rgba(255,107,0,.18);border-color:rgba(255,107,0,.55);color:var(--spec-orange)}
 .keycap--yellow{background:rgba(255,208,0,.18);border-color:rgba(255,208,0,.55);color:var(--spec-yellow)}
@@ -129,33 +152,68 @@ p{margin:0 0 16px;color:var(--d-sub);max-width:64ch}
 .keycap--blue{background:rgba(31,101,255,.22);border-color:rgba(31,101,255,.55);color:#70A6FF}
 .keycap--indigo{background:rgba(107,17,255,.22);border-color:rgba(107,17,255,.55);color:#B784FF}
 .keycap--magenta{background:rgba(224,0,184,.18);border-color:rgba(224,0,184,.55);color:var(--spec-magenta)}
-.keycap--accent{background:rgba(0,229,255,.18);border-color:rgba(0,229,255,.55);color:var(--spec-cyan)}
 
 /* Control Layout Grids */
 .control-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:20px;margin-top:28px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;margin-top:24px;
 }
 .control-card{
-  background:var(--d-raise);border:1px solid var(--d-edge2);border-radius:12px;padding:24px;
-  display:flex;flex-direction:column;gap:16px;
+  background:var(--d-raise);border:1px solid var(--d-edge2);border-radius:12px;padding:22px 24px;
+  display:flex;flex-direction:column;gap:14px;
 }
 .control-card-header{
   display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;
   border-bottom:1px solid var(--d-edge);
 }
-.control-title{font-family:var(--display);font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff}
-.control-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
-.control-tag--primary{background:rgba(0,229,255,.12);color:var(--spec-cyan);border:1px solid rgba(0,229,255,.3)}
-.control-tag--kb{background:rgba(255,208,0,.12);color:var(--spec-yellow);border:1px solid rgba(255,208,0,.3)}
+.control-title{font-family:var(--display);font-size:13.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.control-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border-radius:4px;font-weight:700}
+.control-tag--cyan{background:rgba(0,229,255,.12);color:var(--spec-cyan);border:1px solid rgba(0,229,255,.3)}
+.control-tag--yellow{background:rgba(255,208,0,.12);color:var(--spec-yellow);border:1px solid rgba(255,208,0,.3)}
+.control-tag--green{background:rgba(16,229,106,.12);color:var(--spec-green);border:1px solid rgba(16,229,106,.3)}
+.control-tag--red{background:rgba(255,42,66,.12);color:var(--spec-red);border:1px solid rgba(255,42,66,.3)}
+.control-tag--blue{background:rgba(31,101,255,.14);color:#70A6FF;border:1px solid rgba(31,101,255,.35)}
 
-.binding-list{display:flex;flex-direction:column;gap:12px}
+.binding-list{display:flex;flex-direction:column;gap:10px}
 .binding-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13.5px}
 .binding-action{color:var(--d-sub);display:flex;align-items:center;gap:8px}
 .binding-keys{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end}
 
+/* Master Comparison Table */
+.matrix-wrap{
+  overflow-x:auto;margin-top:24px;border:1px solid var(--d-edge2);border-radius:12px;background:var(--d-raise);
+}
+.matrix-table{
+  width:100%;border-collapse:collapse;font-size:13px;text-align:left;
+}
+.matrix-table th{
+  font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(5,5,9,.85);color:var(--d-mute);padding:14px 18px;border-bottom:1px solid var(--d-edge2);
+}
+.matrix-table td{
+  padding:12px 18px;border-bottom:1px solid var(--d-edge);color:var(--d-sub);vertical-align:middle;
+}
+.matrix-table tr:last-child td{border-bottom:none}
+.matrix-table tr:hover td{background:rgba(255,255,255,.02)}
+.action-name{font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+
+/* Feature Showcase Grid */
+.feature-box{
+  background:linear-gradient(180deg,var(--d-raise) 0%,var(--d-card) 100%);
+  border:1px solid var(--d-edge2);border-radius:12px;padding:24px;margin-top:20px;
+}
+.feature-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:16px;
+}
+.feature-item{
+  background:rgba(0,0,0,.3);border:1px solid var(--d-edge);border-radius:8px;padding:16px;
+}
+.feature-item-title{
+  font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:6px;
+}
+
 /* Strategy Grid */
 .strategy-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:20px;margin-top:28px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:24px;
 }
 .strategy-card{
   background:var(--d-raise);border:1px solid var(--d-edge2);border-radius:12px;padding:22px;
@@ -170,15 +228,27 @@ p{margin:0 0 16px;color:var(--d-sub);max-width:64ch}
 .strategy-card::before{
   content:"";position:absolute;top:0;left:0;right:0;height:3px;
 }
-.strategy-card--1::before{background:var(--spec-yellow)}
-.strategy-card--2::before{background:var(--spec-orange)}
-.strategy-card--3::before{background:var(--spec-cyan)}
-.strategy-card--4::before{background:var(--spec-red)}
+.strategy-card--1::before{background:var(--spec-cyan)}
+.strategy-card--2::before{background:var(--spec-red)}
+.strategy-card--3::before{background:var(--spec-orange)}
+.strategy-card--4::before{background:var(--spec-blue)}
 .strategy-card--5::before{background:var(--spec-magenta)}
-.strategy-card--6::before{background:var(--spec-green)}
+.strategy-card--6::before{background:var(--spec-indigo)}
+.strategy-card--7::before{background:var(--spec-green)}
+.strategy-card--8::before{background:var(--spec-yellow)}
 
 .strategy-title{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff}
 .strategy-text{font-size:13.5px;line-height:1.6;color:var(--d-sub);margin:0}
+
+/* Ball Physics Grid */
+.ball-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
+.ball-card{
+  background:var(--d-raise);border:1px solid var(--d-edge2);border-radius:10px;padding:18px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.ball-header{display:flex;justify-content:space-between;align-items:center}
+.ball-name{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.08em;color:#fff;text-transform:uppercase}
+.ball-spec{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--d-mute);letter-spacing:.06em}
 
 /* Footer */
 footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var(--d-edge)}
@@ -195,26 +265,48 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <a class="nav-brand" href="index.html">
     <span class="nav-logo-text">Valleyball</span>
     <span class="nav-vs-badge">VERSUS</span>
+    <span class="nav-version-badge">v0.4.0 · 2v2</span>
   </a>
   <nav class="nav-links">
     <a class="nav-link" href="index.html">Home</a>
     <a class="nav-link" href="#gamepad">Gamepads</a>
-    <a class="nav-link" href="#keyboard">Keyboard</a>
+    <a class="nav-link" href="#keyboard">Keyboard & Mouse</a>
+    <a class="nav-link" href="#matrix">Quick Matrix</a>
+    <a class="nav-link" href="#team-play">2v2 Rules</a>
     <a class="nav-link" href="#strategy">Strategy</a>
     <a class="nav-btn" href="https://cascadiajac.itch.io/valleyball-versus">Play Free</a>
   </nav>
 </header>
+
+<!-- Sticky Jump Navigation -->
+<div class="jump-bar">
+  <div class="wrap jump-links">
+    <a class="jump-link" href="#gamepad">🎮 Gamepads</a>
+    <a class="jump-link" href="#keyboard">⌨️ Keyboard & Mouse</a>
+    <a class="jump-link" href="#matrix">📋 Action Matrix</a>
+    <a class="jump-link" href="#team-play">👥 2v2 Team Play</a>
+    <a class="jump-link" href="#combat">💥 Full-Contact Rules</a>
+    <a class="jump-link" href="#balls">⚽ Match Balls</a>
+    <a class="jump-link" href="#strategy">🎯 Pro Strategy</a>
+  </div>
+</div>
 
 <main>
 
   <!-- ==================== HEADER ==================== -->
   <section class="guide-header">
     <div class="wrap">
-      <p class="eyebrow">Athletic Specification & Controls</p>
+      <p class="eyebrow">Athletic Specification & Canonical Controls // v0.4.0 Update</p>
       <h1>How to Play Valleyball Versus</h1>
       <p class="guide-lede">
-        Two athletes, one continuous arena, and zero whistles. Master the physics of sloped momentum, execute precision aerial strikes, and outmaneuver your opponent in pure local competition.
+        Two to four athletes, one continuous bowl arena, and zero whistles. Master the physics of sloped momentum, execute precision aerial spikes, and coordinate team positioning in intense local 1v1 duels or 4-player 2v2 quad split-screen competition.
       </p>
+      <div class="guide-pills">
+        <span class="guide-pill" style="border-color:rgba(0,229,255,.4);color:var(--spec-cyan)">v0.4.0 Verified Canon</span>
+        <span class="guide-pill" style="border-color:rgba(16,229,106,.4);color:var(--spec-green)">Up to 4 Local Controllers</span>
+        <span class="guide-pill" style="border-color:rgba(255,208,0,.4);color:var(--spec-yellow)">Shared Single Keyboard Support</span>
+        <span class="guide-pill" style="border-color:rgba(255,42,66,.4);color:#FF6B7A">Deterministic Rapier Physics</span>
+      </div>
     </div>
   </section>
 
@@ -222,68 +314,102 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <section class="guide-section" id="gamepad">
     <div class="wrap">
       <p class="eyebrow" style="color:var(--spec-cyan)">Primary Controller Layout</p>
-      <h2>Gamepad Setup (Up to 4 Controllers)</h2>
+      <h2>Gamepad Controls (Up to 4 Controllers)</h2>
       <p>
-        Plug in up to four Xbox, PlayStation, or generic USB/Bluetooth controllers. In v0.4.0, each connected gamepad can be assigned independently to any athlete slot for 1v1 duels or full 2v2 quad split-screen team play. Each athlete enjoys full analog movement, sprint momentum, and precise aerial trajectory control.
+        Plug in up to four Xbox, PlayStation, Switch, or generic USB/Bluetooth controllers. In v0.4.0, every controller is auto-detected and can be claimed by any athlete slot on Team 1 (South / Home) or Team 2 (North / Away). Analog sticks provide complete 360° locomotion, sprint surges, and directional strike aiming.
       </p>
 
       <div class="control-grid">
-        <!-- Gamepad Locomotion Card -->
+        <!-- Locomotion & Agility -->
         <div class="control-card">
           <div class="control-card-header">
             <div class="control-title">Locomotion & Mobility</div>
-            <span class="control-tag" style="background:rgba(31,101,255,.15);color:#70A6FF;border:1px solid rgba(31,101,255,.35)">Analog Input</span>
+            <span class="control-tag control-tag--blue">Analog Input</span>
           </div>
           <div class="binding-list">
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-blue)">●</span> Directional Movement & Aim</span>
+              <span class="binding-action"><span style="color:var(--spec-blue)">●</span> Directional Movement</span>
               <span class="binding-keys"><span class="keycap keycap--blue">Left Stick</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-indigo)">●</span> Camera Look & Orbit</span>
-              <span class="binding-keys"><span class="keycap keycap--indigo">Right Stick</span></span>
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Strike Aim & Camera Orbit</span>
+              <span class="binding-keys"><span class="keycap keycap--cyan">Right Stick</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Sprint Surge (Uphill Drive)</span>
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Sprint Boost (Fight Incline)</span>
               <span class="binding-keys"><span class="keycap keycap--cyan">LT / L2</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-orange)">●</span> Committed Ground Slide</span>
+              <span class="binding-action"><span style="color:var(--spec-orange)">●</span> Ground Slide (Hold - Downhill)</span>
               <span class="binding-keys"><span class="keycap keycap--orange">RT / R2</span></span>
             </div>
             <div class="binding-row">
               <span class="binding-action"><span style="color:var(--spec-green)">●</span> Jump & Aerial Leap</span>
               <span class="binding-keys"><span class="keycap keycap--green">A / Cross</span></span>
             </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:#70A6FF)">●</span> Directional Cut / Plant</span>
+              <span class="binding-keys"><span class="keycap keycap--blue">RB / R1</span></span>
+            </div>
           </div>
         </div>
 
-        <!-- Gamepad Strikes & Ball Play Card -->
+        <!-- Strikes, Spikes & Defense -->
         <div class="control-card">
           <div class="control-card-header">
-            <div class="control-title">Strikes, Spikes & Dives</div>
-            <span class="control-tag" style="background:rgba(255,42,66,.15);color:#FF6B7A;border:1px solid rgba(255,42,66,.35)">Athletic Strikes</span>
+            <div class="control-title">Strikes, Spikes & Defense</div>
+            <span class="control-tag control-tag--red">Athletic Strikes</span>
           </div>
           <div class="binding-list">
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-yellow)">●</span> Volley Strike / Kick (Upward Pop)</span>
-              <span class="binding-keys"><span class="keycap keycap--yellow">X / Square</span></span>
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Volley Strike / Kick / Pop Up</span>
+              <span class="binding-keys"><span class="keycap keycap--cyan">B / Circle</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Spike (Steep Downward Drive)</span>
+              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Downward Spike (Apex Strike)</span>
               <span class="binding-keys"><span class="keycap keycap--red">Y / Triangle</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-magenta)">●</span> Committed Lunge Dive</span>
-              <span class="binding-keys"><span class="keycap keycap--magenta">B / Circle</span></span>
+              <span class="binding-action"><span style="color:var(--spec-magenta)">●</span> Ground Dive (Committed Lunge)</span>
+              <span class="binding-keys"><span class="keycap keycap--magenta">X / Square</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-magenta)">●</span> Regulation Serve (Basin Start)</span>
-              <span class="binding-keys"><span class="keycap keycap--magenta">B / Circle</span></span>
+              <span class="binding-action"><span style="color:#93c5fd">●</span> Agile Defensive Brace (Hold Block)</span>
+              <span class="binding-keys"><span class="keycap keycap--blue">LB / L1</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-indigo)">●</span> Fast Camera Re-center</span>
-              <span class="binding-keys"><span class="keycap keycap--indigo">LB / RB</span></span>
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Regulation Serve (Basin Start)</span>
+              <span class="binding-keys"><span class="keycap keycap--cyan">B / Circle</span> or <span class="keycap keycap--red">Y</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- System & Match Utility -->
+        <div class="control-card">
+          <div class="control-card-header">
+            <div class="control-title">Camera & Match Utility</div>
+            <span class="control-tag control-tag--yellow">System</span>
+          </div>
+          <div class="binding-list">
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-yellow)">●</span> Cycle Camera Perspective</span>
+              <span class="binding-keys"><span class="keycap keycap--yellow">D-Pad ◀ ▶</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-orange)">●</span> Reset Match Ball (Practice)</span>
+              <span class="binding-keys"><span class="keycap keycap--orange">Back / View</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Pause / In-Game Menu</span>
+              <span class="binding-keys"><span class="keycap keycap--red">Start / Options</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-green)">●</span> Claim Team Side (In Lobby)</span>
+              <span class="binding-keys"><span class="keycap keycap--green">◀ ▶ + A</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-sub)">●</span> Return to Bench (In Lobby)</span>
+              <span class="binding-keys"><span class="keycap">B / Circle</span></span>
             </div>
           </div>
         </div>
@@ -294,18 +420,18 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <!-- ==================== KEYBOARD CONTROLS ==================== -->
   <section class="guide-section" id="keyboard">
     <div class="wrap">
-      <p class="eyebrow" style="color:var(--spec-yellow)">Single Keyboard Shared Play</p>
-      <h2>Two Athletes, One Keyboard</h2>
+      <p class="eyebrow" style="color:var(--spec-yellow)">Keyboard & Mouse Desktop Controls</p>
+      <h2>Single Keyboard or Shared Desk Competition</h2>
       <p>
-        No controllers handy? Valleyball Versus natively supports simultaneous 2-player local competition right on a single keyboard.
+        No gamepads required. Valleyball Versus delivers fully responsive keyboard and mouse controls. Player 1 uses WASD combined with genuine mouse aim and pointer-lock striking. A second athlete can join right beside you on the same keyboard using the IJKL layout!
       </p>
 
       <div class="control-grid">
-        <!-- Player 1 (South / WASD) -->
-        <div class="control-card">
+        <!-- Player 1 (WASD + Mouse) -->
+        <div class="control-card" style="border-color:rgba(0,229,255,.35)">
           <div class="control-card-header">
-            <div class="control-title">Player 1 // South Athlete</div>
-            <span class="control-tag" style="background:rgba(0,229,255,.15);color:var(--spec-cyan);border:1px solid rgba(0,229,255,.35)">WASD Zone</span>
+            <div class="control-title">Player 1 // Primary (WASD + Mouse)</div>
+            <span class="control-tag control-tag--cyan">P1 Desktop</span>
           </div>
           <div class="binding-list">
             <div class="binding-row">
@@ -315,70 +441,372 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
               </span>
             </div>
             <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Strike Aim / Camera Look</span>
+              <span class="binding-keys"><span class="keycap keycap--mouse">🖱️ Mouse Movement</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Volley Strike / Kick / Serve</span>
+              <span class="binding-keys">
+                <span class="keycap keycap--mouse">Left Click</span> or <span class="keycap keycap--cyan">E</span>
+              </span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Downward Spike Strike</span>
+              <span class="binding-keys">
+                <span class="keycap keycap--red">Right Click</span> or <span class="keycap keycap--red">R</span>
+              </span>
+            </div>
+            <div class="binding-row">
               <span class="binding-action"><span style="color:var(--spec-green)">●</span> Jump & Aerial Leap</span>
               <span class="binding-keys"><span class="keycap keycap--green">Space</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Sprint Surge (Uphill)</span>
-              <span class="binding-keys"><span class="keycap keycap--cyan">Shift</span></span>
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Sprint Boost (Uphill)</span>
+              <span class="binding-keys"><span class="keycap keycap--cyan">Left Shift</span></span>
             </div>
             <div class="binding-row">
               <span class="binding-action"><span style="color:var(--spec-orange)">●</span> Ground Slide (Downhill)</span>
               <span class="binding-keys"><span class="keycap keycap--orange">C</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-yellow)">●</span> Volley Strike / Kick (Up)</span>
-              <span class="binding-keys"><span class="keycap keycap--yellow">J</span></span>
+              <span class="binding-action"><span style="color:var(--spec-magenta)">●</span> Ground Dive (Lunge)</span>
+              <span class="binding-keys"><span class="keycap keycap--magenta">Q</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Spike (Down)</span>
-              <span class="binding-keys"><span class="keycap keycap--red">K</span></span>
+              <span class="binding-action"><span style="color:#70A6FF">●</span> Directional Cut & Plant</span>
+              <span class="binding-keys"><span class="keycap keycap--blue">V</span> / <span class="keycap keycap--blue">F</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-magenta)">●</span> Lunge Dive / Serve</span>
-              <span class="binding-keys"><span class="keycap keycap--magenta">L</span> / <span class="keycap keycap--magenta">B</span></span>
+              <span class="binding-action"><span style="color:#93c5fd">●</span> Agile Defensive Brace (Block)</span>
+              <span class="binding-keys"><span class="keycap keycap--blue">G</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-yellow)">●</span> Cycle Camera (Player / Arena)</span>
+              <span class="binding-keys"><span class="keycap keycap--yellow">Tab</span> / <span class="keycap keycap--yellow">Shift+Tab</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-orange)">●</span> Reset Ball (Practice Mode)</span>
+              <span class="binding-keys"><span class="keycap keycap--orange">B</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Pause Menu / Release Mouse</span>
+              <span class="binding-keys"><span class="keycap keycap--red">Esc</span></span>
             </div>
           </div>
         </div>
 
-        <!-- Player 2 (North / IJKL or Arrows) -->
-        <div class="control-card">
+        <!-- Player 2 (IJKL Shared Keyboard) -->
+        <div class="control-card" style="border-color:rgba(255,208,0,.35)">
           <div class="control-card-header">
-            <div class="control-title">Player 2 // North Athlete</div>
-            <span class="control-tag" style="background:rgba(255,208,0,.15);color:var(--spec-yellow);border:1px solid rgba(255,208,0,.35)">IJKL / Numpad Zone</span>
+            <div class="control-title">Player 2 // Secondary (IJKL Zone)</div>
+            <span class="control-tag control-tag--yellow">P2 Split Keyboard</span>
           </div>
           <div class="binding-list">
             <div class="binding-row">
               <span class="binding-action"><span style="color:var(--spec-blue)">●</span> Run / Steer</span>
               <span class="binding-keys">
-                <span class="keycap keycap--blue">I</span><span class="keycap keycap--blue">J</span><span class="keycap keycap--blue">K</span><span class="keycap keycap--blue">L</span> or <span class="keycap keycap--blue">Arrows</span>
+                <span class="keycap keycap--blue">I</span><span class="keycap keycap--blue">J</span><span class="keycap keycap--blue">K</span><span class="keycap keycap--blue">L</span>
               </span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-green)">●</span> Jump & Aerial Leap</span>
-              <span class="binding-keys"><span class="keycap keycap--green">Enter</span> / <span class="keycap keycap--green">R-Shift</span></span>
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Strike Aim / Look Direction</span>
+              <span class="binding-keys">
+                <span class="keycap keycap--cyan">Arrow Keys (← ↑ → ↓)</span>
+              </span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Sprint Surge (Uphill)</span>
-              <span class="binding-keys"><span class="keycap keycap--cyan">R-Ctrl</span></span>
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Volley Strike / Kick / Serve</span>
+              <span class="binding-keys"><span class="keycap keycap--cyan">P</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Downward Spike Strike</span>
+              <span class="binding-keys"><span class="keycap keycap--red">[</span> or <span class="keycap keycap--red">Y</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-green)">●</span> Jump & Aerial Leap</span>
+              <span class="binding-keys"><span class="keycap keycap--green">Enter</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-cyan)">●</span> Sprint Boost (Uphill)</span>
+              <span class="binding-keys"><span class="keycap keycap--cyan">R-Shift</span> or <span class="keycap keycap--cyan">/</span></span>
             </div>
             <div class="binding-row">
               <span class="binding-action"><span style="color:var(--spec-orange)">●</span> Ground Slide (Downhill)</span>
-              <span class="binding-keys"><span class="keycap keycap--orange">;</span> / <span class="keycap keycap--orange">Num 0</span></span>
+              <span class="binding-keys"><span class="keycap keycap--orange">O</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-yellow)">●</span> Volley Strike / Kick (Up)</span>
-              <span class="binding-keys"><span class="keycap keycap--yellow">U</span> / <span class="keycap keycap--yellow">Num 1</span></span>
+              <span class="binding-action"><span style="color:var(--spec-magenta)">●</span> Ground Dive (Lunge)</span>
+              <span class="binding-keys"><span class="keycap keycap--magenta">U</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-red)">●</span> Spike (Down)</span>
-              <span class="binding-keys"><span class="keycap keycap--red">O</span> / <span class="keycap keycap--red">Num 2</span></span>
+              <span class="binding-action"><span style="color:#70A6FF">●</span> Directional Cut & Plant</span>
+              <span class="binding-keys"><span class="keycap keycap--blue">N</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-magenta)">●</span> Lunge Dive / Serve</span>
-              <span class="binding-keys"><span class="keycap keycap--magenta">P</span> / <span class="keycap keycap--magenta">Num 3</span></span>
+              <span class="binding-action"><span style="color:#93c5fd">●</span> Agile Defensive Brace (Block)</span>
+              <span class="binding-keys"><span class="keycap keycap--blue">H</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-yellow)">●</span> Cycle Camera (Player / Arena)</span>
+              <span class="binding-keys"><span class="keycap keycap--yellow">]</span> / <span class="keycap keycap--yellow">\</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-orange)">●</span> Reset Ball (Practice Mode)</span>
+              <span class="binding-keys"><span class="keycap keycap--orange">M</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-sub)">●</span> Switch Sides (In Lobby)</span>
+              <span class="binding-keys"><span class="keycap">← → + Enter</span></span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MASTER ACTION REFERENCE TABLE ==================== -->
+  <section class="guide-section" id="matrix">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--spec-green)">Canonical Reference Matrix</p>
+      <h2>Unified Input Comparison</h2>
+      <p>
+        Every physical action maps directly to identical simulation parameters regardless of whether you play on an elite gamepad or standard keyboard.
+      </p>
+
+      <div class="matrix-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">Action & Mechanic</th>
+              <th>Gamepad (Xbox / PS)</th>
+              <th>Player 1 (Mouse & Keys)</th>
+              <th>Player 2 (Shared Keys)</th>
+              <th>Kinematic Behavior</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-blue)">●</span> Run / Steer</span></td>
+              <td><span class="keycap keycap--blue">Left Stick</span></td>
+              <td><span class="keycap keycap--blue">W</span><span class="keycap keycap--blue">A</span><span class="keycap keycap--blue">S</span><span class="keycap keycap--blue">D</span></td>
+              <td><span class="keycap keycap--blue">I</span><span class="keycap keycap--blue">J</span><span class="keycap keycap--blue">K</span><span class="keycap keycap--blue">L</span></td>
+              <td>Full 360° locomotion across basin banks.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-cyan)">●</span> Strike Aim / Look</span></td>
+              <td><span class="keycap keycap--cyan">Right Stick</span></td>
+              <td><span class="keycap keycap--mouse">Mouse Look</span></td>
+              <td><span class="keycap keycap--cyan">Arrow Keys</span></td>
+              <td>Directs angle of contact for all volleys and spikes.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-cyan)">●</span> Sprint Surge (Hold)</span></td>
+              <td><span class="keycap keycap--cyan">LT / L2</span></td>
+              <td><span class="keycap keycap--cyan">Left Shift</span></td>
+              <td><span class="keycap keycap--cyan">R-Shift / Slash</span></td>
+              <td>Preserves kinetic velocity against the upward slope.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-orange)">●</span> Ground Slide (Hold)</span></td>
+              <td><span class="keycap keycap--orange">RT / R2</span></td>
+              <td><span class="keycap keycap--orange">C</span></td>
+              <td><span class="keycap keycap--orange">O</span></td>
+              <td>Harnesses gravity on downhill slopes; triggers leg sweep tackle.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-green)">●</span> Jump & Aerial Leap</span></td>
+              <td><span class="keycap keycap--green">A / Cross</span></td>
+              <td><span class="keycap keycap--green">Space</span></td>
+              <td><span class="keycap keycap--green">Enter</span></td>
+              <td>Vertical leap to elevate above opponents and meet the ball.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-cyan)">●</span> Volley Strike / Kick</span></td>
+              <td><span class="keycap keycap--cyan">B / Circle</span></td>
+              <td><span class="keycap keycap--mouse">Left Click</span> / <span class="keycap keycap--cyan">E</span></td>
+              <td><span class="keycap keycap--cyan">P</span></td>
+              <td>Pops ball up into high parabolic flight to reset tempo or set teammates.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-red)">●</span> Downward Spike</span></td>
+              <td><span class="keycap keycap--red">Y / Triangle</span></td>
+              <td><span class="keycap keycap--red">Right Click</span> / <span class="keycap keycap--red">R</span></td>
+              <td><span class="keycap keycap--red">[</span> / <span class="keycap keycap--red">Y</span></td>
+              <td>Steep downward hammer drive; triggers rainbow sweet-spot at apex.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-magenta)">●</span> Ground Dive (Lunge)</span></td>
+              <td><span class="keycap keycap--magenta">X / Square</span></td>
+              <td><span class="keycap keycap--magenta">Q</span></td>
+              <td><span class="keycap keycap--magenta">U</span></td>
+              <td>Committed desperation skid to reach low rim shots or basin balls.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:#70A6FF">●</span> Directional Cut / Plant</span></td>
+              <td><span class="keycap keycap--blue">RB / R1</span></td>
+              <td><span class="keycap keycap--blue">V / F</span></td>
+              <td><span class="keycap keycap--blue">N</span></td>
+              <td>Instant momentum redirection without losing forward traction.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:#93c5fd">●</span> Agile Brace (Block)</span></td>
+              <td><span class="keycap keycap--blue">LB / L1</span></td>
+              <td><span class="keycap keycap--blue">G</span></td>
+              <td><span class="keycap keycap--blue">H</span></td>
+              <td>Defensive shield stance: rebounds incoming spikes and absorbs impacts.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-yellow)">●</span> Cycle Camera</span></td>
+              <td><span class="keycap keycap--yellow">D-Pad</span></td>
+              <td><span class="keycap keycap--yellow">Tab (Shift+Tab)</span></td>
+              <td><span class="keycap keycap--yellow">] / \</span></td>
+              <td>Switches athlete follow cam or stadium broadcast perspectives.</td>
+            </tr>
+            <tr>
+              <td><span class="action-name"><span style="color:var(--spec-orange)">●</span> Ball Reset (Practice)</span></td>
+              <td><span class="keycap keycap--orange">Back / View</span></td>
+              <td><span class="keycap keycap--orange">B</span></td>
+              <td><span class="keycap keycap--orange">M</span></td>
+              <td>Spawns ball at center drop for practice drills.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 2v2 TEAM PLAY & SIDES ==================== -->
+  <section class="guide-section" id="team-play">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--spec-cyan)">v0.4.0 Feature Highlight</p>
+      <h2>2v2 Team Play & Controller Assignment</h2>
+      <p>
+        Valleyball v0.4.0 expands the sport to 4 simultaneous athletes on the court. Form a squad with a friend against two AI bots, run full 2v2 quad split-screen with four human players, or test your solo mechanics in traditional 1v1 duels.
+      </p>
+
+      <div class="feature-box">
+        <h3 style="margin:0 0 8px;font-family:var(--display);font-size:15px;letter-spacing:.08em;color:#fff;text-transform:uppercase">The Pre-Match Assignment Dock</h3>
+        <p style="margin-bottom:16px">Before every kickoff, the Controller Assignment Screen lets you drag, drop, or press buttons to claim athlete positions:</p>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-item-title" style="color:var(--spec-cyan)">Team 1 // South (Home)</div>
+            <p style="font-size:13px;line-height:1.55;margin:0">Controls athletes <strong>P1</strong> and <strong>P3</strong>. Attacking North hoop at kickoff. Defending the South goal hoop.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-title" style="color:var(--spec-yellow)">Team 2 // North (Away)</div>
+            <p style="font-size:13px;line-height:1.55;margin:0">Controls athletes <strong>P2</strong> and <strong>P4</strong>. Attacking South hoop at kickoff. Defending the North goal hoop.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-title" style="color:var(--spec-green)">Flexible Bot Toggles</div>
+            <p style="font-size:13px;line-height:1.55;margin:0">Any slot not claimed by a human player automatically populates with competitive bot AI running local physics navigation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-box" style="margin-top:20px">
+        <h3 style="margin:0 0 8px;font-family:var(--display);font-size:15px;letter-spacing:.08em;color:#fff;text-transform:uppercase">Tactical 2v2 Mechanics</h3>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-item-title" style="color:var(--spec-cyan)">The Volley-to-Spike Set</div>
+            <p style="font-size:13px;line-height:1.55;margin:0">Teammate A pops an upward Volley (<span class="keycap keycap--cyan">B</span> or <span class="keycap keycap--cyan">E</span>) toward the hoop. Teammate B leaps at the apex to hammer a downward Spike (<span class="keycap keycap--red">Y</span> or <span class="keycap keycap--red">R</span>).</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-title" style="color:var(--spec-red)">Double-Rim Defense</div>
+            <p style="font-size:13px;line-height:1.55;margin:0">Because the goal hoop is open on both sides, one defender should guard the front goal mouth while the second covers backboard bank shots.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-title" style="color:var(--spec-orange)">Synchronized Quad Split-Screen</div>
+            <p style="font-size:13px;line-height:1.55;margin:0">Four synchronized camera viewports render on one display with independent tracking, zero lag, and full situational awareness.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== COMBAT & PHYSICAL CONTACT ==================== -->
+  <section class="guide-section" id="combat">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--spec-red)">Unscripted Physical Laws</p>
+      <h2>Full-Contact Combat & Knockdowns</h2>
+      <p>
+        Valleyball is a high-speed collision sport. There are no fouls, offsides, or penalty whistles. Every interaction is simulated by the Rapier physics engine in deterministic real-time.
+      </p>
+
+      <div class="strategy-grid">
+        <div class="strategy-card strategy-card--2">
+          <div class="strategy-title" style="color:var(--spec-red)">Slide Tackle Leg Sweeps</div>
+          <p class="strategy-text">
+            Initiating a slide (<span class="keycap keycap--orange">RT</span> / <span class="keycap keycap--orange">C</span>) at speeds exceeding <strong>6.0 m/s</strong> transforms your athlete into a sweeping projectile. Connecting with an opponent's legs triggers an immediate ragdoll knockdown, dispossessing them instantly.
+          </p>
+        </div>
+
+        <div class="strategy-card strategy-card--3">
+          <div class="strategy-title" style="color:var(--spec-orange)">Physical Body Bumps</div>
+          <p class="strategy-text">
+            Running directly into an opposing athlete shoves both competitors apart. The faster your closing velocity, the more violent the kinetic impulse. Use shoulder checks to shove defenders away from the goal mouth.
+          </p>
+        </div>
+
+        <div class="strategy-card strategy-card--6">
+          <div class="strategy-title" style="color:#B784FF">Mutual Slide Clashes</div>
+          <p class="strategy-text">
+            When two athletes slide tackle toward each other simultaneously, both players collide, lose all traction, and enter ragdoll knockdown state together, leaving the ball completely open for secondary athletes.
+          </p>
+        </div>
+
+        <div class="strategy-card strategy-card--5">
+          <div class="strategy-title" style="color:var(--spec-magenta)">Heavy Ball Knockouts</div>
+          <p class="strategy-text">
+            A high-velocity spiked ball that strikes an athlete directly in the torso or head carries enough kinetic momentum to knock them off their feet. Time your defensive braces to deflect rather than absorb face-first impacts!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MATCH BALLS & DIFFICULTY ==================== -->
+  <section class="guide-section" id="balls">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--spec-yellow)">Equipment Specifications</p>
+      <h2>Match Ball Weights & Aerodynamics</h2>
+      <p>
+        The match ball dictates the pace, bounce height, and physical hazard of every rally. Choose your ball diameter during pre-match setup:
+      </p>
+
+      <div class="ball-grid">
+        <!-- Small Ball -->
+        <div class="ball-card" style="border-color:rgba(255,42,66,.35)">
+          <div class="ball-header">
+            <span class="ball-name" style="color:var(--spec-red)">Small Striker</span>
+            <span class="ball-spec">0.4m · 0.84 kg</span>
+          </div>
+          <p style="font-size:13px;line-height:1.55;margin:0;color:var(--d-sub)">
+            <strong>Lightning Reflexes:</strong> The lightest and smallest sphere. Highly reactive with extreme aerial velocity and snappy bank rebounds. Punishes missed strikes; rewards twitch timing.
+          </p>
+        </div>
+
+        <!-- Medium Ball -->
+        <div class="ball-card" style="border-color:rgba(0,229,255,.35)">
+          <div class="ball-header">
+            <span class="ball-name" style="color:var(--spec-cyan)">Medium Regulation</span>
+            <span class="ball-spec">1.0m · 2.20 kg</span>
+          </div>
+          <p style="font-size:13px;line-height:1.55;margin:0;color:var(--d-sub)">
+            <strong>Official Championship Ball:</strong> Balanced mass, predictable parabolic flight paths, and optimal sweet-spot response. The standard tournament ball for all competitive play.
+          </p>
+        </div>
+
+        <!-- Large Ball -->
+        <div class="ball-card" style="border-color:rgba(107,17,255,.35)">
+          <div class="ball-header">
+            <span class="ball-name" style="color:#B784FF">Large Exercise Titan</span>
+            <span class="ball-spec">1.5m · 3.89 kg</span>
+          </div>
+          <p style="font-size:13px;line-height:1.55;margin:0;color:var(--d-sub)">
+            <strong>High-Inertia Juggernaut:</strong> Massive surface area, colossal momentum, and heavy collision forces. Shoves athletes backward on contact and easily knocks players down on direct hits.
+          </p>
         </div>
       </div>
     </div>
@@ -387,58 +815,74 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <!-- ==================== ATHLETIC STRATEGY & PHYSICS ==================== -->
   <section class="guide-section" id="strategy">
     <div class="wrap">
-      <p class="eyebrow" style="color:var(--spec-green)">Physics Laws & Court Positioning</p>
+      <p class="eyebrow" style="color:var(--spec-green)">Tactical Execution</p>
       <h2>Mastering the Inclined Playing Field</h2>
       <p>
-        Valleyball is not an arcade game with magnetic auto-targeting. Your momentum, launch angle, and aerial timing determine whether you score or get caught out on the counter.
+        Valleyball is zero-assist physics. There is no magnetizing ball snap or canned animation locks. Your trajectory reads, momentum conservation, and aerial jump timing dictate every rally.
       </p>
 
       <div class="strategy-grid">
-        <!-- 01 Kicking / Volleying -->
+        <!-- 01 Upward Volleys -->
         <div class="strategy-card strategy-card--1">
-          <div class="strategy-title" style="color:var(--spec-yellow)">01 // Kicking & Upward Volleys</div>
+          <div class="strategy-title" style="color:var(--spec-cyan)">01 // Upward Volleys & Pop Sets</div>
           <p class="strategy-text">
-            <strong>Launch the ball skyward into active play.</strong> Connecting on a low-line kick or upward volley pops the ball deep into the arena's vertical airspace. This resets rally tempo, buys time to reposition, and lofts the ball high above defending opponents.
+            <strong>Launch the ball skyward.</strong> Pressing Volley (<span class="keycap keycap--mouse">Left Click</span> / <span class="keycap keycap--cyan">E</span> / <span class="keycap keycap--cyan">B</span>) strikes an upward arc. This buys time to reposition, resets defensive shape, and lofts the ball for teammates or self-set aerial spikes.
           </p>
         </div>
 
-        <!-- 02 Sliding -->
+        <!-- 02 Apex Spiking -->
         <div class="strategy-card strategy-card--2">
-          <div class="strategy-title" style="color:var(--spec-orange)">02 // Sliding & Downhill Momentum</div>
+          <div class="strategy-title" style="color:var(--spec-red)">02 // The Apex Spike Rule</div>
           <p class="strategy-text">
-            <strong>Turn the arena's gravity into speed.</strong> Initiating a ground slide while aimed downhill accelerates your athlete rapidly along the sloped banks. Use downhill slides to chase down runaway loose balls, beat opponents to the basin, and convert gravity into strike momentum.
+            <strong>Spike higher = steeper angle.</strong> Spiking (<span class="keycap keycap--red">Right Click</span> / <span class="keycap keycap--red">R</span> / <span class="keycap keycap--red">Y</span>) while grounded produces a flat forward drive. Leaping to the peak of your jump and striking the ball at the apex sends a crushing, downward hammer strike directly into the hoop.
           </p>
         </div>
 
-        <!-- 03 Sprinting -->
+        <!-- 03 Downhill Sliding -->
         <div class="strategy-card strategy-card--3">
-          <div class="strategy-title" style="color:var(--spec-cyan)">03 // Sprinting Against Incline</div>
+          <div class="strategy-title" style="color:var(--spec-orange)">03 // Downhill Slide Momentum</div>
           <p class="strategy-text">
-            <strong>Fight gravity up the terrain.</strong> Climbing out of the central basin toward the elevated target goal requires sustained sprint drive. Fighting uphill constantly bleeds kinetic energy—time your sprint bursts along the banked approach corridors to preserve speed.
+            <strong>Convert gravity into raw speed.</strong> Holding Slide (<span class="keycap keycap--orange">C</span> / <span class="keycap keycap--orange">RT</span>) while aimed downhill accelerates your athlete down the banked terrain. Use downhill slides to beat rivals to the basin and turn slopes into offensive speed.
           </p>
         </div>
 
-        <!-- 04 Apex Spiking -->
+        <!-- 04 Sprinting Uphill -->
         <div class="strategy-card strategy-card--4">
-          <div class="strategy-title" style="color:var(--spec-red)">04 // The Apex Spike Rule</div>
+          <div class="strategy-title" style="color:#70A6FF">04 // Sprinting Against the Incline</div>
           <p class="strategy-text">
-            <strong>Spike higher = steeper angle.</strong> Striking a spike while grounded produces a flat horizontal vector. Jumping to the exact apex of your leap and striking downwards delivers a sharp, crushing spike with maximum velocity directly into the target hoop.
+            <strong>Fight gravity up the terrain.</strong> Climbing out of the central bowl toward the elevated goal rim rapidly bleeds kinetic energy. Hold Sprint (<span class="keycap keycap--cyan">Shift</span> / <span class="keycap keycap--cyan">LT</span>) along banked lateral tracks to maintain maximum approach velocity.
           </p>
         </div>
 
-        <!-- 05 Committed Lunges -->
+        <!-- 05 Ground Dives -->
         <div class="strategy-card strategy-card--5">
-          <div class="strategy-title" style="color:var(--spec-magenta)">05 // The Committed Lunge</div>
+          <div class="strategy-title" style="color:var(--spec-magenta)">05 // Committed Ground Dives</div>
           <p class="strategy-text">
-            <strong>High risk, vital reach.</strong> A diving lunge is an unscripted physical commitment. Once triggered, momentum carries your athlete skidding across the turf. Essential for last-second basin saves, but mistiming leaves your goal wide open during recovery.
+            <strong>High-risk, vital reach.</strong> A diving lunge (<span class="keycap keycap--magenta">Q</span> / <span class="keycap keycap--magenta">X</span>) commits your athlete to an unscripted turf skid. Essential for stopping balls on the goal line, but mistiming leaves you grounded while opponents recover the rebound.
           </p>
         </div>
 
-        <!-- 06 Score & Invert -->
+        <!-- 06 Directional Cuts -->
         <div class="strategy-card strategy-card--6">
-          <div class="strategy-title" style="color:var(--spec-green)">06 // Score & Invert Instantly</div>
+          <div class="strategy-title" style="color:#B784FF">06 // Directional Cuts & Plants</div>
           <p class="strategy-text">
-            <strong>The whistle never blows.</strong> The millisecond the ball drops through the ring, target goals invert in real time. The hoop you just scored in is instantly yours to defend. Never pause to celebrate—pivot immediately into defensive positioning.
+            <strong>Break ankles and redirect.</strong> Tapping Cut (<span class="keycap keycap--blue">V / F</span> / <span class="keycap keycap--blue">RB</span>) plants your athlete's cleats firmly into the turf, shedding inertia instantly and allowing 90° and 180° direction changes without skidding out of control.
+          </p>
+        </div>
+
+        <!-- 07 Defensive Braces -->
+        <div class="strategy-card strategy-card--7">
+          <div class="strategy-title" style="color:var(--spec-green)">07 // Defensive Brace Shielding</div>
+          <p class="strategy-text">
+            <strong>Hold the goal line.</strong> Holding Brace (<span class="keycap keycap--blue">G</span> / <span class="keycap keycap--blue">LB</span>) lowers your athletic center of mass into a fortified stance. Incoming high-speed spikes bounce off your chest without knocking you backward or causing a stumble.
+          </p>
+        </div>
+
+        <!-- 08 Live Inversion -->
+        <div class="strategy-card strategy-card--8">
+          <div class="strategy-title" style="color:var(--spec-yellow)">08 // Instant Goal Inversion</div>
+          <p class="strategy-text">
+            <strong>The whistle never blows.</strong> The exact millisecond the ball passes through the hoop, targets swap in real-time. The goal you just scored in is instantly yours to defend. Never pause to celebrate—pivot immediately into backcourt defense!
           </p>
         </div>
       </div>
@@ -452,15 +896,17 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
 <footer>
   <div class="wrap foot">
     <div style="display:flex;align-items:center;gap:14px">
-      <img src="mark-sm.png" width="30" height="30" alt="" aria-hidden="true" style="border-radius:50%">
+      <img src="mark-sm.png" width="30" height="30" alt="Valleyball Official Logo" aria-hidden="true" style="border-radius:50%">
       <span class="nav-logo-text" style="font-size:13px">Valleyball Versus</span>
     </div>
-    <div style="display:flex;gap:18px">
+    <div style="display:flex;gap:18px;flex-wrap:wrap">
       <a href="index.html">Versus Home</a>
       <a href="https://cascadiajac.itch.io/valleyball-versus">Play on itch.io</a>
       <a href="https://valleyball.org">valleyball.org</a>
+      <a href="https://www.youtube.com/@valleyball">YouTube</a>
+      <a href="https://www.twitch.tv/valleyball">Twitch</a>
     </div>
-    <div style="font-family:var(--mono);font-size:10px;color:#6B6D7A">Official Rules & Mechanics · VB-SPEC v2.4</div>
+    <div style="font-family:var(--mono);font-size:10px;color:#6B6D7A">Official Rules & Mechanics · v0.4.0 Verified · VB-SPEC v2.4</div>
   </div>
 <script>
 // Track outbound clicks to play on itch.io in Google Analytics
