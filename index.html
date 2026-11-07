@@ -12,19 +12,19 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Valleyball Versus — 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
-<meta property="og:title" content="Valleyball Versus">
-<meta property="og:description" content="Valleyball Versus — 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta name="description" content="Valleyball Versus (v0.4.0) — 2v2 team play and 1v1 duels with quad split-screen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta property="og:title" content="Valleyball Versus (v0.4.0) — 2v2 Physics Volleyball">
+<meta property="og:description" content="Valleyball Versus (v0.4.0) — 2v2 team play and 1v1 duels with quad split-screen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://valleyballvs.com/">
 <meta property="og:image" content="https://valleyballvs.com/hero_valley.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Valleyball Versus">
-<meta name="twitter:description" content="Valleyball Versus — 1v1 local splitscreen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta name="twitter:title" content="Valleyball Versus (v0.4.0) — 2v2 Physics Volleyball">
+<meta name="twitter:description" content="Valleyball Versus (v0.4.0) — 2v2 team play and 1v1 duels with quad split-screen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
 <meta name="twitter:image" content="https://valleyballvs.com/hero_valley.jpg">
 <link rel="icon" href="mark-sm.png">
 <link rel="canonical" href="https://valleyballvs.com/">
-<title>Valleyball Versus — Compete In A Brand-New Sport</title>
+<title>Valleyball Versus (v0.4.0) — 2v2 Team Play & Competitive Physics Volleyball</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&display=swap">
@@ -147,12 +147,42 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 
 /* ============================== HERO ============================== */
 .hero{position:relative;overflow:hidden;background:var(--d-deep);color:var(--d-ink)}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.45}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg img, .hero-bg video{width:100%;height:100%;object-fit:cover;display:block}
+.hero-bg video{opacity:.48;transform:scale(1.02);filter:contrast(1.05) saturate(1.1)}
 .hero-bg::after{content:"";position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 25%,rgba(3,3,8,.84) 0%,rgba(3,3,8,.38) 64%,transparent 100%),
-    linear-gradient(180deg,rgba(5,5,9,.55) 0%,rgba(5,5,9,.65) 50%,var(--d-ground) 100%)}
+    radial-gradient(ellipse 85% 65% at 50% 25%,rgba(3,3,8,.84) 0%,rgba(3,3,8,.38) 64%,transparent 100%),
+    linear-gradient(180deg,rgba(5,5,9,.50) 0%,rgba(5,5,9,.68) 50%,var(--d-ground) 100%)}
+
+.hero-live-badge{
+  position:absolute;top:20px;right:var(--gutter);z-index:10;
+  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
+  border-radius:20px;background:rgba(5,5,9,.84);backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.18);font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;color:#fff;
+}
+.hero-live-badge .live-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--spec-red);
+  box-shadow:0 0 10px var(--spec-red);animation:pulse-red 2s infinite ease-in-out;
+}
+@keyframes pulse-red{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.85)}
+}
+.hero-sound-toggle{
+  position:absolute;bottom:24px;right:var(--gutter);z-index:10;
+  display:inline-flex;align-items:center;gap:8px;padding:8px 14px;
+  border-radius:6px;background:rgba(5,5,9,.84);backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.24);color:#fff;font-family:var(--mono);
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  transition:all .18s ease;
+}
+.hero-sound-toggle:hover{
+  background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-1px);
+}
 .hero-inner{position:relative;z-index:2;padding-block:clamp(50px,7vw,85px) clamp(46px,6.5vw,78px);
             display:flex;flex-direction:column;align-items:center;text-align:center}
 
@@ -166,6 +196,15 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 .hero-word{font-size:clamp(32px,6vw,58px);margin-top:8px}
 
 /* Large, Dominant VERSUS Text */
+.hero-release-pill{
+  margin-top:14px;display:inline-flex;align-items:center;gap:8px;padding:6px 16px;
+  border-radius:24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#fff;
+}
+.hero-release-pill::before{
+  content:"";width:7px;height:7px;border-radius:50%;background:var(--spec-green);
+  box-shadow:0 0 10px var(--spec-green);
+}
 .hero-versus{
   font-family:var(--display);font-weight:700;color:#fff;text-transform:uppercase;
   font-size:clamp(28px,6vw,60px);letter-spacing:.42em;text-indent:.42em;margin-top:6px;
@@ -542,6 +581,181 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   border-color:rgba(255,255,255,.24);
 }
 
+/* ============================== ROAD TO CHAMPIONSHIP ============================== */
+.band--championship{
+  background:radial-gradient(ellipse 100% 70% at 50% 0%,rgba(255,208,0,.08) 0%,var(--d-deep) 100%);
+  position:relative;overflow:hidden;
+}
+.championship-card{
+  border:1px solid var(--d-edge2);border-radius:18px;background:var(--d-raise);
+  overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.6);position:relative;
+}
+.championship-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--spec-yellow) 0%,var(--spec-red) 50%,var(--spec-cyan) 100%);
+  z-index:2;
+}
+.championship-hero-row{
+  display:grid;grid-template-columns:1fr;padding:clamp(28px,4vw,44px);
+  gap:24px;align-items:center;border-bottom:1px solid var(--d-edge);
+}
+@media(min-width:880px){.championship-hero-row{grid-template-columns:1.3fr 1fr}}
+.championship-badge-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.championship-pill{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;border:1px solid rgba(255,208,0,.4);
+  background:rgba(255,208,0,.1);color:var(--spec-yellow);display:inline-flex;align-items:center;gap:6px;
+}
+.championship-title{
+  font-family:var(--display);font-size:clamp(22px,3.2vw,36px);font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:#fff;margin:0 0 12px;line-height:1.2;
+}
+.championship-desc{font-size:14.5px;color:var(--d-sub);line-height:1.65;margin:0}
+.championship-spec-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;
+}
+.champ-stat{
+  background:rgba(255,255,255,.03);border:1px solid var(--d-edge);border-radius:10px;
+  padding:14px 16px;display:flex;flex-direction:column;gap:4px;
+}
+.champ-stat-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--d-mute)}
+.champ-stat-val{font-family:var(--display);font-size:14px;font-weight:700;letter-spacing:.08em;color:#fff}
+.champ-stat-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--spec-cyan)}
+
+.championship-links-bar{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  padding:18px clamp(20px,3.5vw,36px);background:rgba(0,0,0,.35);gap:16px;
+}
+.champ-stream-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.champ-link{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid var(--d-edge);
+  transition:all .18s ease;
+}
+.champ-link:hover{background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-1px)}
+
+/* ============================== MULTI-CAMERA BROADCAST CONSOLE ============================== */
+.console-wrapper{
+  margin-top:clamp(32px,4.5vw,48px);
+  border:1px solid var(--d-edge2);border-radius:18px;overflow:hidden;
+  background:#05050A;box-shadow:0 20px 60px rgba(0,0,0,.75);position:relative;
+}
+.console-wrapper::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--spectral);z-index:2;
+}
+.console-topbar{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  padding:14px 22px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--d-edge);
+  gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+}
+.console-brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+.console-status-group{display:flex;align-items:center;gap:18px;color:var(--d-mute);font-size:10.5px}
+.console-status-item{display:flex;align-items:center;gap:6px}
+.tally-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--spec-red);
+  box-shadow:0 0 8px var(--spec-red);
+}
+.tally-dot--green{background:var(--spec-green);box-shadow:0 0 8px var(--spec-green)}
+
+.console-monitor{
+  position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;
+}
+.console-video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:opacity .2s ease;
+}
+.console-video.is-switching{opacity:0.35}
+
+/* Broadcast On-Screen Display (OSD) Overlay */
+.console-osd{
+  position:absolute;inset:0;pointer-events:none;padding:clamp(16px,2.5vw,26px);
+  display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(180deg,rgba(0,0,0,.65) 0%,transparent 24%,transparent 68%,rgba(0,0,0,.8) 100%);
+  font-family:var(--mono);text-transform:uppercase;
+}
+.osd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.osd-tag{
+  padding:5px 12px;border-radius:4px;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.18);font-size:10px;letter-spacing:.18em;color:#fff;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.osd-tag--live{color:#FF6B7A;border-color:rgba(255,42,66,.4)}
+.osd-tag--live::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:var(--spec-red);
+  box-shadow:0 0 8px var(--spec-red);animation:pulse-red 1.6s infinite ease-in-out;
+}
+.osd-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.osd-channel-meta{
+  background:rgba(0,0,0,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:10px 14px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.osd-channel-title{font-size:11px;font-weight:700;letter-spacing:.16em;color:#fff}
+.osd-channel-desc{font-size:10px;letter-spacing:.12em;color:var(--spec-cyan)}
+
+.console-controls{
+  pointer-events:auto;display:flex;align-items:center;gap:8px;
+}
+.console-ctrl-btn{
+  background:rgba(0,0,0,.82);border:1px solid rgba(255,255,255,.24);color:#fff;
+  border-radius:6px;padding:7px 12px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;transition:all .18s ease;
+}
+.console-ctrl-btn:hover{background:rgba(255,255,255,.2);border-color:#fff}
+
+/* Switcher Control Surface */
+.console-switcher{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:1px;background:rgba(255,255,255,.08);border-top:1px solid var(--d-edge);
+}
+.switcher-btn{
+  background:#0B0C12;border:none;padding:16px 20px;text-align:left;
+  cursor:pointer;display:flex;flex-direction:column;gap:6px;position:relative;
+  transition:all .18s ease;outline:none;
+}
+.switcher-btn:hover{background:#141520}
+.switcher-btn.active{
+  background:#1A1C2A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);
+}
+.switcher-btn::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:transparent;transition:background .18s ease;
+}
+.switcher-btn.active::before{background:var(--spec-cyan)}
+.switcher-header{display:flex;justify-content:space-between;align-items:center}
+.switcher-tally{
+  display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--d-sub);
+}
+.switcher-btn.active .switcher-tally{color:#fff}
+.switcher-led{
+  width:7px;height:7px;border-radius:50%;background:#404452;
+  transition:all .18s ease;
+}
+.switcher-btn.active .switcher-led{
+  background:var(--spec-red);box-shadow:0 0 10px var(--spec-red);
+}
+.switcher-keycap{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);color:var(--d-mute);
+}
+.switcher-btn.active .switcher-keycap{
+  background:rgba(0,229,255,.15);border-color:rgba(0,229,255,.4);color:var(--spec-cyan);
+}
+.switcher-label{
+  font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff;
+}
+.switcher-sub{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--d-mute);line-height:1.4;
+}
+.switcher-btn.active .switcher-sub{color:#B8C4D4}
+
 /* ============================== FOOTER ============================== */
 footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
        border-top:2px solid rgba(255,255,255,.22)}
@@ -564,6 +778,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   <a class="nav-brand" href="index.html">
     <span class="nav-logo-text">Valleyball</span>
     <span class="nav-vs-badge">VERSUS</span>
+    <span class="nav-vs-badge" style="background:rgba(16,229,106,.15);color:var(--spec-green);border-color:rgba(16,229,106,.35)">v0.4.0 · 2v2</span>
   </a>
   <nav class="nav-links">
     <a class="nav-link" href="#the-game">The Game</a>
@@ -580,7 +795,20 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
   <!-- ============================ HERO ============================ -->
   <section class="hero">
-    <div class="hero-bg"><img src="hero_valley.jpg" alt="" aria-hidden="true"></div>
+    <div class="hero-bg">
+      <video id="hero-video" class="hero-video" autoplay loop muted playsinline width="1920" height="1080" poster="hero_valley.jpg">
+        <source src="img/video_hero_reel.mp4" type="video/mp4">
+      </video>
+      <div class="hero-live-badge">
+        <span class="live-dot"></span>
+        <span>LIVE 1080P60 // TOURNAMENT BROADCAST FEED</span>
+      </div>
+      <button id="hero-sound-toggle" class="hero-sound-toggle" type="button" aria-label="Toggle Hero Sound">
+        <svg id="hero-sound-icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <svg id="hero-sound-icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <span id="hero-sound-label">UNMUTE SOUND</span>
+      </button>
+    </div>
     <div class="wrap hero-inner">
 
       <!-- Distinct Textless Versus Ball Mark - NO halo/border ring -->
@@ -590,6 +818,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
       <div class="wordmark hero-word">Valleyball</div>
       <div class="hero-versus">VERSUS</div>
+      <div class="hero-release-pill">v0.4.0 Live · 2v2 Team Play & Quad Split-Screen</div>
 
       <h1 class="hero-thesis">Compete In A Brand-New Sport</h1>
       <p class="hero-sub">
@@ -600,7 +829,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <a class="btn btn-primary" href="https://cascadiajac.itch.io/valleyball-versus">Play Free on itch.io</a>
         <a class="btn btn-guide" href="how-to-play.html">How to Play & Controls Guide</a>
       </div>
-      <span class="play-meta">Instant browser play · Dual gamepads or split keyboard · Zero install</span>
+      <span class="play-meta">v0.4.0 Live · 2v2 Team Mode & 1v1 Duels · Up to 4 Gamepads or Split Keyboard · Free in Browser</span>
 
       <div class="hero-signup-wrap">
         <div class="hero-divider">
@@ -658,6 +887,69 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         </div>
         <div class="score-swap-caption">
           Score in the ring and it immediately becomes yours to defend—without the ball ever leaving play.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ROAD TO CHAMPIONSHIP (DEC 27) ==================== -->
+  <section class="band band--championship" id="championship">
+    <div class="wrap">
+      <div class="championship-card">
+        <div class="championship-hero-row">
+          <div>
+            <div class="championship-badge-row">
+              <span class="championship-pill">
+                <span style="width:6px;height:6px;border-radius:50%;background:var(--spec-yellow);box-shadow:0 0 6px var(--spec-yellow)"></span>
+                Major Event · Dec 27, 2026
+              </span>
+              <span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--d-mute);text-transform:uppercase">
+                Double-Elimination 2v2 Bracket
+              </span>
+            </div>
+            <h2 class="championship-title">The Inaugural Valleyball Championship</h2>
+            <p class="championship-desc">
+              Seven weeks out. The world's top duos converge on the sculpted coliseum for the first official Valleyball Championship on <strong>Sunday, December 27, 2026</strong>. Streamed live in 1080p60 on Twitch and YouTube, featuring dedicated tournament-build hardware, quad split-screen coverage, and uncapped framerate telemetry.
+            </p>
+          </div>
+
+          <div class="championship-spec-grid">
+            <div class="champ-stat">
+              <span class="champ-stat-label">Tournament Format</span>
+              <span class="champ-stat-val">2v2 Double-Elim</span>
+              <span class="champ-stat-sub">Quad-Split Arena Feed</span>
+            </div>
+            <div class="champ-stat">
+              <span class="champ-stat-label">Target Build</span>
+              <span class="champ-stat-val">Dedicated Desktop</span>
+              <span class="champ-stat-sub">Uncapped 144Hz / 240Hz</span>
+            </div>
+            <div class="champ-stat">
+              <span class="champ-stat-label">Match Duration</span>
+              <span class="champ-stat-val">5:00 Unbroken</span>
+              <span class="champ-stat-sub">Zero Clock Stoppage</span>
+            </div>
+            <div class="champ-stat">
+              <span class="champ-stat-label">Official Ball</span>
+              <span class="champ-stat-val">1.0m Valley Ball</span>
+              <span class="champ-stat-sub">Regulation Rapier Physics</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="championship-links-bar">
+          <div class="champ-stream-links">
+            <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--d-mute)">Watch Live Dec 27:</span>
+            <a class="champ-link" href="https://www.twitch.tv/valleyball" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+              Twitch Broadcast
+            </a>
+            <a class="champ-link" href="https://www.youtube.com/@valleyball" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              YouTube Live
+            </a>
+          </div>
+          <a class="btn btn-primary" href="#dispatch" style="font-size:10.5px;padding:10px 18px">Join Championship Dispatch</a>
         </div>
       </div>
     </div>
@@ -896,21 +1188,21 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   <!-- ==================== TEAM & ATHLETE CUSTOMIZATION (NEW) ==================== -->
   <section class="band" id="customization">
     <div class="wrap">
-      <p class="eyebrow eyebrow--cyan">Match Setup // Customization</p>
-      <h2>Your Colors. Your Physique. Your Arena.</h2>
+      <p class="eyebrow eyebrow--cyan">Match Setup // 2v2 Team Loadouts & Customization</p>
+      <h2>Your Squad. Your Colors. Your Arena.</h2>
       <p class="lede" style="max-width:60ch">
-        Before entering the arena, configure both athletes from the Match Setup Lobby. High-contrast Home and Away kits provide instant visual distinction mid-rally, backed by full control over athlete builds and match ball physics.
+        Before entering the arena, configure 1v1 duels or full 2v2 squads from the Match Setup Lobby. High-contrast Home and Away kits provide instant visual distinction mid-rally, backed by independent athlete loadouts, 4-controller assignment, and variable ball physics.
       </p>
 
       <!-- Match Lobby Visual -->
       <div class="custom-lobby-card">
-        <img class="custom-lobby-img" src="img/customization_lobby.jpg" alt="Valleyball Versus Match Lobby setup screen showing 10 team color swatches, 3 physiques, and ball options">
+        <img class="custom-lobby-img" src="img/02_2v2_team_lobby_loadouts.png" alt="Valleyball Versus v0.4.0 2v2 Match Setup Lobby screen showing 4 athlete loadout panels, team colorways, and controller assignments" loading="lazy">
         <div class="custom-grid">
           <div class="custom-item">
             <div class="custom-item-title">
-              <span style="color:var(--spec-cyan)">01 //</span> Home vs Away
+              <span style="color:var(--spec-cyan)">01 //</span> 2v2 Team Formations
             </div>
-            <p class="custom-item-desc">Dark vs Light polarity ensures crystal-clear visual clarity during high-speed dives and split-second net encounters.</p>
+            <p class="custom-item-desc">Assemble 4-athlete rosters across Team 1 (Home) and Team 2 (Away), assigning human controllers or configurable AI difficulty per slot.</p>
           </div>
 
           <div class="custom-item">
@@ -953,40 +1245,197 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   <!-- ==================== WHAT IT LOOKS LIKE — DARK ==================== -->
   <section class="band" id="gameplay">
     <div class="wrap">
-      <p class="eyebrow eyebrow--green">Physics-first gameplay</p>
+      <p class="eyebrow eyebrow--green">Physics-first gameplay // v0.4.0 in action</p>
       <h2>Real Physics. Honest Momentum. Nothing Scripted.</h2>
       <p class="lede" style="max-width:58ch">
-        Traditional sports games rely on canned animations and magnetic ball-snapping. Valleyball strips all of that away. Every strike, slide tackle, and diving save is a real physics collision. When momentum takes over, skill is the only thing that saves you.
+        Traditional sports games rely on canned animations and magnetic ball-snapping. Valleyball strips all of that away. Every strike, slide tackle, and diving save is a real physics collision. In 2v2, teamwork and court spacing turn momentum into pure athletic spectacle.
       </p>
 
+      <!-- Multi-Camera Broadcast Console (Interactive 60fps Channel Switcher) -->
+      <div class="console-wrapper" id="broadcast-console">
+        <div class="console-topbar">
+          <div class="console-brand">
+            <span class="tally-dot"></span>
+            <span>PRODUCTION CONSOLE // 60FPS BROADCAST FEED</span>
+          </div>
+          <div class="console-status-group">
+            <div class="console-status-item">
+              <span class="tally-dot tally-dot--green"></span>
+              <span>RAPIER 3D · 60HZ FIXED TIMESTEP</span>
+            </div>
+            <div class="console-status-item">
+              <span>UNSCRIPTED MATCH RIG</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="console-monitor">
+          <video
+            id="console-video"
+            class="console-video"
+            autoplay
+            loop
+            muted
+            playsinline
+            width="1920"
+            height="1080"
+            loading="lazy"
+            poster="img/04_2v2_quad_splitscreen_multiplayer.png"
+          >
+            <source id="console-video-src" src="img/video_2v2_quad.mp4" type="video/mp4">
+          </video>
+
+          <div class="console-osd">
+            <div class="osd-top">
+              <span class="osd-tag osd-tag--live">REC ● LIVE HARVEST // SEED 20261028</span>
+              <span class="osd-tag" id="osd-res-tag">1080P60 · D3D11 HEADLESS ENGINE</span>
+            </div>
+            <div class="osd-bottom">
+              <div class="osd-channel-meta">
+                <span class="osd-channel-title" id="osd-ch-title">CH 01 // QUAD SPLIT (4 ATHLETES)</span>
+                <span class="osd-channel-desc" id="osd-ch-desc">4-Player 2v2 Synced Perspectives · 0 Latency Quad-Feed</span>
+              </div>
+              <div class="console-controls">
+                <button type="button" class="console-ctrl-btn" id="console-play-toggle" aria-label="Pause Video">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  <span id="console-play-label">PAUSE</span>
+                </button>
+                <button type="button" class="console-ctrl-btn" id="console-sound-toggle" aria-label="Unmute Console Audio">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  <span id="console-sound-label">UNMUTE</span>
+                </button>
+                <button type="button" class="console-ctrl-btn" id="console-fullscreen-btn" aria-label="Toggle Fullscreen">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                  <span>FULLSCREEN</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Channel Production Switcher -->
+        <div class="console-switcher" role="tablist" aria-label="Broadcast Cameras">
+          <button
+            type="button"
+            class="switcher-btn active"
+            role="tab"
+            aria-selected="true"
+            data-channel="ch1"
+            data-src="img/video_2v2_quad.mp4"
+            data-poster="img/04_2v2_quad_splitscreen_multiplayer.png"
+            data-title="CH 01 // QUAD SPLIT (4 ATHLETES)"
+            data-desc="4-Player 2v2 Synced Perspectives · 0 Latency Quad-Feed"
+          >
+            <div class="switcher-header">
+              <span class="switcher-tally"><span class="switcher-led"></span> CH 01</span>
+              <span class="switcher-keycap">KEY 1</span>
+            </div>
+            <span class="switcher-label">Quad Split-Screen</span>
+            <span class="switcher-sub">All 4 athletes rendered in synchronized split-view with zero latency.</span>
+          </button>
+
+          <button
+            type="button"
+            class="switcher-btn"
+            role="tab"
+            aria-selected="false"
+            data-channel="ch2"
+            data-src="img/video_cam_broadcast.mp4"
+            data-poster="img/06_2v2_broadcast_big_ball_rally.png"
+            data-title="CH 02 // STADIUM BROADCAST"
+            data-desc="Elevation 28.4M · Full Coliseum Kinetic Spatial Tracking"
+          >
+            <div class="switcher-header">
+              <span class="switcher-tally"><span class="switcher-led"></span> CH 02</span>
+              <span class="switcher-keycap">KEY 2</span>
+            </div>
+            <span class="switcher-label">Stadium Broadcast</span>
+            <span class="switcher-sub">Wide-angle dynamic tracking camera showing full-arena court flow.</span>
+          </button>
+
+          <button
+            type="button"
+            class="switcher-btn"
+            role="tab"
+            aria-selected="false"
+            data-channel="ch3"
+            data-src="img/video_cam_chase.mp4"
+            data-poster="img/03_1v1_split_aerial_contest.png"
+            data-title="CH 03 // PLAYER CHASE"
+            data-desc="Over-The-Shoulder Dynamic Chase · Strike Velocity 29.5 m/s"
+          >
+            <div class="switcher-header">
+              <span class="switcher-tally"><span class="switcher-led"></span> CH 03</span>
+              <span class="switcher-keycap">KEY 3</span>
+            </div>
+            <span class="switcher-label">Player Chase Cam</span>
+            <span class="switcher-sub">Tight over-the-shoulder perspective during high-velocity dives & spikes.</span>
+          </button>
+
+          <button
+            type="button"
+            class="switcher-btn"
+            role="tab"
+            aria-selected="false"
+            data-channel="ch4"
+            data-src="img/video_cam_rim.mp4"
+            data-poster="img/05_2v2_hoop_contest_and_rim_play.png"
+            data-title="CH 04 // RIM CONTEST"
+            data-desc="Overhead Torus Hoop Apex: 4.8M · Aerial Scramble Perspective"
+          >
+            <div class="switcher-header">
+              <span class="switcher-tally"><span class="switcher-led"></span> CH 04</span>
+              <span class="switcher-keycap">KEY 4</span>
+            </div>
+            <span class="switcher-label">Rim Contest Cam</span>
+            <span class="switcher-sub">Overhead ring camera looking straight down into aerial clearances & goals.</span>
+          </button>
+        </div>
+      </div>
+
       <div class="shots">
-        <!-- Wide Action Animated GIF Loop -->
+        <!-- Wide 2v2 Quad Splitscreen Shot -->
         <figure class="shot shot--wide">
-          <span class="badge-live-gif">Live Gameplay Loop</span>
-          <img src="img/gameplay_action.gif" alt="Animated gameplay loop showing athlete driving uphill, scoring cleanly through the goal arch, and immediate scoreboard inversion.">
-          <figcaption>Uphill drive, aerial strike through the goal arch, and instantaneous target swap in continuous play.</figcaption>
+          <span class="badge-live-gif" style="color:var(--spec-cyan);border-color:rgba(0,229,255,.4)">v0.4.0 Quad Split-Screen</span>
+          <img src="img/04_2v2_quad_splitscreen_multiplayer.png" alt="Valleyball Versus v0.4.0 4-player 2v2 quad splitscreen local multiplayer in real-time match" loading="lazy">
+          <figcaption>4-athlete 2v2 local multiplayer: synchronized quad perspectives, independent camera tracking, and zero latency.</figcaption>
         </figure>
 
-        <!-- Compact Animated Dive Impulse -->
+        <!-- 2v2 Rim Scramble -->
         <figure class="shot">
-          <span class="badge-live-gif">Real Physics Impulse</span>
-          <img src="img/gameplay_uphill.gif" alt="Goal-line slide tackle and aerial contest against the AI defender.">
-          <figcaption>Goal-line slide tackle and aerial contest against the AI defender</figcaption>
+          <span class="badge-live-gif">2v2 Rim Scramble</span>
+          <img src="img/05_2v2_hoop_contest_and_rim_play.png" alt="2v2 hoop contest and rim play with athletes battling for the ball above the sloped court ring" loading="lazy">
+          <figcaption>Mid-air team battles and clutch goal-line clearances at the elevated scoring hoop</figcaption>
         </figure>
 
-        <!-- High-Res Aerial Spike Strike -->
+        <!-- Dynamic Animated Gameplay Loop -->
         <figure class="shot">
-          <img src="img/roster/extra_spike_lowangle.png" alt="Athlete executing high-elevation aerial spike above the sloped court ring" loading="lazy">
-          <figcaption>High-elevation aerial spike at the target ring under continuous momentum</figcaption>
+          <span class="badge-live-gif">Continuous Momentum Loop</span>
+          <img src="img/gameplay_ring_duel.gif" alt="Live gameplay loop showing athlete driving uphill, jumping into aerial contest, and scoring through the ring" loading="lazy">
+          <figcaption>Live physics loop: uphill drive, aerial jump strike, and instant ring inversion</figcaption>
+        </figure>
+
+        <!-- Broadcast Big Ball Rally -->
+        <figure class="shot">
+          <span class="badge-live-gif">Broadcast Arena View</span>
+          <img src="img/06_2v2_broadcast_big_ball_rally.png" alt="Valleyball 2v2 broadcast camera view showing four athletes rallying with the 1.5m Big Ball across the sunken court" loading="lazy">
+          <figcaption>Full arena broadcast camera tracking a 4-athlete rally with the 1.5m Big Ball</figcaption>
+        </figure>
+
+        <!-- Team Victory & Telemetry -->
+        <figure class="shot">
+          <span class="badge-live-gif">Team Stats & Telemetry</span>
+          <img src="img/08_2v2_victory_team_and_player_stats.png" alt="2v2 Victory screen showing team scores, MVP performance, hits, and match telemetry" loading="lazy">
+          <figcaption>Post-match team scoreboard, individual hit counts, and in-depth hustle telemetry</figcaption>
         </figure>
       </div>
 
       <!-- Redesigned 2x2 Desktop Feature Grid with Rainbow Spectral Accents -->
       <div class="beats-grid">
         <div class="beat-card beat-card--1">
-          <div class="beat-num">01 // Ball Tuning</div>
-          <h3>Easy to volley, brutal to master</h3>
-          <p>Every match plays out differently. From the massive 1.5m Big Ball that keeps airborne rallies flying across the arena, down to the 0.4m Heavy Striker demanding razor-sharp precision, varying ball sizes reshape the physics, tempo, and replayability of every contest.</p>
+          <div class="beat-num">01 // 2v2 Team Play</div>
+          <h3>Four athletes. Infinite chaos.</h3>
+          <p>Valleyball v0.4.0 introduces full 4-athlete 2v2 multiplayer. Synchronize sets, aerial spikes, and goal-line saves with a teammate in quad split-screen or full broadcast arena camera modes with up to 4 local gamepads.</p>
         </div>
 
         <div class="beat-card beat-card--2">
@@ -1032,7 +1481,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <a href="https://github.com/valleyballjac/Valleyball-Versus">GitHub</a>
         <a href="https://valleyball.org">valleyball.org</a>
       </nav>
-      <div class="foot-meta">Valleyball Versus // Public Arcade Build</div>
+      <div class="foot-meta">Valleyball Versus v0.4.0 // The 2v2 Update · Road to Dec 27 Championship</div>
     </div>
   </footer>
 
@@ -1285,6 +1734,144 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+})();
+
+// ==================== REDUCED MOTION SAFEGUARD ====================
+// Per Modern Web Guidance: Pause autoplaying videos when user prefers reduced motion
+(function initReducedMotion() {
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function syncReducedMotion(prefersReducedMotion) {
+    for (const video of document.querySelectorAll('video[autoplay]')) {
+      if (prefersReducedMotion) {
+        video.removeAttribute('autoplay');
+        video.pause();
+      }
+    }
+  }
+  syncReducedMotion(reducedMotionQuery.matches);
+  reducedMotionQuery.addEventListener('change', (e) => syncReducedMotion(e.matches));
+})();
+
+// ==================== HERO VIDEO AUDIO TOGGLE ====================
+(function initHeroAudio() {
+  const video = document.getElementById('hero-video');
+  const btn = document.getElementById('hero-sound-toggle');
+  const iconMuted = document.getElementById('hero-sound-icon-muted');
+  const iconUnmuted = document.getElementById('hero-sound-icon-unmuted');
+  const label = document.getElementById('hero-sound-label');
+
+  if (!video || !btn) return;
+
+  btn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    if (video.muted) {
+      if (iconMuted) iconMuted.style.display = 'block';
+      if (iconUnmuted) iconUnmuted.style.display = 'none';
+      if (label) label.textContent = 'UNMUTE SOUND';
+    } else {
+      if (iconMuted) iconMuted.style.display = 'none';
+      if (iconUnmuted) iconUnmuted.style.display = 'block';
+      if (label) label.textContent = 'MUTE SOUND';
+      // User gesture allows playing with audio
+      video.play().catch(() => {});
+    }
+  });
+})();
+
+// ==================== MULTI-CAMERA BROADCAST CONSOLE ====================
+(function initBroadcastConsole() {
+  const video = document.getElementById('console-video');
+  const videoSrc = document.getElementById('console-video-src');
+  const chTitle = document.getElementById('osd-ch-title');
+  const chDesc = document.getElementById('osd-ch-desc');
+  const playBtn = document.getElementById('console-play-toggle');
+  const playLabel = document.getElementById('console-play-label');
+  const soundBtn = document.getElementById('console-sound-toggle');
+  const soundLabel = document.getElementById('console-sound-label');
+  const fsBtn = document.getElementById('console-fullscreen-btn');
+  const switcherBtns = document.querySelectorAll('.switcher-btn');
+
+  if (!video || !switcherBtns.length) return;
+
+  function switchChannel(targetBtn) {
+    if (!targetBtn || targetBtn.classList.contains('active')) return;
+
+    switcherBtns.forEach(btn => {
+      const isActive = btn === targetBtn;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    const newSrc = targetBtn.dataset.src;
+    const newPoster = targetBtn.dataset.poster;
+    const newTitle = targetBtn.dataset.title;
+    const newDesc = targetBtn.dataset.desc;
+
+    video.classList.add('is-switching');
+    setTimeout(() => {
+      if (videoSrc) videoSrc.src = newSrc;
+      if (newPoster) video.poster = newPoster;
+      if (chTitle) chTitle.textContent = newTitle;
+      if (chDesc) chDesc.textContent = newDesc;
+
+      video.load();
+      video.play().catch(() => {});
+      video.classList.remove('is-switching');
+    }, 180);
+  }
+
+  switcherBtns.forEach((btn, idx) => {
+    btn.addEventListener('click', () => switchChannel(btn));
+  });
+
+  // Numeric keyboard hotkeys 1, 2, 3, 4
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    const keyNum = parseInt(e.key, 10);
+    if (keyNum >= 1 && keyNum <= switcherBtns.length) {
+      const target = switcherBtns[keyNum - 1];
+      if (target) {
+        switchChannel(target);
+        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  });
+
+  // Play / Pause Toggle
+  if (playBtn) {
+    playBtn.addEventListener('click', () => {
+      if (video.paused) {
+        video.play().catch(() => {});
+        if (playLabel) playLabel.textContent = 'PAUSE';
+      } else {
+        video.pause();
+        if (playLabel) playLabel.textContent = 'PLAY';
+      }
+    });
+  }
+
+  // Audio Toggle
+  if (soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      if (soundLabel) soundLabel.textContent = video.muted ? 'UNMUTE' : 'MUTE';
+    });
+  }
+
+  // Fullscreen Toggle
+  if (fsBtn) {
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    });
+  }
 })();
 </script>
 </body>
