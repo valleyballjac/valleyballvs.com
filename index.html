@@ -635,6 +635,48 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 }
 .champ-link:hover{background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-1px)}
 
+.champ-rsvp{
+  display:grid;grid-template-columns:1fr;gap:20px;align-items:center;
+  padding:clamp(24px,3.5vw,36px) clamp(28px,4vw,44px);
+  border-bottom:1px solid var(--d-edge);background:rgba(255,208,0,.035);
+}
+@media(min-width:880px){.champ-rsvp{grid-template-columns:1fr 1.5fr}}
+.champ-rsvp-intro h3{
+  font-family:var(--display);font-size:clamp(16px,2vw,20px);font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:#fff;margin:6px 0 8px;line-height:1.3;
+}
+.champ-rsvp-intro p{margin:0;color:var(--d-sub);font-size:14px;line-height:1.6}
+.rsvp-roles{border:0;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.rsvp-roles legend{
+  padding:0;margin-bottom:8px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--d-mute);
+}
+.rsvp-chip{position:relative;cursor:pointer}
+.rsvp-chip input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.rsvp-chip span{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;
+  border:1px solid var(--d-edge2);background:rgba(255,255,255,.04);color:#fff;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  transition:all .18s ease;
+}
+.rsvp-chip span::before{content:"";width:10px;height:10px;border-radius:3px;border:1px solid rgba(255,255,255,.5)}
+.rsvp-chip:hover span{border-color:rgba(255,255,255,.6)}
+.rsvp-chip input:checked + span{border-color:var(--spec-yellow);background:rgba(255,208,0,.12);color:var(--spec-yellow)}
+.rsvp-chip input:checked + span::before{background:var(--spec-yellow);border-color:var(--spec-yellow)}
+.rsvp-chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(0,229,255,.3)}
+.rsvp-fields{display:flex;flex-wrap:wrap;gap:10px}
+.rsvp-fields input{
+  flex:1 1 200px;min-width:0;border-radius:8px;padding:13px 16px;
+  font-family:var(--mono);font-size:13.5px;
+  background:rgba(5,5,9,.85);border:1px solid rgba(255,255,255,.2);color:#F5F5F7;
+  transition:border-color .18s ease,box-shadow .18s ease;
+}
+.rsvp-fields input:focus-visible{outline:none;border-color:var(--spec-cyan);box-shadow:0 0 0 3px rgba(0,229,255,.2)}
+.rsvp-fields input[hidden]{display:none}
+.champ-rsvp-form.is-success .rsvp-roles,.champ-rsvp-form.is-success .rsvp-fields{display:none}
+.champ-rsvp-form.is-success .signup-feedback--success{display:block}
+.champ-rsvp-form.is-error .signup-feedback--error{display:block}
+
 /* ============================== MULTI-CAMERA BROADCAST CONSOLE ============================== */
 .console-wrapper{
   margin-top:clamp(32px,4.5vw,48px);
@@ -899,46 +941,71 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
             <div class="championship-badge-row">
               <span class="championship-pill">
                 <span style="width:6px;height:6px;border-radius:50%;background:var(--spec-yellow);box-shadow:0 0 6px var(--spec-yellow)"></span>
-                Major Event · Dec 27, 2026
+                Sunday · Dec 27, 2026
               </span>
               <span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--d-mute);text-transform:uppercase">
-                Competitive Bracket · Format TBA
+                Eugene, Oregon · 1:00 to 7:00 PM PST
               </span>
             </div>
             <h2 class="championship-title">The Inaugural Valleyball Championship</h2>
             <p class="championship-desc">
-              Seven weeks out. The world's top athletes converge on the sculpted coliseum for the first official Valleyball Championship on <strong>Sunday, December 27, 2026</strong>. Streamed live in 1080p60 on Twitch and YouTube, featuring multi-camera coverage and uncapped framerate telemetry.
+              <strong data-champ-countdown></strong> The first official Valleyball Championship comes to Eugene, Oregon on <strong>Sunday, December 27, 2026, from 1 to 7 PM</strong>. Two competitions: a 1v1 bracket and a 2v2 duos bracket, each open to 16 entries. If more players sign up, we'll hold qualifiers. Come to play, come to watch, or catch the stream on Twitch and YouTube. Venue announced soon.
             </p>
           </div>
 
           <div class="championship-spec-grid">
             <div class="champ-stat">
-              <span class="champ-stat-label">Tournament Format</span>
-              <span class="champ-stat-val">Format TBA</span>
-              <span class="champ-stat-sub">Announcing Ahead of Dec 27</span>
+              <span class="champ-stat-label">Competitions</span>
+              <span class="champ-stat-val">1v1 + 2v2 Duos</span>
+              <span class="champ-stat-sub">Up to 16 Entries Each</span>
             </div>
             <div class="champ-stat">
-              <span class="champ-stat-label">Match Duration</span>
-              <span class="champ-stat-val">5:00 Unbroken</span>
-              <span class="champ-stat-sub">Zero Clock Stoppage</span>
+              <span class="champ-stat-label">When</span>
+              <span class="champ-stat-val">Sun, Dec 27</span>
+              <span class="champ-stat-sub">1:00 to 7:00 PM PST</span>
             </div>
             <div class="champ-stat">
-              <span class="champ-stat-label">Official Ball</span>
-              <span class="champ-stat-val">3 Ball Classes</span>
-              <span class="champ-stat-sub">0.4m · 1.0m · 1.5m Options</span>
+              <span class="champ-stat-label">Where</span>
+              <span class="champ-stat-val">Eugene, Oregon</span>
+              <span class="champ-stat-sub">Venue Announced Soon</span>
             </div>
             <div class="champ-stat">
-              <span class="champ-stat-label">Live Broadcast</span>
-              <span class="champ-stat-val">1080p60 Multi-Cam</span>
-              <span class="champ-stat-sub">Twitch & YouTube Streams</span>
+              <span class="champ-stat-label">Live Stream</span>
+              <span class="champ-stat-val">Twitch & YouTube</span>
+              <span class="champ-stat-sub">Free to Watch Online</span>
             </div>
           </div>
+        </div>
+
+        <!-- RSVP: posts to the "Valleyball Championship RSVP" Google Form (Jac's Drive). Field IDs are in initChampionshipRsvp below. -->
+        <div class="champ-rsvp" id="rsvp">
+          <div class="champ-rsvp-intro">
+            <span class="champ-stat-label">RSVP · Free</span>
+            <h3>Coming to play or watch?</h3>
+            <p>Let us know you're in. Players get bracket details and any qualifier dates first.</p>
+          </div>
+          <form class="champ-rsvp-form" id="rsvp-form" novalidate>
+            <fieldset class="rsvp-roles">
+              <legend>I'm coming to</legend>
+              <label class="rsvp-chip"><input type="checkbox" name="role" value="Watching"><span>Watch</span></label>
+              <label class="rsvp-chip"><input type="checkbox" name="role" value="Playing in the 1v1 bracket"><span>Play 1v1</span></label>
+              <label class="rsvp-chip"><input type="checkbox" name="role" value="Playing in the 2v2 duos bracket"><span>Play 2v2 duos</span></label>
+            </fieldset>
+            <div class="rsvp-fields">
+              <input type="email" name="rsvp-email" placeholder="you@example.com" required autocomplete="email" aria-label="Email address">
+              <input type="text" name="rsvp-tag" placeholder="Name or tag (optional)" autocomplete="nickname" aria-label="Name or gamer tag">
+              <input type="text" name="rsvp-partner" placeholder="2v2 partner (optional)" aria-label="2v2 partner's name or tag" hidden>
+              <button type="submit" class="btn-signup">RSVP</button>
+            </div>
+            <div class="signup-feedback signup-feedback--success" role="status">You're on the list. We'll email bracket and venue details before Dec 27.</div>
+            <div class="signup-feedback signup-feedback--error" role="alert">Add a valid email and pick at least one option.</div>
+          </form>
         </div>
 
         <div class="championship-links-bar">
           <div class="champ-stream-links">
             <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--d-mute)">Watch Live Dec 27:</span>
-            <a class="champ-link" href="https://www.twitch.tv/valleyball" target="_blank" rel="noopener">
+            <a class="champ-link" href="https://www.twitch.tv/valleyballsport" target="_blank" rel="noopener">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
               Twitch Broadcast
             </a>
@@ -947,7 +1014,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
               YouTube Live
             </a>
           </div>
-          <a class="btn btn-primary" href="#dispatch" style="font-size:10.5px;padding:10px 18px">Join Championship Dispatch</a>
+          <a class="champ-link" href="#dispatch">Not sure yet? Join the Dispatch</a>
         </div>
       </div>
     </div>
@@ -1472,7 +1539,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <a href="https://valleyball.org/#principles" target="_blank" rel="noopener">Principles ↗</a>
         <a href="https://www.reddit.com/r/valleyballversus/" target="_blank" rel="noopener">Reddit r/valleyballversus ↗</a>
         <a href="https://www.youtube.com/@valleyballwc" target="_blank" rel="noopener">YouTube ↗</a>
-        <a href="https://www.twitch.tv/valleyball" target="_blank" rel="noopener">Twitch ↗</a>
+        <a href="https://www.twitch.tv/valleyballsport" target="_blank" rel="noopener">Twitch ↗</a>
         <a href="https://www.tiktok.com/@valleyballthesport" target="_blank" rel="noopener">TikTok ↗</a>
         <a href="https://valleyball.org" target="_blank" rel="noopener">valleyball.org ↗</a>
       </nav>
@@ -1555,6 +1622,97 @@ document.addEventListener('DOMContentLoaded', function() {
         form.classList.add('is-error');
       }
     });
+  });
+})();
+
+// ==================== CHAMPIONSHIP COUNTDOWN ====================
+(function initChampionshipCountdown() {
+  const els = document.querySelectorAll('[data-champ-countdown]');
+  if (!els.length) return;
+  const start = Date.UTC(2026, 11, 27, 21, 0, 0); // Dec 27, 2026, 1:00 PM PST
+  const end = Date.UTC(2026, 11, 28, 3, 0, 0);    // 7:00 PM PST
+  const now = Date.now();
+  const days = Math.ceil((start - now) / 86400000);
+  let text = '';
+  if (now >= end) text = '';
+  else if (now >= start) text = 'Happening now.';
+  else if (days <= 1) text = 'Tomorrow.';
+  else if (days <= 14) text = days + ' days out.';
+  else text = Math.floor(days / 7) + ' weeks out.';
+  els.forEach(function(el) { el.textContent = text; });
+})();
+
+// ==================== CHAMPIONSHIP RSVP ====================
+(function initChampionshipRsvp() {
+  const form = document.getElementById('rsvp-form');
+  if (!form) return;
+
+  // "Valleyball Championship RSVP" Google Form
+  const RSVP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeI0lpm6mKgoU4tcKOp4piAQjMT7dfA45ASzIBizbM5y297zQ/formResponse';
+  const FIELDS = {
+    email: 'entry.708295810',
+    role: 'entry.1600040140',     // checkboxes: Watching / Playing in the 1v1 bracket / Playing in the 2v2 duos bracket
+    tag: 'entry.1707592933',
+    partner: 'entry.1028383612'
+  };
+
+  const emailInput = form.querySelector('input[name="rsvp-email"]');
+  const tagInput = form.querySelector('input[name="rsvp-tag"]');
+  const partnerInput = form.querySelector('input[name="rsvp-partner"]');
+  const duoBox = form.querySelector('input[name="role"][value="Playing in the 2v2 duos bracket"]');
+  const btn = form.querySelector('button[type="submit"]');
+  const originalText = btn.textContent;
+
+  duoBox.addEventListener('change', function() {
+    partnerInput.hidden = !duoBox.checked;
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    form.classList.remove('is-error');
+    const email = (emailInput.value || '').trim();
+    const roles = Array.from(form.querySelectorAll('input[name="role"]:checked')).map(function(i) { return i.value; });
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !roles.length) {
+      form.classList.add('is-error');
+      (roles.length ? emailInput : form.querySelector('input[name="role"]')).focus();
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const body = new URLSearchParams();
+    body.append(FIELDS.email, email);
+    roles.forEach(function(r) { body.append(FIELDS.role, r); });
+    const tag = (tagInput.value || '').trim();
+    const partner = (partnerInput.value || '').trim();
+    if (tag) body.append(FIELDS.tag, tag);
+    if (partner && duoBox.checked) body.append(FIELDS.partner, partner);
+
+    try {
+      await fetch(RSVP_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'championship_rsvp', {
+          'event_category': 'conversion',
+          'rsvp_watch': roles.indexOf('Watching') !== -1,
+          'rsvp_1v1': roles.indexOf('Playing in the 1v1 bracket') !== -1,
+          'rsvp_2v2': roles.indexOf('Playing in the 2v2 duos bracket') !== -1
+        });
+      }
+
+      form.classList.add('is-success');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = originalText;
+      form.classList.add('is-error');
+    }
   });
 })();
 
