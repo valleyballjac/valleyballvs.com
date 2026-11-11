@@ -7,6 +7,8 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  // Local previews (localhost) must not send data to Analytics
+  if (['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) !== -1) window['ga-disable-G-5J14GD29XW'] = true;
 
   gtag('config', 'G-5J14GD29XW');
 </script>

@@ -7,6 +7,8 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  // Local previews (localhost) must not send data to Analytics
+  if (['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) !== -1) window['ga-disable-G-5J14GD29XW'] = true;
 
   gtag('config', 'G-5J14GD29XW');
 </script>
@@ -694,6 +696,23 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 }
 .champ-link:hover{background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-1px)}
 
+.champ-playtests{
+  display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;
+  padding:18px clamp(28px,4vw,44px);border-bottom:1px solid var(--d-edge);
+  background:rgba(0,229,255,.05);
+}
+.champ-playtests-dot{
+  flex:none;width:8px;height:8px;border-radius:50%;background:var(--spec-cyan);
+  box-shadow:0 0 8px var(--spec-cyan);animation:pulse-red 2s infinite ease-in-out;
+}
+.champ-playtests-text{flex:1 1 260px;display:flex;flex-direction:column;gap:4px}
+.champ-playtests-text strong{
+  font-family:var(--display);font-size:clamp(14px,1.8vw,17px);font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:#fff;line-height:1.35;
+}
+.champ-playtests-text span:last-child{color:var(--d-sub);font-size:14px;line-height:1.55}
+#playtests{scroll-margin-top:92px}
+
 .champ-rsvp{
   display:grid;grid-template-columns:1fr;gap:20px;align-items:center;
   padding:clamp(24px,3.5vw,36px) clamp(28px,4vw,44px);
@@ -1050,12 +1069,23 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           </div>
         </div>
 
-        <!-- RSVP: posts to the "Valleyball Championship RSVP" Google Form (Jac's Drive). Field IDs are in initChampionshipRsvp below. -->
+        <!-- Monday playtests: free weekly play at The Wetlands leading up to the Championship -->
+        <div class="champ-playtests" id="playtests">
+          <span class="champ-playtests-dot" aria-hidden="true"></span>
+          <div class="champ-playtests-text">
+            <span class="champ-stat-label">Free Playtests · Every Monday</span>
+            <strong>Mondays at 7 PM at The Wetlands, Eugene</strong>
+            <span>Come play a few matches and practice for the Championship. Running weekly through the end of the year.</span>
+          </div>
+          <a class="champ-link" href="#rsvp">RSVP for Mondays</a>
+        </div>
+
+        <!-- RSVP: posts to the "Valleyball Championship RSVP" Google Form (owned by valleyballdev@gmail.com). Field IDs are in initChampionshipRsvp below. -->
         <div class="champ-rsvp" id="rsvp">
           <div class="champ-rsvp-intro">
             <span class="champ-stat-label">RSVP · Free</span>
             <h3>Coming to play or watch?</h3>
-            <p>Let us know you're in. Players get bracket details and any qualifier dates first.</p>
+            <p>Tell us if you're coming to the Championship or a Monday playtest. Players get bracket details and any qualifier dates first.</p>
           </div>
           <form class="champ-rsvp-form" id="rsvp-form" novalidate>
             <fieldset class="rsvp-roles">
@@ -1063,6 +1093,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
               <label class="rsvp-chip"><input type="checkbox" name="role" value="Watching"><span>Watch</span></label>
               <label class="rsvp-chip"><input type="checkbox" name="role" value="Playing in the 1v1 bracket"><span>Play 1v1</span></label>
               <label class="rsvp-chip"><input type="checkbox" name="role" value="Playing in the 2v2 duos bracket"><span>Play 2v2 duos</span></label>
+              <label class="rsvp-chip"><input type="checkbox" name="role" value="Coming to a Monday playtest"><span>Monday playtests</span></label>
             </fieldset>
             <div class="rsvp-fields">
               <input type="email" name="rsvp-email" placeholder="you@example.com" required autocomplete="email" aria-label="Email address">
@@ -1736,7 +1767,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const RSVP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeI0lpm6mKgoU4tcKOp4piAQjMT7dfA45ASzIBizbM5y297zQ/formResponse';
   const FIELDS = {
     email: 'entry.708295810',
-    role: 'entry.1600040140',     // checkboxes: Watching / Playing in the 1v1 bracket / Playing in the 2v2 duos bracket
+    role: 'entry.1600040140',     // checkboxes: Watching / Playing in the 1v1 bracket / Playing in the 2v2 duos bracket / Coming to a Monday playtest
     tag: 'entry.1707592933',
     partner: 'entry.1028383612'
   };
@@ -1788,7 +1819,8 @@ document.addEventListener('DOMContentLoaded', function() {
           'event_category': 'conversion',
           'rsvp_watch': roles.indexOf('Watching') !== -1,
           'rsvp_1v1': roles.indexOf('Playing in the 1v1 bracket') !== -1,
-          'rsvp_2v2': roles.indexOf('Playing in the 2v2 duos bracket') !== -1
+          'rsvp_2v2': roles.indexOf('Playing in the 2v2 duos bracket') !== -1,
+          'rsvp_monday': roles.indexOf('Coming to a Monday playtest') !== -1
         });
       }
 
