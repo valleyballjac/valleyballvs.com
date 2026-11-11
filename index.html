@@ -74,6 +74,43 @@ a{color:inherit}
 /* Top rainbow accent bar */
 .top-spectral-bar{height:3px;width:100%;background:var(--spectral);position:sticky;top:0;z-index:100}
 
+/* Championship announcement banner */
+.event-banner{
+  display:flex;align-items:center;justify-content:center;gap:10px 14px;flex-wrap:wrap;
+  padding:9px var(--gutter);text-decoration:none;color:#fff;
+  background:linear-gradient(90deg,rgba(255,208,0,.14) 0%,rgba(255,42,109,.10) 50%,rgba(0,229,255,.12) 100%);
+  border-bottom:1px solid rgba(255,208,0,.3);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  transition:background .18s ease;
+}
+.event-banner:hover{background:linear-gradient(90deg,rgba(255,208,0,.22) 0%,rgba(255,42,109,.16) 50%,rgba(0,229,255,.18) 100%)}
+.event-banner[hidden]{display:none}
+.event-banner-dot{
+  flex:none;width:7px;height:7px;border-radius:50%;background:var(--spec-yellow);
+  box-shadow:0 0 8px var(--spec-yellow);animation:pulse-red 2s infinite ease-in-out;
+}
+.event-banner-text{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2px 0;color:var(--d-sub)}
+.event-banner-text > *:not(:first-child)::before{content:"·";margin:0 10px;color:var(--d-mute)}
+.event-banner-text strong{color:var(--spec-yellow);font-weight:700}
+.event-banner-text .eb-narrow::before{content:none}
+.eb-count{color:#fff}
+.eb-count:empty{display:none}
+.eb-narrow{display:none}
+.event-banner-cta{
+  flex:none;padding:4px 12px;border-radius:4px;background:#fff;color:#000;
+  font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.15em;
+}
+@media(max-width:640px){
+  .event-banner{flex-wrap:nowrap;justify-content:space-between;gap:12px;padding:8px 16px;font-size:10px;letter-spacing:.08em}
+  .event-banner-dot,.eb-wide,.eb-count{display:none}
+  .event-banner-text{justify-content:flex-start;line-height:1.5}
+  .event-banner-text > *:not(:first-child)::before{margin:0 7px}
+  .eb-narrow{display:block;flex-basis:100%}
+  .event-banner-text .eb-narrow + span::before{content:none}
+  .eb-count:empty{display:none}
+}
+#championship,#rsvp{scroll-margin-top:92px}
+
 /* Navigation Bar */
 .nav-bar{
   display:flex;justify-content:space-between;align-items:center;
@@ -814,6 +851,20 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 </head>
 <body>
 <div class="top-spectral-bar" aria-hidden="true"></div>
+
+<!-- Championship announcement banner: links to the RSVP form; hidden by initChampionshipCountdown once the event ends -->
+<a class="event-banner" id="event-banner" href="#rsvp">
+  <span class="event-banner-dot" aria-hidden="true"></span>
+  <span class="event-banner-text">
+    <strong class="eb-wide">The Inaugural Valleyball Championship</strong>
+    <strong class="eb-narrow">Valleyball Championship</strong>
+    <span>Sun, Dec 27</span>
+    <span class="eb-wide">1 to 7 PM</span>
+    <span>Eugene, OR</span>
+    <span class="eb-count" data-champ-countdown="short"></span>
+  </span>
+  <span class="event-banner-cta">RSVP →</span>
+</a>
 
 <!-- Navigation Bar -->
 <header class="nav-bar">
@@ -1639,7 +1690,19 @@ document.addEventListener('DOMContentLoaded', function() {
   else if (days <= 1) text = 'Tomorrow.';
   else if (days <= 14) text = days + ' days out.';
   else text = Math.floor(days / 7) + ' weeks out.';
-  els.forEach(function(el) { el.textContent = text; });
+  els.forEach(function(el) {
+    el.textContent = el.dataset.champCountdown === 'short' ? text.replace(/\.$/, '') : text;
+  });
+
+  const banner = document.getElementById('event-banner');
+  if (banner) {
+    if (now >= end) banner.hidden = true;
+    banner.addEventListener('click', function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'event_banner_click', { 'event_category': 'championship' });
+      }
+    });
+  }
 })();
 
 // ==================== CHAMPIONSHIP RSVP ====================
