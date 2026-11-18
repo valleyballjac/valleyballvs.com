@@ -603,6 +603,8 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   display:block;margin-top:12px;font-family:var(--mono);font-size:10.5px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--d-mute);
 }
+.signup-subnote a,.rsvp-note a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.signup-subnote a:hover,.rsvp-note a:hover{color:#fff}
 .signup-form.is-success .signup-input-wrap,.signup-form.is-success .signup-subnote{display:none}
 .signup-form.is-success .signup-feedback--success{display:block}
 .signup-form.is-error .signup-feedback--error{display:block}
@@ -751,7 +753,8 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 }
 .rsvp-fields input:focus-visible{outline:none;border-color:var(--spec-cyan);box-shadow:0 0 0 3px rgba(0,229,255,.2)}
 .rsvp-fields input[hidden]{display:none}
-.champ-rsvp-form.is-success .rsvp-roles,.champ-rsvp-form.is-success .rsvp-fields{display:none}
+.rsvp-note{margin:12px 0 0;font-family:var(--mono);font-size:10.5px;line-height:1.6;letter-spacing:.08em;text-transform:uppercase;color:var(--d-mute)}
+.champ-rsvp-form.is-success .rsvp-roles,.champ-rsvp-form.is-success .rsvp-fields,.champ-rsvp-form.is-success .rsvp-note{display:none}
 .champ-rsvp-form.is-success .signup-feedback--success{display:block}
 .champ-rsvp-form.is-error .signup-feedback--error{display:block}
 
@@ -978,7 +981,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           <div class="signup-feedback signup-feedback--error" role="alert">
             Please enter a valid email address.
           </div>
-          <span class="signup-subnote">Early playtest invites & major tournament announcements</span>
+          <span class="signup-subnote">Early playtest invites & major tournament announcements · Ages 13+ · <a href="/privacy/">Privacy</a></span>
         </form>
       </div>
     </div>
@@ -1103,6 +1106,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
             </div>
             <div class="signup-feedback signup-feedback--success" role="status">You're on the list. We'll email bracket and venue details before Dec 27.</div>
             <div class="signup-feedback signup-feedback--error" role="alert">Add a valid email and pick at least one option.</div>
+            <p class="rsvp-note">Ages 13+. Players under 18 need a parent or guardian's permission to compete. <a href="/privacy/">Privacy</a></p>
           </form>
         </div>
 
@@ -1348,7 +1352,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           <div class="signup-feedback signup-feedback--error" role="alert">
             Please enter a valid email address.
           </div>
-          <span class="signup-subnote">No marketing spam · Only major playtest and tournament announcements</span>
+          <span class="signup-subnote">No marketing spam · Only major playtest and tournament announcements · Ages 13+ · <a href="/privacy/">Privacy</a></span>
         </form>
       </div>
     </div>
@@ -1646,8 +1650,9 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <a href="https://www.twitch.tv/valleyballsport" target="_blank" rel="noopener">Twitch ↗</a>
         <a href="https://www.tiktok.com/@valleyballthesport" target="_blank" rel="noopener">TikTok ↗</a>
         <a href="https://valleyball.org" target="_blank" rel="noopener">valleyball.org ↗</a>
+        <a href="/privacy/">Privacy</a>
       </nav>
-      <div class="foot-meta">© 2026 Valleyball Athletic Corporation. All rights reserved. · Valleyball Versus v0.4.0 // The 2v2 Update · VB-SPEC v0.4.0 · Road to Dec 27 Championship</div>
+      <div class="foot-meta">© 2026 Valleyball. All rights reserved. · Valleyball Versus v0.4.0 // The 2v2 Update · VB-SPEC v0.4.0 · Road to Dec 27 Championship</div>
     </div>
   </footer>
 
