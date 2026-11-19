@@ -14,29 +14,30 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Valleyball Versus (v0.4.0) — 2v2 team play and 1v1 duels with quad split-screen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
-<meta property="og:title" content="Valleyball Versus (v0.4.0) — 2v2 Physics Volleyball">
-<meta property="og:description" content="Valleyball Versus (v0.4.0) — 2v2 team play and 1v1 duels with quad split-screen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta name="description" content="Valleyball Versus (v0.4.1): 2v2 team play and 1v1 duels with quad split-screen in a sloped arena. Real physics, zero referees, and a ball that never leaves play. Free in your browser, plus weekly playtests and the Dec 27 Championship in Eugene, Oregon.">
+<meta property="og:title" content="Valleyball Versus (v0.4.1): 2v2 Physics Sports Game & Eugene Championship">
+<meta property="og:description" content="Four players, one screen, real physics, and zero whistles. Play free in your browser, join free Monday playtests in Eugene, or RSVP for the Dec 27 Inaugural Championship.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://valleyballvs.com/">
 <meta property="og:image" content="https://valleyballvs.com/hero_valley.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Valleyball Versus (v0.4.0) — 2v2 Physics Volleyball">
-<meta name="twitter:description" content="Valleyball Versus (v0.4.0) — 2v2 team play and 1v1 duels with quad split-screen in a gravity-defying arena. Genuine ragdoll momentum, unscripted physics, and a ball that never leaves play. Free in your browser.">
+<meta name="twitter:title" content="Valleyball Versus (v0.4.1): 2v2 Physics Sports Game & Eugene Championship">
+<meta name="twitter:description" content="Four players, one screen, real physics, and zero whistles. Play free in your browser, join Monday playtests in Eugene, or RSVP for Dec 27.">
 <meta name="twitter:image" content="https://valleyballvs.com/hero_valley.jpg">
 <link rel="icon" href="mark-sm.png">
 <link rel="canonical" href="https://valleyballvs.com/">
-<title>Valleyball Versus (v0.4.0) — 2v2 Team Play & Competitive Physics Volleyball</title>
+<link rel="preload" as="image" href="hero_valley.jpg" fetchpriority="high">
+<title>Valleyball Versus (v0.4.1) | 2v2 Physics Sport & Dec 27 Eugene Championship</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&display=swap">
 <style>
 /* =========================================================================
-   VALLEYBALL VERSUS — valleyballvs.com
+   VALLEYBALL VERSUS: valleyballvs.com
 
    IDENTITY: Dark vs Light value conflict with hard athletic edges.
    Home/Dark on obsidian, Away/Light inverted to chalk.
-   Full continuous spectral rainbow touches per VB-SPEC v0.4.0.
+   Full continuous spectral rainbow touches per VB-SPEC v0.4.1.
    ========================================================================= */
 :root {
   color-scheme: dark;
@@ -72,6 +73,18 @@ body{margin:0;background:var(--d-ground);font-family:var(--body);font-size:16px;
 img{max-width:100%;display:block}
 a{color:inherit}
 .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+.visually-hidden{
+  position:absolute!important;clip-path:inset(50%)!important;overflow:hidden!important;
+  width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;
+  border:0!important;white-space:nowrap!important;
+}
+.skip-link:focus-visible{
+  position:fixed!important;top:10px;left:10px;z-index:200;clip-path:none!important;
+  width:auto!important;height:auto!important;margin:0!important;padding:12px 18px!important;
+  background:#fff;color:#06070B;border-radius:6px;font-family:var(--mono);font-size:13px;
+  font-weight:700;text-decoration:none;outline:3px solid var(--spec-cyan);outline-offset:2px;
+}
+#roster,#customization,#gameplay{content-visibility:auto;contain-intrinsic-size:auto 760px}
 
 /* Top rainbow accent bar */
 .top-spectral-bar{height:3px;width:100%;background:var(--spectral);position:sticky;top:0;z-index:100}
@@ -111,7 +124,7 @@ a{color:inherit}
   .event-banner-text .eb-narrow + span::before{content:none}
   .eb-count:empty{display:none}
 }
-#championship,#rsvp{scroll-margin-top:92px}
+#championship,#playtests,#rsvp{scroll-margin-top:92px}
 
 /* Navigation Bar */
 .nav-bar{
@@ -147,7 +160,7 @@ a{color:inherit}
   .nav-brand{gap:8px;min-height:28px}
   .nav-brand > :nth-child(3){display:none}
   .nav-links{
-    order:3;flex:1 1 100%;flex-wrap:nowrap;gap:18px;overflow-x:auto;
+    order:3;flex:1 1 100%;flex-wrap:nowrap;gap:14px;overflow-x:auto;
     scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;
   }
   .nav-links::-webkit-scrollbar{display:none}
@@ -244,8 +257,12 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 .hero-sound-toggle:hover{
   background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-1px);
 }
-.hero-inner{position:relative;z-index:2;padding-block:clamp(50px,7vw,85px) clamp(46px,6.5vw,78px);
+.hero-inner{position:relative;z-index:2;padding-block:clamp(50px,7vw,85px) clamp(64px,7.5vw,92px);
             display:flex;flex-direction:column;align-items:center;text-align:center}
+@media(max-width:760px){
+  .hero-inner{padding-bottom:84px}
+  .hero-sound-toggle{bottom:16px;right:16px}
+}
 
 /* Clean hero mark - NO halo/border ring */
 .hero-mark-wrap{
@@ -572,18 +589,20 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 .signup-form{max-width:520px;margin:0 auto;position:relative}
 .signup-input-wrap{display:flex;gap:10px;flex-wrap:wrap}
 .signup-input-wrap input[type=email]{
-  flex:1 1 240px;min-width:0;border-radius:8px;padding:14px 18px;
-  font-family:var(--mono);font-size:14px;
-  background:rgba(5,5,9,.85);border:1px solid rgba(255,255,255,.2);color:#F5F5F7;
+  flex:1 1 240px;min-width:0;min-height:48px;border-radius:8px;padding:12px 16px;
+  font-family:var(--mono);font-size:max(1rem,1em);
+  background:rgba(5,5,9,.85);border:1px solid rgba(255,255,255,.24);color:#F5F5F7;
   transition:border-color .18s ease,box-shadow .18s ease;
 }
 .signup-input-wrap input[type=email]:focus-visible{
-  outline:none;border-color:var(--spec-cyan);
-  box-shadow:0 0 0 3px rgba(0,229,255,.2);
+  outline:2px solid var(--spec-cyan);outline-offset:2px;border-color:var(--spec-cyan);
+}
+.signup-input-wrap input[aria-invalid="true"],.rsvp-fields input[aria-invalid="true"]{
+  border-color:#FF6B7A;box-shadow:0 0 0 2px rgba(255,42,66,.25);
 }
 .btn-signup{
-  background:#F5F5F7;color:#0A0A0C;border:1px solid transparent;border-radius:8px;
-  padding:14px 26px;font-family:var(--display);font-weight:700;font-size:11.5px;
+  min-height:48px;background:#F5F5F7;color:#0A0A0C;border:1px solid transparent;border-radius:8px;
+  padding:12px 24px;font-family:var(--display);font-weight:700;font-size:11.5px;
   letter-spacing:.16em;text-transform:uppercase;cursor:pointer;white-space:nowrap;
   transition:all .18s ease;
 }
@@ -746,13 +765,17 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 .rsvp-chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(0,229,255,.3)}
 .rsvp-fields{display:flex;flex-wrap:wrap;gap:10px}
 .rsvp-fields input{
-  flex:1 1 200px;min-width:0;border-radius:8px;padding:13px 16px;
-  font-family:var(--mono);font-size:13.5px;
-  background:rgba(5,5,9,.85);border:1px solid rgba(255,255,255,.2);color:#F5F5F7;
+  flex:1 1 200px;min-width:0;min-height:48px;border-radius:8px;padding:12px 16px;
+  font-family:var(--mono);font-size:max(1rem,1em);
+  background:rgba(5,5,9,.85);border:1px solid rgba(255,255,255,.24);color:#F5F5F7;
   transition:border-color .18s ease,box-shadow .18s ease;
 }
-.rsvp-fields input:focus-visible{outline:none;border-color:var(--spec-cyan);box-shadow:0 0 0 3px rgba(0,229,255,.2)}
+.rsvp-fields input:focus-visible{outline:2px solid var(--spec-cyan);outline-offset:2px;border-color:var(--spec-cyan)}
 .rsvp-fields input[hidden]{display:none}
+@media (pointer:coarse){
+  .signup-input-wrap input[type=email],.rsvp-fields input,.btn-signup,.btn{min-height:52px}
+  .rsvp-chip span{min-height:44px}
+}
 .rsvp-note{margin:12px 0 0;font-family:var(--mono);font-size:10.5px;line-height:1.6;letter-spacing:.08em;text-transform:uppercase;color:var(--d-mute)}
 .champ-rsvp-form.is-success .rsvp-roles,.champ-rsvp-form.is-success .rsvp-fields,.champ-rsvp-form.is-success .rsvp-note{display:none}
 .champ-rsvp-form.is-success .signup-feedback--success{display:block}
@@ -894,6 +917,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link visually-hidden">Skip to content</a>
 <div class="top-spectral-bar" aria-hidden="true"></div>
 
 <!-- Championship announcement banner: links to the RSVP form; hidden by initChampionshipCountdown once the event ends -->
@@ -915,127 +939,76 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   <a class="nav-brand" href="/">
     <span class="nav-logo-text">Valleyball</span>
     <span class="nav-vs-badge">VERSUS</span>
-    <span class="nav-vs-badge" style="background:rgba(16,229,106,.15);color:var(--spec-green);border-color:rgba(16,229,106,.35)">v0.4.0 · 2v2</span>
+    <span class="nav-vs-badge" style="background:rgba(16,229,106,.15);color:var(--spec-green);border-color:rgba(16,229,106,.35)">v0.4.1 · 2v2</span>
   </a>
-  <nav class="nav-links">
-    <a class="nav-link" href="#the-game">The Game</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a class="nav-link" href="#championship">Dec 27</a>
+    <a class="nav-link" href="#the-game">The Rule</a>
     <a class="nav-link" href="#gameplay">Gameplay</a>
-    <a class="nav-link" href="#championship">Championship</a>
     <a class="nav-link" href="how-to-play.html" style="color:var(--spec-cyan);font-weight:700">How To Play</a>
     <a class="nav-btn" href="https://cascadiajac.itch.io/valleyball-versus">Play Free</a>
   </nav>
 </header>
 
-<main>
+<main id="main-content" tabindex="-1">
 
   <!-- ============================ HERO ============================ -->
   <section class="hero">
     <div class="hero-bg">
-      <video id="hero-video" class="hero-video" autoplay loop muted playsinline width="1920" height="1080" poster="hero_valley.jpg">
+      <video id="hero-video" class="hero-video" autoplay loop muted playsinline width="1920" height="1080" poster="hero_valley.jpg" aria-hidden="true">
         <source src="img/video_hero_reel.mp4" type="video/mp4">
       </video>
-      <div class="hero-live-badge">
-        <span class="live-dot"></span>
-        <span>LIVE 1080P60 // TOURNAMENT BROADCAST FEED</span>
-      </div>
-      <button id="hero-sound-toggle" class="hero-sound-toggle" type="button" aria-label="Toggle Hero Sound">
-        <svg id="hero-sound-icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-        <svg id="hero-sound-icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <button id="hero-sound-toggle" class="hero-sound-toggle" type="button" aria-label="Toggle hero background video sound" aria-pressed="false">
+        <svg id="hero-sound-icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <svg id="hero-sound-icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
         <span id="hero-sound-label">UNMUTE SOUND</span>
       </button>
     </div>
     <div class="wrap hero-inner">
 
       <!-- Distinct Textless Versus Ball Mark - NO halo/border ring -->
-      <div class="hero-mark-wrap" title="Valleyball Versus Match Ball">
-        <img src="mark.png" width="160" height="160" alt="Valleyball Versus Ball">
+      <div class="hero-mark-wrap">
+        <img src="mark.png" width="160" height="160" alt="Valleyball Versus Match Ball">
       </div>
 
       <div class="wordmark hero-word">Valleyball</div>
       <div class="hero-versus">VERSUS</div>
-      <div class="hero-release-pill">v0.4.0 Live · 2v2 Team Play & Quad Split-Screen</div>
+      <div class="hero-release-pill">v0.4.1 Live · 1v1, 2v2 Quad Split-Screen &amp; Fighting Pad Support</div>
 
       <h1 class="hero-thesis">Compete In A Brand-New Sport</h1>
       <p class="hero-sub">
-        Built on millennia of athletic tradition and engineered for the digital age. Purpose-designed multiplayer sport with unscripted momentum, honest full-gravity physics, a ball that never leaves play, and play that never stops.
+        Four players on one screen, real physics, sloped walls, zero referees, and a ball that never leaves play. Drop into free Monday playtests in Eugene or play free on desktop.
       </p>
 
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://cascadiajac.itch.io/valleyball-versus">Play Free on itch.io</a>
-        <a class="btn btn-guide" href="how-to-play.html">How to Play & Controls Guide</a>
+        <a class="btn btn-primary" href="#rsvp">RSVP: Dec 27 &amp; Mondays</a>
+        <a class="btn btn-guide" href="https://cascadiajac.itch.io/valleyball-versus">Play Free on itch.io</a>
+        <a class="btn btn-guide" href="how-to-play.html">How to Play</a>
       </div>
-      <span class="play-meta">v0.4.0 Live · 2v2 Team Mode & 1v1 Duels · Up to 4 Gamepads or Split Keyboard · Free in Browser</span>
-
-      <div class="hero-signup-wrap">
-        <div class="hero-divider">
-          <span>Or get closed alpha & tournament invites</span>
-        </div>
-        <form class="signup-form hero-signup-form" id="signup-hero" novalidate>
-          <div class="signup-input-wrap">
-            <input type="email" id="email-hero" name="email" placeholder="athlete@example.com" required autocomplete="email">
-            <button type="submit" class="btn-signup">Get Notified</button>
-          </div>
-          <div class="signup-feedback signup-feedback--success" role="status">
-            ✓ You're on the roster. Match drops will land in your inbox.
-          </div>
-          <div class="signup-feedback signup-feedback--error" role="alert">
-            Please enter a valid email address.
-          </div>
-          <span class="signup-subnote">Early playtest invites & major tournament announcements · Ages 13+ · <a href="/privacy/">Privacy</a></span>
-        </form>
-      </div>
+      <span class="play-meta">v0.4.1 Live · 1v1 &amp; 2v2 Local Multiplayer · Up to 4 Gamepads, Fight-Sticks or Split Keyboard</span>
     </div>
   </section>
 
-  <!-- ==================== THE ONE RULE — LIGHT ==================== -->
-  <section class="band band--light" id="the-game">
-    <div class="wrap two">
-      <div>
-        <p class="eyebrow" style="color:#C14E4F">The Game // Unbroken Play</p>
-        <h2>Score, Swap, Keep Playing</h2>
-        <p class="lede">
-          Every goal counts, but nobody stops the clock. The moment the ball drops through the ring, target goals swap in real time. The momentum never breaks, and your opponent gets an immediate chance to answer back.
-        </p>
-        <p>
-          No resets, no dead time, and no sitting on a lead. Five minutes of play is five minutes
-          of unbroken, breathless competition.
-        </p>
-      </div>
-
-      <!-- In-Engine Scoreboard Swap Telemetry Display -->
-      <div class="score-swap-card">
-        <div class="score-swap-header">
-          <span>Match Telemetry // In-Game Event</span>
-          <span style="color:#C14E4F">Zero Clock Stoppage</span>
-        </div>
-        <div class="score-swap-views">
-          <div class="score-view-pane">
-            <div class="pane-badge pane-badge--goal">01 // Goal In North</div>
-            <img src="sb_celebration.png" alt="In-game goal clearance with the ball sailing through the goal arch and scoreboard advancing to 1 - 0">
-            <p class="pane-desc">Ball passes through the ring. Point awarded instantly without whistle or reset.</p>
-          </div>
-          <div class="score-view-pane">
-            <div class="pane-badge pane-badge--swap">02 // Instant Swap</div>
-            <img src="sb_end_close.png" alt="In-game digital scoreboards inverting target indicator to Away Attacking Goal South without clock stoppage">
-            <p class="pane-desc">Target ends invert the same second. The hoop you scored in is now yours to defend.</p>
-          </div>
-        </div>
-        <div class="score-swap-caption">
-          Score in the ring and it immediately becomes yours to defend—without the ball ever leaving play.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== ROAD TO CHAMPIONSHIP (DEC 27) ==================== -->
+  <!-- ==================== ROAD TO CHAMPIONSHIP (DEC 27 & MONDAYS FIRST) ==================== -->
   <section class="band band--championship" id="championship">
     <div class="wrap">
       <div class="championship-card">
+        <!-- Monday playtests: free weekly play at The Wetlands leading up to the Championship -->
+        <div class="champ-playtests" id="playtests">
+          <span class="champ-playtests-dot" aria-hidden="true"></span>
+          <div class="champ-playtests-text">
+            <span class="champ-stat-label">Free Weekly Playtests · Every Monday</span>
+            <strong>Mondays at 7 PM at The Wetlands Brew Pub, Eugene (21+)</strong>
+            <span>922 Garfield St. Drop in, grab a controller, and play a few matches. No experience needed: nobody has years of practice yet.</span>
+          </div>
+          <a class="champ-link" href="#rsvp">RSVP for Mondays</a>
+        </div>
+
         <div class="championship-hero-row">
           <div>
             <div class="championship-badge-row">
               <span class="championship-pill">
-                <span style="width:6px;height:6px;border-radius:50%;background:var(--spec-yellow);box-shadow:0 0 6px var(--spec-yellow)"></span>
+                <span style="width:6px;height:6px;border-radius:50%;background:var(--spec-yellow);box-shadow:0 0 6px var(--spec-yellow)" aria-hidden="true"></span>
                 Sunday · Dec 27, 2026
               </span>
               <span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--d-mute);text-transform:uppercase">
@@ -1044,7 +1017,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
             </div>
             <h2 class="championship-title">The Inaugural Valleyball Championship</h2>
             <p class="championship-desc">
-              <strong data-champ-countdown></strong> The first official Valleyball Championship comes to Eugene, Oregon on <strong>Sunday, December 27, 2026, from 1 to 7 PM</strong>. Two competitions: a 1v1 bracket and a 2v2 duos bracket, each open to 16 entries. If more players sign up, we'll hold qualifiers. Come to play, come to watch, or catch the stream on Twitch and YouTube. Venue announced soon.
+              <strong data-champ-countdown></strong> The first official Valleyball Championship comes to Eugene, Oregon on <strong>Sunday, December 27, 2026, from 1 to 7 PM</strong>. Both 1v1 and 2v2 duos competitions (up to 16 entries each, with final bracket structure scaled to day-of turnout). Five-minute timed matches, sudden-death Golden Goal overtime, Standard assist, and the 1.0m Medium Ball (Big Ball optional for casual and 2v2 rounds). USB gamepads and arcade fight-sticks supported, with loaner controllers on site. Come to play, come to watch for free, or catch the live stream. Venue announced soon.
             </p>
           </div>
 
@@ -1055,9 +1028,9 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
               <span class="champ-stat-sub">Up to 16 Entries Each</span>
             </div>
             <div class="champ-stat">
-              <span class="champ-stat-label">When</span>
-              <span class="champ-stat-val">Sun, Dec 27</span>
-              <span class="champ-stat-sub">1:00 to 7:00 PM PST</span>
+              <span class="champ-stat-label">Match Rules</span>
+              <span class="champ-stat-val">5 Min + Golden Goal</span>
+              <span class="champ-stat-sub">Standard Assist · 1.0m Ball</span>
             </div>
             <div class="champ-stat">
               <span class="champ-stat-label">Where</span>
@@ -1066,63 +1039,96 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
             </div>
             <div class="champ-stat">
               <span class="champ-stat-label">Live Stream</span>
-              <span class="champ-stat-val">Twitch & YouTube</span>
+              <span class="champ-stat-val">Twitch &amp; YouTube</span>
               <span class="champ-stat-sub">Free to Watch Online</span>
             </div>
           </div>
-        </div>
-
-        <!-- Monday playtests: free weekly play at The Wetlands leading up to the Championship -->
-        <div class="champ-playtests" id="playtests">
-          <span class="champ-playtests-dot" aria-hidden="true"></span>
-          <div class="champ-playtests-text">
-            <span class="champ-stat-label">Free Playtests · Every Monday</span>
-            <strong>Mondays at 7 PM at The Wetlands, Eugene</strong>
-            <span>Come play a few matches and practice for the Championship. Running weekly through the end of the year.</span>
-          </div>
-          <a class="champ-link" href="#rsvp">RSVP for Mondays</a>
         </div>
 
         <!-- RSVP: posts to the "Valleyball Championship RSVP" Google Form (owned by valleyballdev@gmail.com). Field IDs are in initChampionshipRsvp below. -->
         <div class="champ-rsvp" id="rsvp">
           <div class="champ-rsvp-intro">
             <span class="champ-stat-label">RSVP · Free</span>
-            <h3>Coming to play or watch?</h3>
-            <p>Tell us if you're coming to the Championship or a Monday playtest. Players get bracket details and any qualifier dates first.</p>
+            <h3 id="rsvp-heading">Coming to play or watch?</h3>
+            <p>Tell us if you're coming to the Dec 27 Championship or a free Monday playtest. RSVPs get the Eugene venue announcement and bracket updates first.</p>
           </div>
-          <form class="champ-rsvp-form" id="rsvp-form" novalidate>
+          <form class="champ-rsvp-form" id="rsvp-form" aria-labelledby="rsvp-heading" novalidate>
             <fieldset class="rsvp-roles">
               <legend>I'm coming to</legend>
-              <label class="rsvp-chip"><input type="checkbox" name="role" value="Watching"><span>Watch</span></label>
+              <label class="rsvp-chip"><input type="checkbox" name="role" value="Coming to a Monday playtest"><span>Monday playtests</span></label>
               <label class="rsvp-chip"><input type="checkbox" name="role" value="Playing in the 1v1 bracket"><span>Play 1v1</span></label>
               <label class="rsvp-chip"><input type="checkbox" name="role" value="Playing in the 2v2 duos bracket"><span>Play 2v2 duos</span></label>
-              <label class="rsvp-chip"><input type="checkbox" name="role" value="Coming to a Monday playtest"><span>Monday playtests</span></label>
+              <label class="rsvp-chip"><input type="checkbox" name="role" value="Watching"><span>Watch Dec 27</span></label>
             </fieldset>
             <div class="rsvp-fields">
-              <input type="email" name="rsvp-email" placeholder="you@example.com" required autocomplete="email" aria-label="Email address">
-              <input type="text" name="rsvp-tag" placeholder="Name or tag (optional)" autocomplete="nickname" aria-label="Name or gamer tag">
-              <input type="text" name="rsvp-partner" placeholder="2v2 partner (optional)" aria-label="2v2 partner's name or tag" hidden>
-              <button type="submit" class="btn-signup">RSVP</button>
+              <label for="rsvp-email" class="visually-hidden">Email address</label>
+              <input id="rsvp-email" type="email" name="rsvp-email" placeholder="you@example.com" required autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="send" aria-describedby="rsvp-error">
+              <label for="rsvp-tag" class="visually-hidden">Name or gamer tag (optional)</label>
+              <input id="rsvp-tag" type="text" name="rsvp-tag" placeholder="Name or tag (optional)" autocomplete="nickname" enterkeyhint="send">
+              <label for="rsvp-partner" class="visually-hidden">2v2 partner name or tag (optional)</label>
+              <input id="rsvp-partner" type="text" name="rsvp-partner" placeholder="2v2 partner (optional)" enterkeyhint="send" hidden>
+              <button type="submit" class="btn-signup">RSVP Free</button>
             </div>
-            <div class="signup-feedback signup-feedback--success" role="status">You're on the list. We'll email bracket and venue details before Dec 27.</div>
-            <div class="signup-feedback signup-feedback--error" role="alert">Add a valid email and pick at least one option.</div>
-            <p class="rsvp-note">Ages 13+. Players under 18 need a parent or guardian's permission to compete. <a href="/privacy/">Privacy</a></p>
+            <div class="signup-feedback signup-feedback--success" role="status">You're on the list. We'll email Eugene venue and bracket details before Dec 27.</div>
+            <div class="signup-feedback signup-feedback--error" id="rsvp-error" role="alert">Add a valid email and pick at least one option above.</div>
+            <p class="rsvp-note">Ages 13+ for Dec 27 (Monday playtests at The Wetlands are 21+). Players under 18 need a parent or guardian's permission to compete. <a href="/privacy/">Privacy</a></p>
           </form>
         </div>
 
         <div class="championship-links-bar">
           <div class="champ-stream-links">
-            <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--d-mute)">Watch Live Dec 27:</span>
+            <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--d-mute)">Follow &amp; Watch Live:</span>
             <a class="champ-link" href="https://www.twitch.tv/valleyballsport" target="_blank" rel="noopener">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
-              Twitch Broadcast
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+              Twitch
             </a>
             <a class="champ-link" href="https://www.youtube.com/@valleyballwc" target="_blank" rel="noopener">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              YouTube Live
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              YouTube
             </a>
+            <a class="champ-link" href="https://valleyball.org/links" target="_blank" rel="noopener">All Links ↗</a>
           </div>
-          <a class="champ-link" href="#dispatch">Not sure yet? Join the Dispatch</a>
+          <a class="champ-link" href="#dispatch">Not local? Join the Dispatch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE ONE RULE: LIGHT ==================== -->
+  <section class="band band--light" id="the-game">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow" style="color:#C14E4F">The Game // Unbroken Play</p>
+        <h2>Score, Swap, Keep Playing</h2>
+        <p class="lede">
+          Every goal counts, and nobody stops the clock. The moment the ball drops through the ring, target goals swap in real time. Momentum never breaks, and your opponent gets an immediate chance to answer back.
+        </p>
+        <p>
+          No resets, no dead time, and no sitting on a lead. Five minutes of play is five minutes
+          of unbroken, breathless competition. Tied at 00:00? Jump straight into sudden-death Golden Goal overtime.
+        </p>
+      </div>
+
+      <!-- In-Engine Scoreboard Swap Telemetry Display -->
+      <div class="score-swap-card">
+        <div class="score-swap-header">
+          <span>Match Flow // Live Goal Swap</span>
+          <span style="color:#C14E4F">Zero Clock Stoppage</span>
+        </div>
+        <div class="score-swap-views">
+          <div class="score-view-pane">
+            <div class="pane-badge pane-badge--goal">01 // Goal In North</div>
+            <img src="sb_celebration.png" width="640" height="360" loading="lazy" alt="In-game goal clearance with the ball sailing through the goal arch and scoreboard advancing to 1 to 0">
+            <p class="pane-desc">Ball passes through the ring. Point awarded instantly without whistle or reset.</p>
+          </div>
+          <div class="score-view-pane">
+            <div class="pane-badge pane-badge--swap">02 // Instant Swap</div>
+            <img src="sb_end_close.png" width="640" height="360" loading="lazy" alt="In-game digital scoreboards inverting target indicator to Away Attacking Goal South without clock stoppage">
+            <p class="pane-desc">Target ends invert the same second. The hoop you scored in is now yours to defend.</p>
+          </div>
+        </div>
+        <div class="score-swap-caption">
+          Score in the ring and it immediately becomes yours to defend, without the ball ever leaving play.
         </div>
       </div>
     </div>
@@ -1134,7 +1140,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
       <p class="eyebrow eyebrow--yellow">Playable Athletes // The 10 Rainbow Colorways</p>
       <h2>10 Athletes. 10 Accents. Identical Physics.</h2>
       <p class="lede">
-        In Valleyball Versus, raw player skill is the only divider. Every athlete is simulated with 100% identical mass (80 kg), restitution (0.60), collision hitboxes, and slide recovery. 100% deterministic Rapier physics—your aerial spikes, angle reads, and slope momentum decide the rally.
+        In Valleyball Versus, raw player skill is the only divider. Every athlete shares identical weight, bounce, hitboxes, and recovery speed. Zero stat tiers or pay-to-win perks: your timing, angle reads, and slope momentum decide the rally.
       </p>
 
       <!-- Rainbow Lineup Banner -->
@@ -1211,11 +1217,11 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
             <div class="athlete-metrics-row">
               <div class="metric-box">
-                <span class="metric-label">Physics Simulation</span>
-                <span class="metric-val">80.0 kg · 0.60 Restitution</span>
+                <span class="metric-label">Physics Balance</span>
+                <span class="metric-val">100% Equal Speed &amp; Bounce</span>
               </div>
               <div class="metric-box">
-                <span class="metric-label">Hitbox & Collider</span>
+                <span class="metric-label">Hitbox &amp; Reach</span>
                 <span class="metric-val">100% Uniform Regulation</span>
               </div>
               <div class="metric-box">
@@ -1242,12 +1248,12 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         </div>
       </div>
 
-      <!-- ==================== THE VALLEYBALL LOCKER (TEASER) ==================== -->
+      <!-- ==================== THE VALLEYBALL LOCKER (LIVE IN v0.4.1) ==================== -->
       <div class="locker-section">
-        <p class="eyebrow eyebrow--cyan">Upcoming Feature // The Valleyball Locker</p>
+        <p class="eyebrow eyebrow--cyan">Live in v0.4.1 // The Valleyball Locker</p>
         <h2>Modular Headwear. Zero Collision Impact.</h2>
         <p class="lede" style="max-width:62ch">
-          Coming in the next major game update: <strong>The Valleyball Locker</strong>. Personalize your athlete with modular tournament-legal headwear inspired by each athlete's regional heritage. Built as pure visual scene graph attachments with strictly zero Rapier colliders—ensuring 100% competitive parity across every tournament tier.
+          Playable right now in <strong>Valleyball Versus v0.4.1</strong>: personalize your athlete in the lobby with 10 heritage-inspired headwear pieces. Every hat is purely cosmetic with zero impact on ball collisions, keeping every tournament match 100% fair.
         </p>
 
         <!-- Modular Headwear Highlightable Card Stack -->
@@ -1309,19 +1315,19 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <!-- 3 Competitive Integrity Commitments -->
         <div class="locker-commitments">
           <div class="commitment-card" style="border-left:3px solid var(--spec-cyan)">
-            <span style="font-family:var(--mono);font-size:10px;color:var(--spec-cyan);letter-spacing:.2em;text-transform:uppercase">01 // Architectural Isolation</span>
-            <div class="commitment-title">Pure Visual Attachment</div>
-            <p class="commitment-desc">Cosmetics exist strictly as decorative <code>THREE.Group</code> children parented to the athlete head armature. Zero Rapier physics bodies or colliders are ever created.</p>
+            <span style="font-family:var(--mono);font-size:10px;color:var(--spec-cyan);letter-spacing:.2em;text-transform:uppercase">01 // Purely Cosmetic</span>
+            <div class="commitment-title">Zero Hitbox Change</div>
+            <p class="commitment-desc">Headwear is purely visual. Equipping a visor, crown, or horns never changes your reach, bounce, or collision shape.</p>
           </div>
           <div class="commitment-card" style="border-left:3px solid var(--spec-yellow)">
-            <span style="font-family:var(--mono);font-size:10px;color:var(--spec-yellow);letter-spacing:.2em;text-transform:uppercase">02 // Deterministic Parity</span>
-            <div class="commitment-title">100% Identical Collisions</div>
-            <p class="commitment-desc">Whether an athlete equips massive curved horns or bare hair, the match ball contacts the exact same geometric collider. Zero physics advantages.</p>
+            <span style="font-family:var(--mono);font-size:10px;color:var(--spec-yellow);letter-spacing:.2em;text-transform:uppercase">02 // Fair Competition</span>
+            <div class="commitment-title">Tournament Legal Always</div>
+            <p class="commitment-desc">Every kit and headwear option plays identically on court, so you pick what looks best without giving up an edge.</p>
           </div>
           <div class="commitment-card" style="border-left:3px solid var(--spec-magenta)">
             <span style="font-family:var(--mono);font-size:10px;color:var(--spec-magenta);letter-spacing:.2em;text-transform:uppercase">03 // Distinct Personalities</span>
-            <div class="commitment-title">Living Traditions & Flair</div>
-            <p class="commitment-desc">Each piece of headwear reflects an athlete's personal background and clubhouse spirit—from Mesoamerican cempasúchil floral crowns to Andean chullos, West African arena horns, and Ouendan rally headbands. Express character without altering gameplay.</p>
+            <div class="commitment-title">Living Traditions &amp; Flair</div>
+            <p class="commitment-desc">Each piece of headwear reflects an athlete's heritage and clubhouse spirit: Mesoamerican floral crowns, Andean chullos, West African arena horns, and Ouendan rally headbands.</p>
           </div>
         </div>
 
@@ -1335,21 +1341,23 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
     <div class="wrap">
       <div class="signup-card">
         <div class="signup-content">
-          <p class="eyebrow eyebrow--cyan" style="justify-content:center">The Valleyball Dispatch // Beta & Community</p>
-          <h2>Be Ready When The Incline Calls</h2>
+          <p class="eyebrow eyebrow--cyan" style="justify-content:center">The Valleyball Dispatch // Updates &amp; Tournaments</p>
+          <h2 id="dispatch-heading">Be Ready When The Incline Calls</h2>
           <p>
-            Get direct invites to closed alpha playtests for <em>Valleyball Arenas (3v3 / 4v4)</em>, public tournament broadcasts, and major balance patches. Zero spam, unsubscribe anytime.
+            Get tournament broadcast alerts, major build releases, and playtest dates in your inbox. Zero spam, unsubscribe anytime.
           </p>
         </div>
-        <form class="signup-form" id="signup-dispatch" novalidate>
+        <!-- NOTE: Verify Google Form ownership for this Dispatch endpoint in Jac's account before promoting heavily. -->
+        <form class="signup-form" id="signup-dispatch" aria-labelledby="dispatch-heading" novalidate>
           <div class="signup-input-wrap">
-            <input type="email" id="signup-email" name="email" placeholder="athlete@example.com" required autocomplete="email">
+            <label for="signup-email" class="visually-hidden">Email address</label>
+            <input type="email" id="signup-email" name="email" placeholder="athlete@example.com" required autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="send" aria-describedby="dispatch-error">
             <button type="submit" class="btn-signup">Join Dispatch</button>
           </div>
           <div class="signup-feedback signup-feedback--success" role="status">
-            ✓ You're on the roster. Next major playtest drop lands in your inbox.
+            ✓ You're on the roster. Next major playtest and build drop lands in your inbox.
           </div>
-          <div class="signup-feedback signup-feedback--error" role="alert">
+          <div class="signup-feedback signup-feedback--error" id="dispatch-error" role="alert">
             Please enter a valid email address.
           </div>
           <span class="signup-subnote">No marketing spam · Only major playtest and tournament announcements · Ages 13+ · <a href="/privacy/">Privacy</a></span>
@@ -1358,18 +1366,18 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
     </div>
   </section>
 
-  <!-- ==================== TEAM & ATHLETE CUSTOMIZATION (NEW) ==================== -->
+  <!-- ==================== TEAM & ATHLETE CUSTOMIZATION ==================== -->
   <section class="band" id="customization">
     <div class="wrap">
-      <p class="eyebrow eyebrow--cyan">Match Setup // 2v2 Team Loadouts & Customization</p>
+      <p class="eyebrow eyebrow--cyan">Match Setup // 2v2 Team Loadouts &amp; Customization</p>
       <h2>Your Squad. Your Colors. Your Arena.</h2>
       <p class="lede" style="max-width:60ch">
-        Before entering the arena, configure 1v1 duels or full 2v2 squads from the Match Setup Lobby. High-contrast Home and Away kits provide instant visual distinction mid-rally, backed by independent athlete loadouts, 4-controller assignment, and variable ball physics.
+        Configure 1v1 duels or full 2v2 squads right from the Match Setup Lobby. High-contrast Home and Away kits keep every rally readable, with independent athlete loadouts, 4-controller assignment, fighting-pad D-Pad mode, and selectable ball sizes.
       </p>
 
       <!-- Match Lobby Visual -->
       <div class="custom-lobby-card">
-        <img class="custom-lobby-img" src="img/02_2v2_team_lobby_loadouts.png" alt="Valleyball Versus v0.4.0 2v2 Match Setup Lobby screen showing 4 athlete loadout panels, team colorways, and controller assignments" loading="lazy">
+        <img class="custom-lobby-img" src="img/02_2v2_team_lobby_loadouts.png" alt="Valleyball Versus v0.4.1 2v2 Match Setup Lobby screen showing 4 athlete loadout panels, team colorways, and controller assignments" loading="lazy">
         <div class="custom-grid">
           <div class="custom-item">
             <div class="custom-item-title">
@@ -1399,26 +1407,26 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
           <div class="custom-item">
             <div class="custom-item-title">
-              <span style="color:var(--spec-green)">03 //</span> 3 Physiques
+              <span style="color:var(--spec-green)">03 //</span> 3 Athletic Silhouettes
             </div>
-            <p class="custom-item-desc">Select Classic (balanced athletic proportions), Masculine (frame and power), or Feminine (low center of gravity and agile slide recovery).</p>
+            <p class="custom-item-desc">Pick Classic, Masculine, or Feminine builds. All three share 100% identical speed, jump height, hitboxes, and collision physics.</p>
           </div>
 
           <div class="custom-item">
             <div class="custom-item-title">
               <span style="color:var(--spec-magenta)">04 //</span> Ball Spec Selection
             </div>
-            <p class="custom-item-desc">Compete with the regulation 1.0m Valley Ball, test tight footwork with the 0.4m Foot Ball, or launch skyward rallies with the 1.5m Big Ball.</p>
+            <p class="custom-item-desc">Compete with the regulation 1.0m Medium Ball, test tight footwork with the 0.4m Foot Ball, or launch skyward rallies with the 1.5m Big Ball.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== WHAT IT LOOKS LIKE — DARK ==================== -->
+  <!-- ==================== WHAT IT LOOKS LIKE: DARK ==================== -->
   <section class="band" id="gameplay">
     <div class="wrap">
-      <p class="eyebrow eyebrow--green">Physics-first gameplay // v0.4.0 in action</p>
+      <p class="eyebrow eyebrow--green">Physics-first gameplay // v0.4.1 in action</p>
       <h2>Real Physics. Honest Momentum. Nothing Scripted.</h2>
       <p class="lede" style="max-width:58ch">
         Traditional sports games rely on canned animations and magnetic ball-snapping. Valleyball strips all of that away. Every strike, slide tackle, and diving save is a real physics collision. In 2v2, teamwork and court spacing turn momentum into pure athletic spectacle.
@@ -1429,15 +1437,15 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <div class="console-topbar">
           <div class="console-brand">
             <span class="tally-dot"></span>
-            <span>PRODUCTION CONSOLE // 60FPS BROADCAST FEED</span>
+            <span>MULTI-CAMERA PREVIEW // 60FPS MATCH FEED</span>
           </div>
           <div class="console-status-group">
             <div class="console-status-item">
               <span class="tally-dot tally-dot--green"></span>
-              <span>RAPIER 3D · 60HZ FIXED TIMESTEP</span>
+              <span>REAL-TIME PHYSICS · 60HZ</span>
             </div>
             <div class="console-status-item">
-              <span>UNSCRIPTED MATCH RIG</span>
+              <span>UNSCRIPTED GAMEPLAY</span>
             </div>
           </div>
         </div>
@@ -1446,13 +1454,12 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           <video
             id="console-video"
             class="console-video"
-            autoplay
             loop
             muted
             playsinline
+            preload="none"
             width="1920"
             height="1080"
-            loading="lazy"
             poster="img/04_2v2_quad_splitscreen_multiplayer.png"
           >
             <source id="console-video-src" src="img/video_2v2_quad.mp4" type="video/mp4">
@@ -1460,25 +1467,25 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
           <div class="console-osd">
             <div class="osd-top">
-              <span class="osd-tag osd-tag--live">REC ● LIVE HARVEST // SEED 20261028</span>
-              <span class="osd-tag" id="osd-res-tag">1080P60 · D3D11 HEADLESS ENGINE</span>
+              <span class="osd-tag osd-tag--live">IN-ENGINE CAPTURE</span>
+              <span class="osd-tag" id="osd-res-tag">1080P60 · REAL PHYSICS</span>
             </div>
             <div class="osd-bottom">
               <div class="osd-channel-meta">
                 <span class="osd-channel-title" id="osd-ch-title">CH 01 // QUAD SPLIT (4 ATHLETES)</span>
-                <span class="osd-channel-desc" id="osd-ch-desc">4-Player 2v2 Synced Perspectives · 0 Latency Quad-Feed</span>
+                <span class="osd-channel-desc" id="osd-ch-desc">4-Player 2v2 Synced Perspectives · Shared Screen</span>
               </div>
               <div class="console-controls">
-                <button type="button" class="console-ctrl-btn" id="console-play-toggle" aria-label="Pause Video">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                  <span id="console-play-label">PAUSE</span>
+                <button type="button" class="console-ctrl-btn" id="console-play-toggle" aria-label="Play Video">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  <span id="console-play-label">PLAY</span>
                 </button>
                 <button type="button" class="console-ctrl-btn" id="console-sound-toggle" aria-label="Unmute Console Audio">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
                   <span id="console-sound-label">UNMUTE</span>
                 </button>
                 <button type="button" class="console-ctrl-btn" id="console-fullscreen-btn" aria-label="Toggle Fullscreen">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
                   <span>FULLSCREEN</span>
                 </button>
               </div>
@@ -1569,8 +1576,8 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
       <div class="shots">
         <!-- Wide 2v2 Quad Splitscreen Shot -->
         <figure class="shot shot--wide">
-          <span class="badge-live-gif" style="color:var(--spec-cyan);border-color:rgba(0,229,255,.4)">v0.4.0 Quad Split-Screen</span>
-          <img src="img/04_2v2_quad_splitscreen_multiplayer.png" alt="Valleyball Versus v0.4.0 4-player 2v2 quad splitscreen local multiplayer in real-time match" loading="lazy">
+          <span class="badge-live-gif" style="color:var(--spec-cyan);border-color:rgba(0,229,255,.4)">v0.4.1 Quad Split-Screen</span>
+          <img src="img/04_2v2_quad_splitscreen_multiplayer.png" alt="Valleyball Versus v0.4.1 4-player 2v2 quad splitscreen local multiplayer in real-time match" loading="lazy">
           <figcaption>4-athlete 2v2 local multiplayer: synchronized quad perspectives, independent camera tracking, and zero latency.</figcaption>
         </figure>
 
@@ -1608,7 +1615,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <div class="beat-card beat-card--1">
           <div class="beat-num">01 // 2v2 Team Play</div>
           <h3>Four athletes. Infinite chaos.</h3>
-          <p>Valleyball v0.4.0 introduces full 4-athlete 2v2 multiplayer. Synchronize sets, aerial spikes, and goal-line saves with a teammate in quad split-screen or full broadcast arena camera modes with up to 4 local gamepads.</p>
+          <p>Valleyball v0.4.1 delivers full 4-athlete 2v2 multiplayer. Synchronize sets, aerial spikes, and goal-line saves with a teammate in quad split-screen or full broadcast arena camera modes with up to 4 local gamepads or arcade fight-sticks.</p>
         </div>
 
         <div class="beat-card beat-card--2">
@@ -1643,7 +1650,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
           <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.42em;color:var(--d-mute);margin-top:3px">VERSUS</div>
         </div>
       </div>
-      <nav class="foot-links">
+      <nav class="foot-links" aria-label="Footer">
         <a href="https://valleyball.org/#principles" target="_blank" rel="noopener">Principles ↗</a>
         <a href="https://www.reddit.com/r/valleyballversus/" target="_blank" rel="noopener">Reddit r/valleyballversus ↗</a>
         <a href="https://www.youtube.com/@valleyballwc" target="_blank" rel="noopener">YouTube ↗</a>
@@ -1652,7 +1659,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <a href="https://valleyball.org" target="_blank" rel="noopener">valleyball.org ↗</a>
         <a href="/privacy/">Privacy</a>
       </nav>
-      <div class="foot-meta">© 2026 Valleyball. All rights reserved. · Valleyball Versus v0.4.0 // The 2v2 Update · VB-SPEC v0.4.0 · Road to Dec 27 Championship</div>
+      <div class="foot-meta">© 2026 Valleyball. All rights reserved. · Valleyball Versus v0.4.1 · Eugene, OR · Road to Dec 27 Championship</div>
     </div>
   </footer>
 
@@ -1688,13 +1695,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const originalText = btn.textContent;
     const isHero = form.id === 'signup-hero';
 
+    input.addEventListener('input', function() {
+      form.classList.remove('is-error');
+      input.removeAttribute('aria-invalid');
+    });
+
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       form.classList.remove('is-error');
+      input.removeAttribute('aria-invalid');
       const email = (input.value || '').trim();
 
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         form.classList.add('is-error');
+        input.setAttribute('aria-invalid', 'true');
         input.focus();
         return;
       }
@@ -1780,9 +1794,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const emailInput = form.querySelector('input[name="rsvp-email"]');
   const tagInput = form.querySelector('input[name="rsvp-tag"]');
   const partnerInput = form.querySelector('input[name="rsvp-partner"]');
+  const roleBoxes = form.querySelectorAll('input[name="role"]');
   const duoBox = form.querySelector('input[name="role"][value="Playing in the 2v2 duos bracket"]');
   const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
+
+  emailInput.addEventListener('input', function() {
+    form.classList.remove('is-error');
+    emailInput.removeAttribute('aria-invalid');
+  });
+
+  roleBoxes.forEach(function(box) {
+    box.addEventListener('change', function() {
+      form.classList.remove('is-error');
+    });
+  });
 
   duoBox.addEventListener('change', function() {
     partnerInput.hidden = !duoBox.checked;
@@ -1791,12 +1817,15 @@ document.addEventListener('DOMContentLoaded', function() {
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     form.classList.remove('is-error');
+    emailInput.removeAttribute('aria-invalid');
     const email = (emailInput.value || '').trim();
     const roles = Array.from(form.querySelectorAll('input[name="role"]:checked')).map(function(i) { return i.value; });
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !roles.length) {
+    if (!emailValid || !roles.length) {
       form.classList.add('is-error');
-      (roles.length ? emailInput : form.querySelector('input[name="role"]')).focus();
+      if (!emailValid) emailInput.setAttribute('aria-invalid', 'true');
+      (!emailValid ? emailInput : form.querySelector('input[name="role"]')).focus();
       return;
     }
 
@@ -1874,7 +1903,7 @@ document.addEventListener('DOMContentLoaded', function() {
       img: 'img/roster/blue_action.png',
       techTitle: 'Signature Technique // The Wicket Parry',
       techDesc: 'Rapid horizontal wrist redirect that preserves low-ground baseline defense under heavy fire.',
-      quote: '"You don\'t fight the slope—you anchor it."',
+      quote: '"You don\'t fight the slope, you anchor it."',
       loreUrl: 'https://valleyball.org/athletes.html#athlete-blue'
     },
     red: {
@@ -2039,6 +2068,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   btn.addEventListener('click', () => {
     video.muted = !video.muted;
+    btn.setAttribute('aria-pressed', String(!video.muted));
     if (video.muted) {
       if (iconMuted) iconMuted.style.display = 'block';
       if (iconUnmuted) iconUnmuted.style.display = 'none';
@@ -2068,6 +2098,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (!video || !switcherBtns.length) return;
 
+  function syncPlayState() {
+    const isPlaying = !video.paused && !video.ended;
+    if (playLabel) playLabel.textContent = isPlaying ? 'PAUSE' : 'PLAY';
+    if (playBtn) playBtn.setAttribute('aria-label', isPlaying ? 'Pause Video' : 'Play Video');
+  }
+
+  video.addEventListener('play', syncPlayState);
+  video.addEventListener('pause', syncPlayState);
+  syncPlayState();
+
   function switchChannel(targetBtn) {
     if (!targetBtn || targetBtn.classList.contains('active')) return;
 
@@ -2090,7 +2130,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (chDesc) chDesc.textContent = newDesc;
 
       video.load();
-      video.play().catch(() => {});
+      video.play().then(syncPlayState).catch(syncPlayState);
       video.classList.remove('is-switching');
     }, 180);
   }
@@ -2116,11 +2156,10 @@ document.addEventListener('DOMContentLoaded', function() {
   if (playBtn) {
     playBtn.addEventListener('click', () => {
       if (video.paused) {
-        video.play().catch(() => {});
-        if (playLabel) playLabel.textContent = 'PAUSE';
+        video.play().then(syncPlayState).catch(syncPlayState);
       } else {
         video.pause();
-        if (playLabel) playLabel.textContent = 'PLAY';
+        syncPlayState();
       }
     });
   }
@@ -2129,6 +2168,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (soundBtn) {
     soundBtn.addEventListener('click', () => {
       video.muted = !video.muted;
+      soundBtn.setAttribute('aria-pressed', String(!video.muted));
       if (soundLabel) soundLabel.textContent = video.muted ? 'UNMUTE' : 'MUTE';
     });
   }

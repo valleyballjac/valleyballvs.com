@@ -14,26 +14,26 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Official How to Play and Canonical Controls Guide for Valleyball Versus v0.4.0. Up to 4 gamepads, shared keyboard setup, 2v2 quad split-screen team play, and unscripted physics mechanics.">
-<meta property="og:title" content="How to Play — Valleyball Versus (v0.4.0 Guide)">
-<meta property="og:description" content="Official How to Play and Canonical Controls Guide for Valleyball Versus v0.4.0. Up to 4 gamepads, shared keyboard setup, 2v2 quad split-screen team play, and unscripted physics mechanics.">
+<meta name="description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.1. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
+<meta property="og:title" content="How to Play: Valleyball Versus (v0.4.1 Guide)">
+<meta property="og:description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.1. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://valleyballvs.com/how-to-play.html">
 <meta property="og:image" content="https://valleyballvs.com/hero_valley.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="How to Play — Valleyball Versus (v0.4.0 Guide)">
-<meta name="twitter:description" content="Official How to Play and Canonical Controls Guide for Valleyball Versus v0.4.0. Up to 4 gamepads, shared keyboard setup, 2v2 quad split-screen team play, and unscripted physics mechanics.">
+<meta name="twitter:title" content="How to Play: Valleyball Versus (v0.4.1 Guide)">
+<meta name="twitter:description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.1. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
 <meta name="twitter:image" content="https://valleyballvs.com/hero_valley.jpg">
 <link rel="icon" href="mark-sm.png">
 <link rel="canonical" href="https://valleyballvs.com/how-to-play.html">
-<title>How to Play — Valleyball Versus (v0.4.0 Official Guide)</title>
+<title>How to Play: Valleyball Versus (v0.4.1 Official Guide)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap">
 <style>
 /* =========================================================================
-   HOW TO PLAY — valleyballvs.com/how-to-play.html
-   Authoritative athletic and input guide for Valleyball Versus v0.4.0.
+   HOW TO PLAY: valleyballvs.com/how-to-play.html
+   Authoritative athletic and input guide for Valleyball Versus v0.4.1.
    ========================================================================= */
 :root {
   color-scheme: dark;
@@ -279,9 +279,18 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
 .foot{display:flex;flex-wrap:wrap;gap:20px 32px;justify-content:space-between;align-items:center}
 .foot a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--d-mute);text-decoration:none}
 .foot a:hover{color:#fff}
+
+.skip-link{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  padding:12px 18px;background:#fff;color:#000;
+  font-family:var(--mono);font-size:12px;font-weight:700;text-decoration:none;border-radius:0 0 8px 0;
+}
+.skip-link:focus{left:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div class="top-spectral-bar" aria-hidden="true"></div>
 
 <!-- Navigation Bar -->
@@ -289,12 +298,13 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <a class="nav-brand" href="/">
     <span class="nav-logo-text">Valleyball</span>
     <span class="nav-vs-badge">VERSUS</span>
-    <span class="nav-version-badge">v0.4.0 · 2v2</span>
+    <span class="nav-version-badge">v0.4.1 · 2v2</span>
   </a>
-  <nav class="nav-links">
+  <nav class="nav-links" aria-label="Primary">
     <a class="nav-link" href="/">Home</a>
+    <a class="nav-link" href="/#rsvp">Dec 27 RSVP</a>
     <a class="nav-link" href="#gamepad">Gamepads</a>
-    <a class="nav-link" href="#keyboard">Keyboard & Mouse</a>
+    <a class="nav-link" href="#keyboard">Keyboard &amp; Mouse</a>
     <a class="nav-link" href="#matrix">Quick Matrix</a>
     <a class="nav-link" href="#team-play">2v2 Rules</a>
     <a class="nav-link" href="#strategy">Strategy</a>
@@ -303,33 +313,33 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
 </header>
 
 <!-- Sticky Jump Navigation -->
-<div class="jump-bar">
+<nav class="jump-bar" aria-label="Guide sections">
   <div class="wrap jump-links">
-    <a class="jump-link" href="#gamepad">🎮 Gamepads</a>
-    <a class="jump-link" href="#keyboard">⌨️ Keyboard & Mouse</a>
+    <a class="jump-link" href="#gamepad">🎮 Gamepads &amp; Fight-Sticks</a>
+    <a class="jump-link" href="#keyboard">⌨️ Keyboard &amp; Mouse</a>
     <a class="jump-link" href="#matrix">📋 Action Matrix</a>
-    <a class="jump-link" href="#team-play">👥 2v2 Team Play</a>
+    <a class="jump-link" href="#team-play">👥 2v2 &amp; Match Rules</a>
     <a class="jump-link" href="#combat">💥 Full-Contact Rules</a>
     <a class="jump-link" href="#balls">⚽ Match Balls</a>
     <a class="jump-link" href="#strategy">🎯 Pro Strategy</a>
   </div>
-</div>
+</nav>
 
-<main>
+<main id="main-content" tabindex="-1">
 
   <!-- ==================== HEADER ==================== -->
   <section class="guide-header">
     <div class="wrap">
-      <p class="eyebrow">Athletic Specification & Canonical Controls // v0.4.0 Update</p>
+      <p class="eyebrow">Athletic Specification &amp; Controls // v0.4.1 Live</p>
       <h1>How to Play Valleyball Versus</h1>
       <p class="guide-lede">
-        Two to four athletes, one continuous bowl arena, and zero whistles. Master the physics of sloped momentum, execute precision aerial spikes, and coordinate team positioning in intense local 1v1 duels or 4-player 2v2 quad split-screen competition.
+        Two to four athletes, one continuous bowl arena, and zero whistles. Master the physics of sloped momentum, execute precision aerial spikes, and coordinate team positioning in local 1v1 duels or 4-player 2v2 quad split-screen competition.
       </p>
       <div class="guide-pills">
-        <span class="guide-pill" style="border-color:rgba(0,229,255,.4);color:var(--spec-cyan)">v0.4.0 Verified Canon</span>
-        <span class="guide-pill" style="border-color:rgba(16,229,106,.4);color:var(--spec-green)">Up to 4 Local Controllers</span>
+        <span class="guide-pill" style="border-color:rgba(0,229,255,.4);color:var(--spec-cyan)">v0.4.1 Current Build</span>
+        <span class="guide-pill" style="border-color:rgba(16,229,106,.4);color:var(--spec-green)">Up to 4 Gamepads or Fight-Sticks</span>
         <span class="guide-pill" style="border-color:rgba(255,208,0,.4);color:var(--spec-yellow)">Shared Single Keyboard Support</span>
-        <span class="guide-pill" style="border-color:rgba(255,42,66,.4);color:#FF6B7A">Deterministic Rapier Physics</span>
+        <span class="guide-pill" style="border-color:rgba(255,42,66,.4);color:#FF6B7A">Real Physics · Zero Aim Magnetism</span>
       </div>
     </div>
   </section>
@@ -338,9 +348,9 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <section class="guide-section" id="gamepad">
     <div class="wrap">
       <p class="eyebrow" style="color:var(--spec-cyan)">Primary Controller Layout</p>
-      <h2>Gamepad Controls (Up to 4 Controllers)</h2>
+      <h2>Gamepads &amp; Arcade Fight-Sticks (Up to 4 Controllers)</h2>
       <p>
-        Plug in up to four Xbox, PlayStation, Switch, or generic USB/Bluetooth controllers. In v0.4.0, every controller is auto-detected and can be claimed by any athlete slot on Team 1 (South / Home) or Team 2 (North / Away). Analog sticks provide complete 360° locomotion, sprint surges, and directional strike aiming.
+        Plug in up to four Xbox, PlayStation, Switch, arcade fight-stick, or generic USB/Bluetooth controllers. In v0.4.1, every controller is auto-detected and can be claimed by any athlete slot on Team 1 (South / Home) or Team 2 (North / Away). Analog sticks provide full 360° movement, and v0.4.1 adds a <strong>D-Pad Move</strong> toggle in Controls for 8-way arcade fight-sticks and fighting pads.
       </p>
 
       <div class="control-grid">
@@ -372,8 +382,12 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
               <span class="binding-keys"><span class="keycap keycap--green">A / Cross</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:#70A6FF)">●</span> Directional Cut / Plant</span>
+              <span class="binding-action"><span style="color:#70A6FF">●</span> Directional Cut / Plant</span>
               <span class="binding-keys"><span class="keycap keycap--blue">RB / R1</span></span>
+            </div>
+            <div class="binding-row">
+              <span class="binding-action"><span style="color:var(--spec-yellow)">●</span> Fighting Pad / Arcade Stick Mode</span>
+              <span class="binding-keys"><span class="keycap keycap--yellow">D-Pad Move (Toggle)</span></span>
             </div>
           </div>
         </div>
@@ -432,7 +446,7 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
               <span class="binding-keys"><span class="keycap keycap--green">◀ ▶ + A</span></span>
             </div>
             <div class="binding-row">
-              <span class="binding-action"><span style="color:var(--spec-sub)">●</span> Return to Bench (In Lobby)</span>
+              <span class="binding-action"><span style="color:var(--d-sub)">●</span> Return to Bench (In Lobby)</span>
               <span class="binding-keys"><span class="keycap">B / Circle</span></span>
             </div>
           </div>
@@ -702,10 +716,10 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <!-- ==================== 2v2 TEAM PLAY & SIDES ==================== -->
   <section class="guide-section" id="team-play">
     <div class="wrap">
-      <p class="eyebrow" style="color:var(--spec-cyan)">v0.4.0 Feature Highlight</p>
-      <h2>2v2 Team Play & Controller Assignment</h2>
+      <p class="eyebrow" style="color:var(--spec-cyan)">v0.4.1 Live // 1v1, 2v2 &amp; Overtime</p>
+      <h2>2v2 Team Play, Match Clock &amp; Overtime</h2>
       <p>
-        Valleyball v0.4.0 expands the sport to 4 simultaneous athletes on the court. Form a squad with a friend against two AI bots, run full 2v2 quad split-screen with four human players, or test your solo mechanics in traditional 1v1 duels.
+        Valleyball v0.4.1 supports up to 4 simultaneous athletes on one screen. Squad up with a friend against AI bots, run full 2v2 quad split-screen with four local players, or test your solo mechanics in 1v1 duels. Regulation tournament matches run 5 minutes with sudden-death Golden Goal overtime.
       </p>
 
       <div class="feature-box">
@@ -742,6 +756,10 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
           <div class="feature-item">
             <div class="feature-item-title" style="color:var(--spec-orange)">Synchronized Quad Split-Screen</div>
             <p style="font-size:13px;line-height:1.55;margin:0">Four synchronized camera viewports render on one display with independent tracking, zero lag, and full situational awareness.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-title" style="color:var(--spec-yellow)">Overtime Agreement Menu</div>
+            <p style="font-size:13px;line-height:1.55;margin:0">Tied when the clock hits 00:00? Pick sudden-death <strong>Golden Goal</strong> (Dec 27 tournament standard) or a Timed Overtime period directly from the in-match prompt.</p>
           </div>
         </div>
       </div>
@@ -842,7 +860,7 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
       <p class="eyebrow" style="color:var(--spec-green)">Tactical Execution</p>
       <h2>Mastering the Inclined Playing Field</h2>
       <p>
-        Valleyball is zero-assist physics. There is no magnetizing ball snap or canned animation locks. Your trajectory reads, momentum conservation, and aerial jump timing dictate every rally.
+        Valleyball runs on real rigid-body physics with zero aim magnetism and zero canned animation locks. Choose Standard assist (the regulation default) for welcoming contact forgiveness, or switch to Pure Sim for razor-thin precision. Your trajectory reads, momentum conservation, and jump timing decide every rally.
       </p>
 
       <div class="strategy-grid">
@@ -906,7 +924,7 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
         <div class="strategy-card strategy-card--8">
           <div class="strategy-title" style="color:var(--spec-yellow)">08 // Instant Goal Inversion</div>
           <p class="strategy-text">
-            <strong>The whistle never blows.</strong> The exact millisecond the ball passes through the hoop, targets swap in real-time. The goal you just scored in is instantly yours to defend. Never pause to celebrate—pivot immediately into backcourt defense!
+            <strong>The whistle never blows.</strong> The exact millisecond the ball passes through the hoop, targets swap in real-time. The goal you just scored in is instantly yours to defend. Never pause to celebrate: pivot immediately into backcourt defense!
           </p>
         </div>
       </div>
@@ -920,11 +938,12 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
 <footer>
   <div class="wrap foot">
     <div style="display:flex;align-items:center;gap:14px">
-      <img src="mark-sm.png" width="30" height="30" alt="Valleyball Official Logo" aria-hidden="true" style="border-radius:50%">
+      <img src="mark-sm.png" width="30" height="30" alt="" aria-hidden="true" style="border-radius:50%">
       <span class="nav-logo-text" style="font-size:13px">Valleyball Versus</span>
     </div>
-    <div style="display:flex;gap:18px;flex-wrap:wrap">
+    <nav aria-label="Footer" style="display:flex;gap:18px;flex-wrap:wrap">
       <a href="/">Versus Home</a>
+      <a href="/#rsvp">Dec 27 RSVP</a>
       <a href="https://cascadiajac.itch.io/valleyball-versus">Play on itch.io</a>
       <a href="https://valleyball.org">valleyball.org</a>
       <a href="https://www.reddit.com/r/valleyballversus/" target="_blank" rel="noopener">Reddit r/valleyballversus ↗</a>
@@ -932,9 +951,10 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
       <a href="https://www.twitch.tv/valleyballsport" target="_blank" rel="noopener">Twitch ↗</a>
       <a href="https://www.tiktok.com/@valleyballthesport" target="_blank" rel="noopener">TikTok ↗</a>
       <a href="/privacy/">Privacy</a>
-    </div>
-    <div style="font-family:var(--mono);font-size:10px;color:#6B6D7A">© 2026 Valleyball. All rights reserved. · Official Rules & Mechanics · VB-SPEC v0.4.0</div>
+    </nav>
+    <div style="font-family:var(--mono);font-size:10px;color:#6B6D7A">© 2026 Valleyball. All rights reserved. · Official Controls &amp; Rules · Valleyball Versus v0.4.1</div>
   </div>
+</footer>
 <script>
 // Track outbound clicks to play on itch.io in Google Analytics
 document.addEventListener('DOMContentLoaded', function() {
