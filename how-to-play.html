@@ -1,39 +1,70 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5J14GD29XW"></script>
+<!-- Google tag (gtag.js) - Unified Stream G-5J14GD29XW with local/LAN guard & EEA Consent Mode v2 -->
 <script>
+(function(){
+  var h = location.hostname;
+  var isLocal = !h || location.protocol === 'file:' ||
+    h === 'localhost' || h === '127.0.0.1' || h === '[::1]' ||
+    /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(h) ||
+    /\.local$/i.test(h);
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  window.gtag = function(){ dataLayer.push(arguments); };
+  if (isLocal) { window.__vbAnalyticsDisabled = true; return; }
+  var sp;
+  try {
+    sp = new URLSearchParams(location.search);
+    if (sp.get('vb_internal') === '1') localStorage.setItem('vb_internal', '1');
+    else if (sp.get('vb_internal') === '0') localStorage.removeItem('vb_internal');
+  } catch (_) {}
+  var isInternal = false;
+  try { isInternal = localStorage.getItem('vb_internal') === '1'; } catch (_) {}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB']
+  });
+  gtag('set', 'url_passthrough', true);
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'linker', { domains: ['valleyballvs.com', 'valleyball.org', 'cascadiajac.itch.io'] });
   gtag('js', new Date());
-  // Local previews (localhost) must not send data to Analytics
-  if (['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) !== -1) window['ga-disable-G-5J14GD29XW'] = true;
-
-  gtag('config', 'G-5J14GD29XW');
+  var cfg = { send_page_view: true };
+  if (isInternal) cfg.traffic_type = 'internal';
+  if (sp && sp.get('vb_debug') === '1') cfg.debug_mode = true;
+  gtag('config', 'G-5J14GD29XW', cfg);
+  var s = document.createElement('script');
+  s.async = true;
+  s.fetchPriority = 'low';
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-5J14GD29XW';
+  document.head.appendChild(s);
+})();
 </script>
+<script defer fetchpriority="low" src="vb-analytics.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.1. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
-<meta property="og:title" content="How to Play: Valleyball Versus (v0.4.1 Guide)">
-<meta property="og:description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.1. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
+<meta name="description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.2. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
+<meta property="og:title" content="How to Play: Valleyball Versus (v0.4.2 Guide)">
+<meta property="og:description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.2. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://valleyballvs.com/how-to-play.html">
 <meta property="og:image" content="https://valleyballvs.com/hero_valley.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="How to Play: Valleyball Versus (v0.4.1 Guide)">
-<meta name="twitter:description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.1. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
+<meta name="twitter:title" content="How to Play: Valleyball Versus (v0.4.2 Guide)">
+<meta name="twitter:description" content="Official How to Play and Controls Guide for Valleyball Versus v0.4.2. Up to 4 gamepads or arcade fight-sticks, shared keyboard setup, 2v2 quad split-screen team play, and real physics mechanics.">
 <meta name="twitter:image" content="https://valleyballvs.com/hero_valley.jpg">
 <link rel="icon" href="mark-sm.png">
 <link rel="canonical" href="https://valleyballvs.com/how-to-play.html">
-<title>How to Play: Valleyball Versus (v0.4.1 Official Guide)</title>
+<title>How to Play: Valleyball Versus (v0.4.2 Official Guide)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap">
 <style>
 /* =========================================================================
    HOW TO PLAY: valleyballvs.com/how-to-play.html
-   Authoritative athletic and input guide for Valleyball Versus v0.4.1.
+   Authoritative athletic and input guide for Valleyball Versus v0.4.2.
    ========================================================================= */
 :root {
   color-scheme: dark;
@@ -298,7 +329,7 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <a class="nav-brand" href="/">
     <span class="nav-logo-text">Valleyball</span>
     <span class="nav-vs-badge">VERSUS</span>
-    <span class="nav-version-badge">v0.4.1 · 2v2</span>
+    <span class="nav-version-badge">v0.4.2 · 2v2</span>
   </a>
   <nav class="nav-links" aria-label="Primary">
     <a class="nav-link" href="/">Home</a>
@@ -330,13 +361,13 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <!-- ==================== HEADER ==================== -->
   <section class="guide-header">
     <div class="wrap">
-      <p class="eyebrow">Athletic Specification &amp; Controls // v0.4.1 Live</p>
+      <p class="eyebrow">Athletic Specification &amp; Controls // v0.4.2 Live</p>
       <h1>How to Play Valleyball Versus</h1>
       <p class="guide-lede">
         Two to four athletes, one continuous bowl arena, and zero whistles. Master the physics of sloped momentum, execute precision aerial spikes, and coordinate team positioning in local 1v1 duels or 4-player 2v2 quad split-screen competition.
       </p>
       <div class="guide-pills">
-        <span class="guide-pill" style="border-color:rgba(0,229,255,.4);color:var(--spec-cyan)">v0.4.1 Current Build</span>
+        <span class="guide-pill" style="border-color:rgba(0,229,255,.4);color:var(--spec-cyan)">v0.4.2 Current Build</span>
         <span class="guide-pill" style="border-color:rgba(16,229,106,.4);color:var(--spec-green)">Up to 4 Gamepads or Fight-Sticks</span>
         <span class="guide-pill" style="border-color:rgba(255,208,0,.4);color:var(--spec-yellow)">Shared Single Keyboard Support</span>
         <span class="guide-pill" style="border-color:rgba(255,42,66,.4);color:#FF6B7A">Real Physics · Zero Aim Magnetism</span>
@@ -350,7 +381,7 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
       <p class="eyebrow" style="color:var(--spec-cyan)">Primary Controller Layout</p>
       <h2>Gamepads &amp; Arcade Fight-Sticks (Up to 4 Controllers)</h2>
       <p>
-        Plug in up to four Xbox, PlayStation, Switch, arcade fight-stick, or generic USB/Bluetooth controllers. In v0.4.1, every controller is auto-detected and can be claimed by any athlete slot on Team 1 (South / Home) or Team 2 (North / Away). Analog sticks provide full 360° movement, and v0.4.1 adds a <strong>D-Pad Move</strong> toggle in Controls for 8-way arcade fight-sticks and fighting pads.
+        Plug in up to four Xbox, PlayStation, Switch, arcade fight-stick, or generic USB/Bluetooth controllers. In v0.4.2, every controller is auto-detected and can be claimed by any athlete slot on Team 1 (South / Home) or Team 2 (North / Away). Analog sticks provide full 360° movement, and v0.4.2 adds a <strong>D-Pad Move</strong> toggle in Controls for 8-way arcade fight-sticks and fighting pads.
       </p>
 
       <div class="control-grid">
@@ -716,10 +747,10 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
   <!-- ==================== 2v2 TEAM PLAY & SIDES ==================== -->
   <section class="guide-section" id="team-play">
     <div class="wrap">
-      <p class="eyebrow" style="color:var(--spec-cyan)">v0.4.1 Live // 1v1, 2v2 &amp; Overtime</p>
+      <p class="eyebrow" style="color:var(--spec-cyan)">v0.4.2 Live // 1v1, 2v2 &amp; Overtime</p>
       <h2>2v2 Team Play, Match Clock &amp; Overtime</h2>
       <p>
-        Valleyball v0.4.1 supports up to 4 simultaneous athletes on one screen. Squad up with a friend against AI bots, run full 2v2 quad split-screen with four local players, or test your solo mechanics in 1v1 duels. Regulation tournament matches run 5 minutes with sudden-death Golden Goal overtime.
+        Valleyball v0.4.2 supports up to 4 simultaneous athletes on one screen. Squad up with a friend against AI bots, run full 2v2 quad split-screen with four local players, or test your solo mechanics in 1v1 duels. Regulation tournament matches run 5 minutes with sudden-death Golden Goal overtime.
       </p>
 
       <div class="feature-box">
@@ -943,8 +974,8 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
     </div>
     <nav aria-label="Footer" style="display:flex;gap:18px;flex-wrap:wrap">
       <a href="/">Versus Home</a>
-      <a href="/#rsvp">Dec 27 RSVP</a>
-      <a href="https://cascadiajac.itch.io/valleyball-versus">Play on itch.io</a>
+      <a href="/#rsvp" data-cta="how_to_play_rsvp" data-cta-loc="footer">Dec 27 RSVP</a>
+      <a href="https://cascadiajac.itch.io/valleyball-versus" data-cta-loc="how_to_play_footer">Play on itch.io</a>
       <a href="https://valleyball.org">valleyball.org</a>
       <a href="https://www.reddit.com/r/valleyballversus/" target="_blank" rel="noopener">Reddit r/valleyballversus ↗</a>
       <a href="https://www.youtube.com/@valleyballwc" target="_blank" rel="noopener">YouTube ↗</a>
@@ -952,24 +983,8 @@ footer{background:var(--d-deep);padding-block:36px 44px;border-top:1px solid var
       <a href="https://www.tiktok.com/@valleyballthesport" target="_blank" rel="noopener">TikTok ↗</a>
       <a href="/privacy/">Privacy</a>
     </nav>
-    <div style="font-family:var(--mono);font-size:10px;color:#6B6D7A">© 2026 Valleyball. All rights reserved. · Official Controls &amp; Rules · Valleyball Versus v0.4.1</div>
+    <div style="font-family:var(--mono);font-size:10px;color:#6B6D7A">© 2026 Valleyball. All rights reserved. · Official Controls &amp; Rules · Valleyball Versus v0.4.2</div>
   </div>
 </footer>
-<script>
-// Track outbound clicks to play on itch.io in Google Analytics
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('a[href*="itch.io"]').forEach(function(link) {
-    link.addEventListener('click', function() {
-      if (typeof gtag === 'function') {
-        gtag('event', 'play_game_click', {
-          'event_category': 'conversion',
-          'event_label': 'itch.io Play Button (How to Play)',
-          'link_url': link.href
-        });
-      }
-    });
-  });
-});
-</script>
 </body>
 </html>

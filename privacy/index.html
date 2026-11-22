@@ -1,17 +1,48 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5J14GD29XW"></script>
+<!-- Google tag (gtag.js) - Unified Stream G-5J14GD29XW with local/LAN guard & EEA Consent Mode v2 -->
 <script>
+(function(){
+  var h = location.hostname;
+  var isLocal = !h || location.protocol === 'file:' ||
+    h === 'localhost' || h === '127.0.0.1' || h === '[::1]' ||
+    /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(h) ||
+    /\.local$/i.test(h);
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  window.gtag = function(){ dataLayer.push(arguments); };
+  if (isLocal) { window.__vbAnalyticsDisabled = true; return; }
+  var sp;
+  try {
+    sp = new URLSearchParams(location.search);
+    if (sp.get('vb_internal') === '1') localStorage.setItem('vb_internal', '1');
+    else if (sp.get('vb_internal') === '0') localStorage.removeItem('vb_internal');
+  } catch (_) {}
+  var isInternal = false;
+  try { isInternal = localStorage.getItem('vb_internal') === '1'; } catch (_) {}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB']
+  });
+  gtag('set', 'url_passthrough', true);
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'linker', { domains: ['valleyballvs.com', 'valleyball.org', 'cascadiajac.itch.io'] });
   gtag('js', new Date());
-  // Local previews (localhost) must not send data to Analytics
-  if (['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) !== -1) window['ga-disable-G-5J14GD29XW'] = true;
-
-  gtag('config', 'G-5J14GD29XW');
+  var cfg = { send_page_view: true };
+  if (isInternal) cfg.traffic_type = 'internal';
+  if (sp && sp.get('vb_debug') === '1') cfg.debug_mode = true;
+  gtag('config', 'G-5J14GD29XW', cfg);
+  var s = document.createElement('script');
+  s.async = true;
+  s.fetchPriority = 'low';
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-5J14GD29XW';
+  document.head.appendChild(s);
+})();
 </script>
+<script defer fetchpriority="low" src="../vb-analytics.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy | Valleyball</title>
@@ -88,7 +119,7 @@ footer a{color:inherit}
 
 <main>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated November 18, 2026</p>
+  <p class="updated">Last updated November 20, 2026</p>
 
   <p class="lede">Valleyball is a passion project run by me, Jackson Thomas, in Junction City, Oregon. It is not a company. This policy explains what I collect and what I do with it.</p>
 
@@ -115,7 +146,7 @@ footer a{color:inherit}
 
   <h2>What is collected automatically</h2>
   <p>Both sites and the itch.io page use <strong>Google Analytics</strong> to show me how people find and use them. It records things like pages viewed, scrolling, link clicks, form starts, the site or campaign that sent you, your device and browser type, your language, and your approximate location. When you submit a form, it records that you signed up, which form you used, and for RSVPs which options you picked. It does not receive the email address, name, tag, or partner you type, and I have turned on Analytics' setting that removes email addresses from the page data it collects.</p>
-  <p>Analytics uses cookies, including <code>_ga</code> and <code>_ga_*</code>, to recognize a browser across visits. They can last up to two years. When you follow a link between valleyballvs.com, valleyball.org, and the itch.io page, a <code>_gl</code> value in the link lets Analytics count that as one visitor.</p>
+  <p>Analytics uses cookies, including <code>_ga</code> and <code>_ga_*</code>, to recognize a browser across visits. They can last up to two years. For visitors in the European Economic Area and the United Kingdom, analytics and ad storage cookies are denied by default so only cookieless aggregate pings are sent. When you follow a link between valleyballvs.com, valleyball.org, and the itch.io page, a <code>_gl</code> value in the link lets Analytics count that as one visitor.</p>
   <p>I have also turned on <strong>Google signals</strong>, which can connect this activity with information from Google accounts of signed-in people who have allowed that connection. I see this only in reports. It does not show me who you are.</p>
   <p>I use <strong>Google Ads</strong> at times to promote Valleyball, and Analytics helps me measure whether those ads lead to visits and RSVPs. I am not currently using this data to build ad audiences or personalize ads.</p>
   <h3>Other services that load with the pages</h3>
