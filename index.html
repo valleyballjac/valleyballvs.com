@@ -77,7 +77,7 @@
   --d-edge:rgba(255,255,255,.10); --d-edge2:rgba(255,255,255,.20);
 
   --l-ground:#F2F2F0; --l-raise:#FFFFFF; --l-deep:#E4E5E1;
-  --l-ink:#121218;    --l-sub:#3E404A;   --l-mute:#6C6F78;
+  --l-ink:#121218;    --l-sub:#3E404A;   --l-mute:#5A5D66;
   --l-edge:rgba(18,18,24,.14); --l-edge2:rgba(18,18,24,.30);
 
   --home:#383B42; --away:#FFFFFF;
@@ -895,6 +895,7 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   transition:all .18s ease;outline:none;
 }
 .switcher-btn:hover{background:#141520}
+.switcher-btn:focus-visible{outline:2px solid var(--spec-cyan);outline-offset:-2px}
 .switcher-btn.active{
   background:#1A1C2A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);
 }
@@ -942,7 +943,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         color:var(--d-mute);text-decoration:none;transition:color .18s ease}
 .foot a:hover{color:#fff}
 .foot a:focus-visible{outline:2px solid #6E9BC4;outline-offset:3px;border-radius:2px}
-.foot-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#5A5A6B}
+.foot-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#8A8A99}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -1084,7 +1085,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
             <p>Tell us if you're coming to the Dec 27 Championship or a free Monday playtest. RSVPs get the Eugene venue announcement and bracket updates first.</p>
           </div>
           <form class="champ-rsvp-form" id="rsvp-form" aria-labelledby="rsvp-heading" novalidate>
-            <fieldset class="rsvp-roles">
+            <fieldset class="rsvp-roles" aria-describedby="rsvp-error">
               <legend>I'm coming to</legend>
               <label class="rsvp-chip"><input type="checkbox" name="role" value="Coming to a Monday playtest"><span>Monday playtests</span></label>
               <label class="rsvp-chip"><input type="checkbox" name="role" value="Playing in the 1v1 bracket"><span>Play 1v1</span></label>
