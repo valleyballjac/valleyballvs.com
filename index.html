@@ -341,6 +341,7 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 .btn-primary:hover{transform:translateY(-1px);background:#fff}
 .btn-guide{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3)}
 .btn-guide:hover{transform:translateY(-1px);background:rgba(255,255,255,.16);border-color:#fff}
+.btn:focus-visible{outline:2px solid var(--spec-cyan);outline-offset:2px}
 
 .play-meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8FA0B0;margin-top:16px}
 
@@ -740,13 +741,24 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   padding:18px clamp(20px,3.5vw,36px);background:rgba(0,0,0,.35);gap:16px;
 }
 .champ-stream-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.champ-links-label{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--d-mute);
+}
+.champ-bar-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .champ-link{
   font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-  padding:8px 14px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid var(--d-edge);
-  transition:all .18s ease;
+  color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;max-width:100%;padding:10px 16px;border-radius:6px;
+  background:rgba(255,255,255,.05);border:1px solid var(--d-edge);
+  transition:transform .18s ease,background .18s ease,border-color .18s ease;
 }
 .champ-link:hover{background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-1px)}
+.champ-link:focus-visible{outline:2px solid var(--spec-cyan);outline-offset:2px}
+.champ-link-primary{
+  background:#F5F5F7;color:#08080C;border-color:#F5F5F7;
+  font-family:var(--display);font-weight:700;
+}
+.champ-link-primary:hover{background:#fff;border-color:#fff;color:#08080C}
 
 .champ-playtests{
   display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;
@@ -776,6 +788,12 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
   text-transform:uppercase;color:#fff;margin:6px 0 8px;line-height:1.3;
 }
 .champ-rsvp-intro p{margin:0;color:var(--d-sub);font-size:14px;line-height:1.6}
+.champ-rsvp-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+@media(max-width:599px){
+  .champ-rsvp{padding:22px 20px}
+  .championship-links-bar{padding:18px 20px}
+  .champ-rsvp-actions .champ-link,.champ-bar-actions .champ-link{width:100%}
+}
 .rsvp-roles{border:0;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
 .rsvp-roles legend{
   padding:0;margin-bottom:8px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
@@ -805,6 +823,9 @@ p{margin:0 0 16px;color:var(--sub);max-width:64ch}
 .rsvp-fields input[hidden]{display:none}
 @media (pointer:coarse){
   .signup-input-wrap input[type=email],.rsvp-fields input,.btn-signup,.btn{min-height:52px}
+  .rsvp-chip span{min-height:44px}
+}
+@media (max-width:760px){
   .rsvp-chip span{min-height:44px}
 }
 .rsvp-note{margin:12px 0 0;font-family:var(--mono);font-size:10.5px;line-height:1.6;letter-spacing:.08em;text-transform:uppercase;color:var(--d-mute)}
@@ -1080,9 +1101,14 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
         <!-- RSVP: posts to the "Valleyball Championship RSVP" Google Form (owned by valleyballdev@gmail.com). Field IDs are in initChampionshipRsvp below. -->
         <div class="champ-rsvp" id="rsvp">
           <div class="champ-rsvp-intro">
-            <span class="champ-stat-label">RSVP · Free</span>
+            <span class="champ-stat-label">Registration &amp; Free RSVP</span>
             <h3 id="rsvp-heading">Coming to play or watch?</h3>
-            <p>Tell us if you're coming to the Dec 27 Championship or a free Monday playtest. RSVPs get the Eugene venue announcement and bracket updates first.</p>
+            <p>Entering the Dec 27 1v1 or 2v2 brackets? Register on start.gg to lock your bracket spot, and use the free RSVP form for Monday playtests, spectator headcount, and Eugene venue updates.</p>
+            <div class="champ-rsvp-actions">
+              <a class="champ-link champ-link-primary" href="https://www.start.gg/tournament/the-inaugural-valleyball-championship" target="_blank" rel="noopener noreferrer" data-cta="startgg_register" data-cta-loc="championship_rsvp">
+                Register on start.gg <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in new tab)</span>
+              </a>
+            </div>
           </div>
           <form class="champ-rsvp-form" id="rsvp-form" aria-labelledby="rsvp-heading" novalidate>
             <fieldset class="rsvp-roles" aria-describedby="rsvp-error">
@@ -1109,18 +1135,23 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
         <div class="championship-links-bar">
           <div class="champ-stream-links">
-            <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--d-mute)">Follow &amp; Watch Live:</span>
-            <a class="champ-link" href="https://www.twitch.tv/valleyballsport" target="_blank" rel="noopener">
+            <span class="champ-links-label">Follow &amp; Watch Live:</span>
+            <a class="champ-link" href="https://www.twitch.tv/valleyballsport" target="_blank" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
               Twitch
             </a>
-            <a class="champ-link" href="https://www.youtube.com/@valleyballwc" target="_blank" rel="noopener">
+            <a class="champ-link" href="https://www.youtube.com/@valleyballwc" target="_blank" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               YouTube
             </a>
-            <a class="champ-link" href="https://valleyball.org/links" target="_blank" rel="noopener" data-cta="all_links" data-cta-loc="championship">All Links ↗</a>
+            <a class="champ-link" href="https://valleyball.org/links" target="_blank" rel="noopener noreferrer" data-cta="all_links" data-cta-loc="championship">All Links <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in new tab)</span></a>
           </div>
-          <a class="champ-link" href="#dispatch" data-cta="not_local_dispatch" data-cta-loc="championship">Not local? Join the Dispatch</a>
+          <div class="champ-bar-actions">
+            <a class="champ-link champ-link-primary" href="https://www.start.gg/tournament/the-inaugural-valleyball-championship" target="_blank" rel="noopener noreferrer" data-cta="startgg_register" data-cta-loc="championship">
+              Register on start.gg <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in new tab)</span>
+            </a>
+            <a class="champ-link" href="#dispatch" data-cta="not_local_dispatch" data-cta-loc="championship">Not local? Join the Dispatch</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1834,6 +1865,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
   const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
   let rsvpStarted = false;
+  let isSubmitting = false;
 
   function trackRsvpStart(firstField) {
     if (rsvpStarted) return;
@@ -1858,6 +1890,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
     box.addEventListener('change', function() {
       trackRsvpStart('role');
       form.classList.remove('is-error');
+      emailInput.removeAttribute('aria-invalid');
     });
   });
 
@@ -1867,6 +1900,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
+    if (isSubmitting || form.classList.contains('is-success')) return;
     form.classList.remove('is-error');
     emailInput.removeAttribute('aria-invalid');
     const email = (emailInput.value || '').trim();
@@ -1884,6 +1918,7 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
       return;
     }
 
+    isSubmitting = true;
     btn.disabled = true;
     btn.textContent = 'Sending…';
 
@@ -1933,6 +1968,10 @@ footer{background:var(--d-deep);color:var(--d-ink);padding-block:38px 46px;
       form.classList.add('is-error');
       if (typeof window.vbTrack === 'function') {
         window.vbTrack('rsvp_form_error', { error_reason: 'network' });
+      }
+    } finally {
+      if (!form.classList.contains('is-success')) {
+        isSubmitting = false;
       }
     }
   });
